@@ -1,0 +1,21 @@
+- title(Region.model_name.human)
+
+%h1= Region.model_name.human
+
+%table
+  %tr
+    %th= Region.human_attribute_name(:id)
+    %th= Region.human_attribute_name(:name)
+    %th{:colspan=>"2"}
+
+  - @regions.each do |region|
+    %tr
+      %td= region.id
+      %td= region.name
+      %td= link_to 'Изменить', edit_vocabularies_region_path(region)
+      %td= link_to 'Удалить', vocabularies_region_path(region), :confirm => 'Вы уверены?', :method => :delete
+
+= will_paginate @regions
+
+= link_to 'Добавить', new_vocabularies_region_path
+

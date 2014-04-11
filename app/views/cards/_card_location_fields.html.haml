@@ -1,0 +1,13 @@
+.row{:class => "fields"}
+  .col.center
+    = f.select :location_id, Location.for_select
+  .col
+    = f.date_select("entrance_date")
+    -#= f.date_select :entrance_date,"date"
+  .col
+    = f.date_select("retirement_date",:include_blank => true)
+    -#= f.date_select :retirement_date,:include_blank => true,:select_date => nil
+  .col.center
+    = f.text_field :comment, :size => "10"
+    = link_to_remove_fields "Удалить", f
+

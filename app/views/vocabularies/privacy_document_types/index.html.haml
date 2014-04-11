@@ -1,0 +1,21 @@
+- title(PrivacyDocumentType.model_name.human)
+
+%h1= PrivacyDocumentType.model_name.human
+
+%table
+  %tr
+    %th= PrivacyDocumentType.human_attribute_name(:id)
+    %th= PrivacyDocumentType.human_attribute_name(:name)
+    %th{:colspan=>"2"}
+
+  - @privacy_document_types.each do |privacy_document_type|
+    %tr
+      %td= privacy_document_type.id
+      %td= privacy_document_type.name
+      %td= link_to 'Изменить', edit_vocabularies_privacy_document_type_path(privacy_document_type)
+      %td= link_to 'Удалить', vocabularies_privacy_document_type_path(privacy_document_type), :confirm => 'Вы уверены?', :method => :delete
+
+= will_paginate @privacy_document_types
+
+= link_to 'Добавить', new_vocabularies_privacy_document_type_path
+

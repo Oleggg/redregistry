@@ -1,0 +1,10 @@
+- title("Причины постановки на учёт")
+
+%h1 Отчёт &laquo;Причины постановки на учёт&raquo;
+
+= form_tag print_registration_cause_reports_report_path, :method => :get do
+  = submit_tag "Печать", :name => :print
+%br
+%br
+= image_tag("#{@graph}")
+

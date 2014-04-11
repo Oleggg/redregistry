@@ -1,0 +1,6 @@
+.row{:class => "fields"}
+  .col.center
+    = f.select :family_type_id, FamilyType.for_select
+  .col.center
+    = link_to_remove_fields "Удалить", f
+

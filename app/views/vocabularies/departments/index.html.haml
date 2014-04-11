@@ -1,0 +1,21 @@
+- title(Department.model_name.human)
+
+%h1= Department.model_name.human
+
+%table
+  %tr
+    %th= Department.human_attribute_name(:id)
+    %th= Department.human_attribute_name(:name)
+    %th{:colspan=>"2"}
+
+  - @departments.each do |department|
+    %tr
+      %td= department.id
+      %td= department.name
+      %td= link_to 'Изменить', edit_vocabularies_department_path(department)
+      %td= link_to 'Удалить', vocabularies_department_path(department), :confirm => 'Вы уверены?', :method => :delete
+
+= will_paginate @departments
+
+= link_to 'Добавить', new_vocabularies_department_path
+

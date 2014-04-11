@@ -1,0 +1,34 @@
+- title("Семьи")
+
+%h1= "Семьи"
+
+.filter
+  = form_tag families_path, :method => :get do
+    = hidden_field_tag :page, @page
+    %h3 Поиск
+    = Family.human_attribute_name(:last_name)
+    = text_field_tag "name", params[:name], :size => 10
+    = Family.human_attribute_name(:address)
+    = text_field_tag "address", params[:address], :size => 10
+    = submit_tag "Найти", :name => :search
+
+%table
+  %tr
+    %th= Family.human_attribute_name(:id)
+    %th= Family.human_attribute_name(:last_name)
+    %th= Family.human_attribute_name(:address)
+    %th{:colspan=>"3"}
+
+  - @families.each do |family|
+    %tr
+      %td= family.id
+      %td= family.last_name
+      %td= family.address
+      %td= link_to 'Просмотр', resource_url(family)
+      %td= link_to 'Изменить', edit_resource_url(family)
+      %td= link_to 'Удалить', resource_url(family), :confirm => 'Вы уверены?', :method => :delete
+
+= will_paginate @families
+
+= link_to 'Добавить', new_resource_url
+

@@ -1,0 +1,28 @@
+- title("Причина постановки на учёт")
+
+%h1 &laquo;Причина постановки на учёт&raquo;
+
+.date
+  на дату:
+  = Date.today.strftime("%d.%m.%Y г.")
+
+%table
+  %tr
+    %th
+    %th Наименование
+    %th Количество детей
+    %th Количество семей
+
+  - RegistrationCause.all.each_with_index do |registration_cause, i|
+    %tr
+      %td= i+1
+      %td= registration_cause.name
+      %td.right= registration_cause.children_count
+      %td.right= registration_cause.families_count
+
+  %tr
+    %td
+    %td.right Всего на учёте семей:
+    %td.right= @total_children
+    %td.right= @total_families
+

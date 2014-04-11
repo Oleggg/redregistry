@@ -1,0 +1,21 @@
+- title(Profession.model_name.human)
+
+%h1= Profession.model_name.human
+
+%table
+  %tr
+    %th= Profession.human_attribute_name(:id)
+    %th= Profession.human_attribute_name(:name)
+    %th{:colspan=>"2"}
+
+  - @professions.each do |profession|
+    %tr
+      %td= profession.id
+      %td= profession.name
+      %td= link_to 'Изменить', edit_vocabularies_profession_path(profession)
+      %td= link_to 'Удалить', vocabularies_profession_path(profession), :confirm => 'Вы уверены?', :method => :delete
+
+= will_paginate @professions
+
+= link_to 'Добавить', new_vocabularies_profession_path
+

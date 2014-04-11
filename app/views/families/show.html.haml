@@ -1,0 +1,15 @@
+- title("Просмотр семьи")
+
+%h1= "Просмотр семьи"
+
+.show
+  %ul
+    %li
+      .label= Family.human_attribute_name(:last_name)
+      = @family.last_name
+    %li
+      .label= Family.human_attribute_name(:address)
+      = @family.address
+  .buttons
+    = link_to 'Вернутся', collection_url
+

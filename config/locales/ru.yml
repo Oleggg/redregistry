@@ -1,0 +1,284 @@
+ru:
+  activerecord:
+    models:
+      address: "Адреса"
+      company: "Организации"
+      eventlog: "Журнал событий"
+      friend: "Друзья"
+      inspector: "Инспекторы"
+      person: "Персоны"
+      relative: "Родственники"
+      role: "Роли"
+      school: "Школа"
+      teacher: "Учитель"
+      user: "Пользователи"
+      card: "Карточки"
+      accommodation: "Условия проживания"
+      category: "Категории учёта"
+      child_help: "Виды помощи ребёнку"
+      company_type: "Тип организации"
+      doctor: "Врачи-специалисты"
+      document_type: "Виды документа"
+      employment_type: "Виды занятости"
+      family: "Семья"
+      family_help: "Виды помощи семье"
+      family_structure: "Состав семьи"
+      family_type: "Категории семей"
+      family_work: "Виды работ с семьёй"
+      location: "Местонахождения"
+      department: "Учреждения"
+      privacy_document_type: "Виды документа личного дела"
+      cc_article: "Статья УК РФ"
+      profession: "Профессии"
+      registration_cause: "Причина постановки на учёт"
+      registration_reason: "Основания для регистрации"
+      relationship: "Виды родства"
+      unregistration_cause: "Причина снятия с учёта"
+      child_character: "Характеристика ребенка"
+      health_status: "Виды здоровья"
+      region: "Регион"
+      district: "Район"
+      city: "Город"
+      town: "Населенный пункт"
+      street: "Улица"
+    attributes:
+      address:
+        region_id: "Регион"
+        district_id: "Район"
+        city_id: "Город"
+        town_id: "Н. пункт"
+        street_id: "Улица"
+        post_code: "Почтовый индекс"
+        address_line: "Улица, дом, кв."
+      company:
+        id: "#"
+        name: "Название"
+        full_name: "Полное название"
+        phone1: "Телефон 1"
+        phone2: "Телефон 2"
+        comment: "Комментарий"
+        company_type_id: "Тип"
+        address: "Адрес"
+      eventlog:
+        id: "#"
+        created_at: "Дата"
+        event_type: "Событие"
+        user_id: "Пользователь"
+        data: "Описание события"
+      person:
+        id: "#"
+        first_name: "Имя"
+        last_name: "Фамилия"
+        middle_name: "Отчество"
+        full_name: "ФИО"
+        gender: "Пол"
+        age: "Возраст"
+        birthday: "Дата рождения"
+        birthplace: "Место рождения"
+        mobile: "Моб.телефон"
+        phone: "Дом.телефон"
+        comment: "Комментарий"
+        photo: "Фото"
+        address: "Адрес"
+      role:
+        id: "#"
+        name: "Название"
+      user:
+        id: "#"
+        login: "Имя"
+        email: "Эл. почта"
+        password: "Пароль"
+        password_confirmation: "Подтвердить пароль"
+        last_login_at: "Последний вход"
+      card:
+        id: "#"
+        reg_num: "Рег. номер"
+        category_id: "Категория учёта"
+        convicted_at: "Осужден"
+        released_at: "Освобожден"
+        release_cause: "Основание освобождения"
+        registered_at: "Дата постановки на учёт"
+        unregistered_at: "Дата снятия с учёта"
+        repeat: "Повторная регистрация"
+        is_archived: "В архиве"
+        comment: "Примечание"
+        registration_reason: "Основание для регистрации"
+        registration_cause: "Причина постановки на учёт"
+        unregistration_cause: "Причина снятия с учёта"
+        registration_address: "Фактический адрес"
+        accommodation: "Условия проживания"
+        address_comment: "Примечание"
+        employment_type: "Занятость"
+        company_id: "Учреждение"
+        status_comment: "Примечание"
+        family: "Семья"
+        family_type: "Категория"
+        family_structure: "Состав"
+        special_signs: "Особые приметы"
+        health_status: "Здоровье"
+        help_comment: "Примечание"
+        characteristic_list: "Черты характера"
+        child_help: "Помощь ребенку"
+        family_help: "Помощь семье"
+        passport_serie: "Паспорт серии"
+        passport_num: "№"
+        issued_by: "Кем выдан"
+        issued_at: "Когда"
+        pension_cert_num: "№ пенсионного удостоверения"
+      accommodation:
+        id: "#"
+        name: "Название"
+      category:
+        id: "#"
+        name: "Название"
+      child_help:
+        id: "#"
+        name: "Название"
+      company_type:
+        id: "#"
+        name: "Название"
+      doctor:
+        id: "#"
+        name: "Название"
+      document_type:
+        id: "#"
+        name: "Название"
+      employment_type:
+        id: "#"
+        name: "Название"
+      family:
+        id: "#"
+        last_name: "Фамилия"
+        address: "Адрес"
+        family_structure: "Состав семьи"
+        family_type: "Категория семьи"
+      family_help:
+        id: "#"
+        name: "Название"
+      family_structure:
+        id: "#"
+        name: "Название"
+      family_type:
+        id: "#"
+        name: "Название"
+      family_work:
+        id: "#"
+        name: "Название"
+      location:
+        id: "#"
+        name: "Название"
+      department:
+        id: "#"
+        name: "Название"
+        full_name: "Полное название"
+        phone1: "Конт. телефон 1"
+        phone2: "Конт. телефон 2"
+        comment: "Примечание"
+      privacy_document_type:
+        id: "#"
+        name: "Название"
+      cc_article:
+        id: "#"
+        number: "Номер"
+        name: "Название"
+      profession:
+        id: "#"
+        name: "Название"
+      registration_cause:
+        id: "#"
+        name: "Название"
+      registration_reason:
+        id: "#"
+        name: "Название"
+      relationship:
+        id: "#"
+        name: "Название"
+        gender: "Пол"
+      unregistration_cause:
+        id: "#"
+        name: "Название"
+      conviction:
+        id: "#"
+        convicted_at: "Осужден"
+        released_at: "Освобожден"
+        release_cause: "Основание освобождения"
+        article: "Статья УК"
+        term: "Срок"
+      region:
+        id: "#"
+        name: "Название"
+        code: "Код"
+      district:
+        id: "#"
+        name: "Название"
+        region: "Регион"
+        code: "Код"
+      city:
+        id: "#"
+        name: "Название"
+        region: "Регион"
+      town:
+        id: "#"
+        name: "Название"
+        region: "Регион"
+        district: "Район"
+      street:
+        id: "#"
+        name: "Название"
+        region: "Регион"
+        district: "Район"
+        city: "Город"
+        town: "Н. пункт"
+      card_privacy_document_type
+        registered_at: "Дата регистрации"
+      conviction:
+        released_at: "Освобожден"        
+      child_character: 
+        id: "#"
+        name: "Название"
+      health_status:
+        id: "#"
+        name: "Название"
+  errors:
+    template:
+      header:
+        one: "{{model}}: сохранение не удалось из-за {{count}} ошибки"
+        few: "{{model}}: сохранение не удалось из-за {{count}} ошибок"
+        many: "{{model}}: сохранение не удалось из-за {{count}} ошибок"
+        other: "{{model}}: сохранение не удалось из-за {{count}} ошибки"
+      body: "Проблемы возникли со следующими полями:"
+
+  authlogic:
+    error_messages:
+      login_blank: "не может быть пустым"
+      login_not_found: "не действительный"
+      login_invalid: "должны быть использованы только буквы, цифры, пробелы, и символы .-_@"
+      consecutive_failed_logins_limit_exceeded: Consecutive failed logins limit exceeded, account is disabled.
+      email_invalid: "должно быть похоже на адрес эл.почты"
+      password_blank: "не может быть пустым"
+      password_invalid: "не действительный"
+      not_active: "Ваш логин не активный"
+      not_confirmed: "Ваш логин не подтверждён"
+      not_approved: "Ваш логин не подтверждён"
+      no_authentication_details: "Вы не указали имя пользователя и пароль для входа."
+
+  eventlog:
+    user_login: "вход"
+    user_logout: "выход"
+
+  general:
+    male: "Мужской"
+    female: "Женский"
+
+  cards:
+    health_status:
+      almost_healthy: "почти здоров"
+      disabled: "инвалид"
+    release_cause:
+      udo: "УДО"
+      end_of_term: "Конец срока"
+
+  convictions:
+    release_cause:
+      udo: "УДО"
+      end_of_term: "Конец срока"

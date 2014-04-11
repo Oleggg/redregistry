@@ -1,0 +1,2 @@
+module Vocabularies::HealthStatusesHelper
+end

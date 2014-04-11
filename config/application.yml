@@ -1,0 +1,19 @@
+defaults: &defaults
+  revision: <%= IO.read("config/version.txt").split("\n")[0] %>
+  build_time: <%= IO.read("config/version.txt").split("\n")[1] %>
+
+development:
+  <<: *defaults
+  app: bigbrother.local
+  key: AOyHuUsBAAAAe4uOOAIA8_qVY3LclHze6Dnn8KYplkx6jWUAAAAAAAAAAAA9PH1Omx93st4YcdZc3uod5NGOHA==
+
+test:
+  <<: *defaults
+  app: bigbrother.local
+  key: AOyHuUsBAAAAe4uOOAIA8_qVY3LclHze6Dnn8KYplkx6jWUAAAAAAAAAAAA9PH1Omx93st4YcdZc3uod5NGOHA==
+
+production:
+  <<: *defaults
+  auth: bb.penzasoft.com
+  key: AIyFuUsBAAAApMp5BgMAxtSvEuAJwERR-2xqv8GF4URummgAAAAAAAAAAAAvt75P5St3r2KFnk9tp75MSubH8A==
+

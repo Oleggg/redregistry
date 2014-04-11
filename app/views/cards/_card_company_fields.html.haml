@@ -1,0 +1,17 @@
+.row{:class => "fields"}
+  .col
+    = f.select :company_id, Company.for_select
+  .col
+    = f.text_field :period, :size => "10"
+  .col
+    = f.text_field :period_from,:class => "datepick",:size => 9
+    = f.text_field :period_to,:class => "datepick",:size => 9
+  .col
+    = f.text_field :comment
+    = link_to_remove_fields "Удалить", f
+
+:javascript 
+  $(document).ready(function() {
+      $(".datepick").datepicker({ buttonText: 'choose' });
+    });
+

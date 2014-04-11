@@ -1,0 +1,28 @@
+.row{:class => "fields"}
+  .col
+    = f.text_field :convicted_at,:class => "datepick",:size => 9, :value =>(f.object.convicted_at.blank? ? '' : f.object.convicted_at.strftime('%d.%m.%Y'))
+    -#= f.date_select :convicted_at
+  .col
+    -#= f.text_field :article, :size => "10"
+    = f.select :cc_article_id, CcArticle.for_select
+  .col
+    = f.text_field :term, :size => "10"
+    -#= f.select :term, :size => "2", :options => { 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,20 }
+    -#= f.select :term, :options => { 1.upto(20) { |i|  [ i.to_s, i ] } }
+    -#= f.input :term, :as => :boolean
+  .col
+    = f.text_field :released_at,:class => "datepick",:size => 9, :value =>(f.object.released_at.blank? ? '' : f.object.released_at.strftime('%d.%m.%Y'))
+    -#= f.date_select :released_at, :include_blank => true
+  .col
+    = f.inputs do
+      = f.select :release_cause, Conviction.release_cause_for_select
+      -#= f.input :release_cause, :as => :select, :collection => Conviction.release_cause_for_select, :label => nil
+  .col
+    = f.text_field :comment, :size => "10"
+    = link_to_remove_fields "Удалить", f
+
+:javascript 
+  $(document).ready(function() {
+      $(".datepick").datepicker({ buttonText: 'choose' });
+    });
+

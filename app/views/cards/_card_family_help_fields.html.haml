@@ -1,0 +1,15 @@
+.row{:class => "fields"}
+  .col.center
+    = f.select :family_help_id, FamilyHelp.for_select
+  .col
+    = f.text_field :help_date,:class => "datepick",:size => 9, :value =>(f.object.help_date.blank? ? '' : f.object.help_date.strftime('%d.%m.%Y'))
+    -#= f.date_select :help_date
+  .col.center
+    = f.select :organization_id, Department.for_select, :include_blank => ''
+    = link_to_remove_fields "Удалить", f
+
+:javascript 
+  $(document).ready(function() {
+      $(".datepick").datepicker({ buttonText: 'choose' });
+    });
+

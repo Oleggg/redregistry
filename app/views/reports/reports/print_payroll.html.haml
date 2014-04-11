@@ -1,0 +1,27 @@
+- title("Списочный состав картотеки")
+%br
+%br
+%hr
+%hr
+%h1 &laquo;Списочный состав картотеки&raquo;
+%hr
+%hr
+
+.date
+  на дату:
+  = Date.today.strftime("%d.%m.%Y г.")
+%table
+  %tr
+    %th #
+    %th= Person.human_attribute_name(:full_name)
+    %th= Person.human_attribute_name(:birthday)
+    %th= Card.human_attribute_name(:registration_address)
+
+  - @cards.each_with_index do |card,i|
+    %tr
+      %td= i+1
+      %td= card.person.full_name
+      %td.center= card.person.birthday
+      %td.center= card.registration_address
+
+

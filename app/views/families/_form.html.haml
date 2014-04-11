@@ -1,0 +1,22 @@
+= semantic_form_for @family do |f|
+  = f.inputs do
+    = f.input :last_name, :required => true
+    = f.input :address, :required => true
+    -#= Family.human_attribute_name(:family_type)
+    = f.input :family_structure, :collection => FamilyStructure.sorted.all
+    -#= f.input :family_type, :collection => FamilyType.sorted.all
+    .table
+      .row
+        .col.head Категория учёта
+        .col.head
+      = f.fields_for :family_family_types do |builder|
+        = render 'family_family_type_fields', :f => builder
+      .row
+        = link_to_add_fields "Добавить", f, :family_family_types
+
+  = f.buttons do
+    = f.commit_button "Сохранить"
+    %li{:class=>"link"}
+      или
+      = link_to 'Вернутся', collection_url
+

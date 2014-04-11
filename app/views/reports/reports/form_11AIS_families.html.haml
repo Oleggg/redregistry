@@ -1,0 +1,17 @@
+- title("Форма 1.1 АИС Информация о семьях")
+
+%h1 Отчёт &laquo;Форма 1.1 АИС Информация о семьях&raquo;
+
+= form_tag print_form_11AIS_families_reports_report_path, :method => :get do
+  Даты с:
+  %br
+  = date_select("date_from","",:default => -6.months.from_now)
+  %br
+  %br
+  по:
+  %br
+  = date_select("date_to", "")
+  %br
+  %br
+  = submit_tag "Печать", :name => :print
+

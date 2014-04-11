@@ -1,0 +1,21 @@
+- title(FamilyType.model_name.human)
+
+%h1= FamilyType.model_name.human
+
+%table
+  %tr
+    %th= FamilyType.human_attribute_name(:id)
+    %th= FamilyType.human_attribute_name(:name)
+    %th{:colspan=>"2"}
+
+  - @family_types.each do |family_type|
+    %tr
+      %td= family_type.id
+      %td= family_type.name
+      %td= link_to 'Изменить', edit_vocabularies_family_type_path(family_type)
+      %td= link_to 'Удалить', vocabularies_family_type_path(family_type), :confirm => 'Вы уверены?', :method => :delete
+
+= will_paginate @family_types
+
+= link_to 'Добавить', new_vocabularies_family_type_path
+

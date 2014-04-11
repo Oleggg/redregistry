@@ -1,0 +1,118 @@
+- title("Форма 1.1 АИС Информация о детях, находящихся в социально опасном положении")
+
+%h1 &laquo;Форма 1.1 АИС&raquo;
+%h2 
+%b
+  Информация о детях, находящихся в социально опасном положении
+
+.date
+  на дату:
+  = Date.today.strftime("%d.%m.%Y г.")
+%hr
+%b Отчетный период с #{@d_from_f} по #{@d_to_f}
+%br
+%br
+%table
+  %tr
+    %th Наименование показателя
+    %th За отчетный период
+    %th Всего
+
+    %tr
+      %td  
+        %b
+          Численность детей, поставленных на учет, по основаниям
+        %b
+      %td.center
+        = @total_children_period
+      %td.center
+        = Card.count
+
+    - RegistrationReason.all.each_with_index do |reg_reason, i|
+      %tr
+        %td= reg_reason.name
+        %td.center= reg_reason.children_count_period(@d_from,@d_to)
+        %td.center= reg_reason.children_count
+
+    %tr
+      %td  
+        %br
+      %td  
+      %td  
+
+    %tr
+      %td  
+        %b Категории поставленных на учет детей
+      %td  
+      %td  
+
+    - Category.all.each_with_index do |cat, i|
+      %tr
+        %td= cat.name
+        %td.center= cat.children_count_period(@d_from,@d_to)
+        %td.center= cat.children_count
+
+    %tr
+      %td  
+        %b Проживающих в регионах
+      %td  
+      %td
+
+    - Region.all.each_with_index do |region, i|
+      %tr
+        %td= region.name
+        %td.center
+        %td.center= region.children_count
+
+    %tr
+      %td  
+        %b Возраст детей
+      %td  
+      %td
+    %tr
+      %td От 3 до 7 лет:
+      %td.center= Card.children_age_count_period(3,7,@d_from,@d_to)
+      %td.center= Card.children_age_count(3,7)
+    %tr
+      %td От 7 до 10 лет:
+      %td.center= Card.children_age_count_period(7,10,@d_from,@d_to)
+      %td.center= Card.children_age_count(7,10)
+    %tr
+      %td От 10 до 14 лет:
+      %td.center= Card.children_age_count_period(10,14,@d_from,@d_to)
+      %td.center= Card.children_age_count(10,14)
+    %tr
+      %td От 14 до 18 лет:
+      %td.center= Card.children_age_count_period(14,18,@d_from,@d_to)
+      %td.center= Card.children_age_count(14,18)
+
+    %tr
+      %td  
+        %b Число детей,поставленных на учет повторно
+      %td.center= Card.repeat_count_period(@d_from,@d_to)
+      %td.center= Card.repeat_count
+
+    %tr
+      %td  
+        %b Число детей,снятых с учета, по причинам
+      %td  
+      %td
+  
+    - UnregistrationCause.all.each do |unreg_cause|
+      %tr
+        %td= unreg_cause.name
+        %td.center= unreg_cause.children_count_period(@d_from,@d_to)
+        %td.center= unreg_cause.children_count
+
+    %tr
+      %td  
+        %b Оказана помощь ребенку(всего)
+      %td.center= @total_help_period 
+      %td.center= @total_help
+  
+    - ChildHelp.all.each do |child_help|
+      %tr
+        %td= child_help.name
+        %td.center= child_help.children_count_period(@d_from,@d_to)
+        %td.center= child_help.children_count
+

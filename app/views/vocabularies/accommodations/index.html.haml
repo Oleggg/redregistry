@@ -1,0 +1,21 @@
+- title(Accommodation.model_name.human)
+
+%h1= Accommodation.model_name.human
+
+%table
+  %tr
+    %th= Accommodation.human_attribute_name(:id)
+    %th= Accommodation.human_attribute_name(:name)
+    %th{:colspan=>"2"}
+
+  - @accommodations.each do |accommodation|
+    %tr
+      %td= accommodation.id
+      %td= accommodation.name
+      %td= link_to 'Изменить', edit_vocabularies_accommodation_path(accommodation)
+      %td= link_to 'Удалить', vocabularies_accommodation_path(accommodation), :confirm => 'Вы уверены?', :method => :delete
+
+= will_paginate @accommodations
+
+= link_to 'Добавить', new_vocabularies_accommodation_path
+

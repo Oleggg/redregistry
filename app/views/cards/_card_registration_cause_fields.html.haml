@@ -1,0 +1,7 @@
+.row{:class => "fields"}
+  .col
+    = f.select :registration_cause_id, RegistrationCause.for_select
+  .col
+    = f.text_field :comment
+    = link_to_remove_fields "Удалить", f
+

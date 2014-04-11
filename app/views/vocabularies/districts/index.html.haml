@@ -1,0 +1,23 @@
+- title(District.model_name.human)
+
+%h1= District.model_name.human
+
+%table
+  %tr
+    %th= District.human_attribute_name(:id)
+    %th= District.human_attribute_name(:name)
+    %th= District.human_attribute_name(:region)
+    %th{:colspan=>"2"}
+
+  - @districts.each do |district|
+    %tr
+      %td= district.id
+      %td= district.name
+      %td= district.region.name if district.region
+      %td= link_to 'Изменить', edit_vocabularies_district_path(district)
+      %td= link_to 'Удалить', vocabularies_district_path(district), :confirm => 'Вы уверены?', :method => :delete
+
+= will_paginate @districts
+
+= link_to 'Добавить', new_vocabularies_district_path
+

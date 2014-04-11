@@ -1,0 +1,12 @@
+- title("Карточки списком")
+
+%h1 Отчёт &laquo;Карточки списком&raquo;
+
+= form_tag print_cards_list_reports_report_path, :method => :get do
+  %br
+    В архиве
+  = check_box_tag :is_archived, "0"
+  %br
+  %br
+  = submit_tag "Печать", :name => :print
+

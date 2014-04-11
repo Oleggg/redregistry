@@ -1,0 +1,23 @@
+- title(CcArticle.model_name.human)
+
+%h1= CcArticle.model_name.human
+
+%table
+  %tr
+    %th= CcArticle.human_attribute_name(:id)
+    %th= CcArticle.human_attribute_name(:number)
+    %th= CcArticle.human_attribute_name(:name)
+    %th{:colspan=>"2"}
+
+  - @cc_articles.each do |cc_article|
+    %tr
+      %td= cc_article.id
+      %td= cc_article.number
+      %td= cc_article.name
+      %td= link_to 'Изменить', edit_vocabularies_cc_article_path(cc_article)
+      %td= link_to 'Удалить', vocabularies_cc_article_path(cc_article), :confirm => 'Вы уверены?', :method => :delete
+
+= will_paginate @cc_articles
+
+= link_to 'Добавить', new_vocabularies_cc_article_path
+

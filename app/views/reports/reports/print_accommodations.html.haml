@@ -1,0 +1,28 @@
+- title("Условия проживания")
+
+%h1 &laquo;Условия проживания&raquo;
+
+.date
+  на дату:
+  = Date.today.strftime("%d.%m.%Y г.")
+
+%table
+  %tr
+    %th
+    %th Название
+    %th Количество детей
+    %th Количество семей
+
+  - Accommodation.all.each_with_index do |accommodation, i|
+    %tr
+      %td= i+1
+      %td= accommodation.name
+      %td.right= accommodation.children_count
+      %td.right= accommodation.families_count
+
+  %tr
+    %td
+    %td.right Всего на учёте семей:
+    %td.right= @total_children
+    %td.right= @total_families
+

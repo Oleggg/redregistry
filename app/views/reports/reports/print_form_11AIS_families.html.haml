@@ -1,0 +1,67 @@
+- title("Форма 1.1 АИС Информация о семьях, находящихся в социально опасном положении")
+
+%h1 &laquo;Форма 1.1 АИС&raquo;
+%h2 
+%b 
+  Информация о семьях, находящихся в социально опасном положении
+
+.date
+  на дату:
+  = Date.today.strftime("%d.%m.%Y г.")
+%hr
+%b Отчетный период с #{@d_from_f} по #{@d_to_f}
+%br
+%br
+%table
+  %tr
+    %th Наименование показателя
+    %th За отчетный период
+    %th Всего
+
+    %tr
+      %td  
+        %b
+          Поставлено на учет в органах социальной защиты населения
+        %b
+      %td
+      %td
+
+    %tr
+      %td  
+        Всего семей
+      %td.center= @total_families_period
+      %td.center= @total_families
+
+    %tr
+      %td  
+        В данных семьях детей
+      %td.center= @total_families_children_period
+      %td.center= @total_families_children
+
+    %tr
+      %td  
+        %b
+          Категории семей, находящихся в социально опасном положении
+        %b
+      %td
+      %td
+
+  - FamilyType.all.each_with_index do |fam_type,i|
+    %tr
+      %td= fam_type.name
+      %td.center= fam_type.families_count_period(@d_from,@d_to)
+      %td.center= fam_type.families_count
+
+  %tr
+    %td  
+      %b
+        Состав семей, находящихся в социально опасном положении
+      %b
+    %td
+    %td
+
+  - FamilyStructure.all.each_with_index do |fam_str,i|
+    %tr
+      %td= fam_str.name
+      %td.center= fam_str.families_count_period(@d_from,@d_to)
+      %td.center= fam_str.families_count

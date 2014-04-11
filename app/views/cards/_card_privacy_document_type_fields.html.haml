@@ -1,0 +1,14 @@
+.row{:class => "fields"}
+  .col.center
+    = f.text_field :name, :size => "15"
+  .col
+    =# f.input :registered_at
+    = f.date_select :registered_at
+  .col.center
+    = f.text_field :reg_num, :size => "5"
+  .col.center
+    = f.select :privacy_document_type_id, PrivacyDocumentType.for_select
+  .col.center
+    = f.text_field :comment, :size => "10"
+    = link_to_remove_fields "Удалить", f
+

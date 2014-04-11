@@ -1,0 +1,20 @@
+!!!
+%html
+  %head
+    %meta{:"http-equiv" => "Content-type", :content => "text/html; charset=utf-8"}
+    %title
+      = yield(:title) || "Вход"
+    = stylesheet_link_tag 'reset', 'common', 'login'
+    = javascript_include_tag "http://www.google.com/jsapi"
+    :javascript
+      google.load("jquery", "1.4");
+    = javascript_include_tag 'rails'
+    = csrf_meta_tag
+  %body
+    .login
+      - if flash[:notice]
+        %div.flash.notice= flash[:notice]
+      - if flash[:error]
+        %div.flash.error= flash[:error]
+      = yield
+

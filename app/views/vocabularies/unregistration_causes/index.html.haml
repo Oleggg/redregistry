@@ -1,0 +1,21 @@
+- title(UnregistrationCause.model_name.human)
+
+%h1= UnregistrationCause.model_name.human
+
+%table
+  %tr
+    %th= UnregistrationCause.human_attribute_name(:id)
+    %th= UnregistrationCause.human_attribute_name(:name)
+    %th{:colspan=>"2"}
+
+  - @unregistration_causes.each do |unregistration_cause|
+    %tr
+      %td= unregistration_cause.id
+      %td= unregistration_cause.name
+      %td= link_to 'Изменить', edit_vocabularies_unregistration_cause_path(unregistration_cause)
+      %td= link_to 'Удалить', vocabularies_unregistration_cause_path(unregistration_cause), :confirm => 'Вы уверены?', :method => :delete
+
+= will_paginate @unregistration_causes
+
+= link_to 'Добавить', new_vocabularies_unregistration_cause_path
+

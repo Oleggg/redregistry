@@ -1,0 +1,10 @@
+.row{:class => "fields"}
+  .col.center
+    = f.select :child_help_id, ChildHelp.for_select
+  .col
+    =# f.input :help_date
+    = f.date_select :help_date
+  .col.center
+    = f.text_field :organization_id
+    = link_to_remove_fields "Удалить", f
+

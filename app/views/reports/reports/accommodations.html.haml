@@ -1,0 +1,10 @@
+- title("Условия проживания")
+
+%h1 Отчёт &laquo;Условия проживания&raquo;
+
+= form_tag print_accommodations_reports_report_path, :method => :get do
+  = submit_tag "Печать", :name => :print
+%br
+%br
+= image_tag("#{@graph}")
+

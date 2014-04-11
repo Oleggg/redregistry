@@ -1,0 +1,21 @@
+- title(Location.model_name.human)
+
+%h1= Location.model_name.human
+
+%table
+  %tr
+    %th= Location.human_attribute_name(:id)
+    %th= Location.human_attribute_name(:name)
+    %th{:colspan=>"2"}
+
+  - @locations.each do |location|
+    %tr
+      %td= location.id
+      %td= location.name
+      %td= link_to 'Изменить', edit_vocabularies_location_path(location)
+      %td= link_to 'Удалить', vocabularies_location_path(location), :confirm => 'Вы уверены?', :method => :delete
+
+= will_paginate @locations
+
+= link_to 'Добавить', new_vocabularies_location_path
+

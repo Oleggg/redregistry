@@ -1,0 +1,21 @@
+- title(DocumentType.model_name.human)
+
+%h1= DocumentType.model_name.human
+
+%table
+  %tr
+    %th= DocumentType.human_attribute_name(:id)
+    %th= DocumentType.human_attribute_name(:name)
+    %th{:colspan=>"2"}
+
+  - @document_types.each do |document_type|
+    %tr
+      %td= document_type.id
+      %td= document_type.name
+      %td= link_to 'Изменить', edit_vocabularies_document_type_path(document_type)
+      %td= link_to 'Удалить', vocabularies_document_type_path(document_type), :confirm => 'Вы уверены?', :method => :delete
+
+= will_paginate @document_types
+
+= link_to 'Добавить', new_vocabularies_document_type_path
+

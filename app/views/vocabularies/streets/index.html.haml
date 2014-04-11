@@ -1,0 +1,29 @@
+- title(Street.model_name.human)
+
+%h1= Street.model_name.human
+
+%table
+  %tr
+    %th= Street.human_attribute_name(:id)
+    %th= Street.human_attribute_name(:name)
+    %th= Street.human_attribute_name(:region)
+    %th= Street.human_attribute_name(:district)
+    %th= Street.human_attribute_name(:city)
+    %th= Street.human_attribute_name(:town)
+    %th{:colspan=>"2"}
+
+  - @streets.each do |street|
+    %tr
+      %td= street.id
+      %td= street.name
+      %td= street.region.name if street.region
+      %td= street.district.name if street.district
+      %td= street.city.name if street.city
+      %td= street.town.name if street.town
+      %td= link_to 'Изменить', edit_vocabularies_street_path(street)
+      %td= link_to 'Удалить', vocabularies_street_path(street), :confirm => 'Вы уверены?', :method => :delete
+
+= will_paginate @streets
+
+= link_to 'Добавить', new_vocabularies_street_path
+

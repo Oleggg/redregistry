@@ -1,0 +1,30 @@
+-#$("table:#con").html(" #{escape_javascript(render(@cards))} ");
+-#$("table:#con").html(" test ");    
+
+-#- data = []
+-#- @cards.each do |c|
+-#  - data << {:label => "#{c.reg_num}", :value => "#{c.reg_num}" }
+-#= data
+
+-#[
+-#- @cards.each do |c|
+-#  "#{c.person.last_name}"
+-#  ,
+-#]
+
+-#   1. <% for city in @cities -%>  
+-#   2. <%= city.name %>, <%= city.country.name %> |<%= city.id %>  
+-#   3. <% end -%>  
+
+-#- data = []
+-#- @cards.each do |c|
+-#  - data << {:label => "#{c.registered_at}", :value => "#{c.registered_at}" }
+-#  = data.to_json
+-#= render :text => @categories.map(&:name)
+
+-#= render :text => @cards.map(&:id)
+= render :text => @cards.map(&:person).map(&:last_name)
+
+
+
+

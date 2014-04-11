@@ -1,0 +1,7 @@
+- title("Списочный состав семей")
+
+%h1 Отчёт &laquo;Списочный состав семей&raquo;
+
+= form_tag print_families_structure_reports_report_path, :method => :get do
+  = submit_tag "Печать", :name => :print
+

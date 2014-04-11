@@ -1,0 +1,11 @@
+- title("Статьи УК")
+
+%h1 Отчёт &laquo;Статьи УК&raquo;
+
+= form_tag print_cc_article_reports_report_path, :method => :get do
+  = submit_tag "Печать", :name => :print
+%br
+%br
+= image_tag("#{@graph}")
+
+

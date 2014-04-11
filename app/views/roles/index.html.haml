@@ -1,0 +1,21 @@
+- title(Role.model_name.human)
+
+%h1= Role.model_name.human
+
+%table
+  %tr
+    %th= Role.human_attribute_name(:id)
+    %th= Role.human_attribute_name(:name)
+    %th{:colspan=>"2"}
+
+  - @roles.each do |role|
+    %tr
+      %td= role.id
+      %td= role.name
+      %td= link_to 'Изменить', edit_role_path(role)
+      %td= link_to 'Удалить', role, :confirm => 'Вы уверены?', :method => :delete
+
+= will_paginate @roles
+
+= link_to 'Добавить', new_role_path
+

@@ -1,0 +1,38 @@
+- javascript_include_yandex_map_api
+
+= semantic_form_for @company do |f|
+  = f.inputs do
+    = f.input :name, :required => true
+    = f.input :company_type_id, :as => :select, :collection => CompanyType.all
+    = f.input :full_name
+    = f.input :phone1
+    = f.input :phone2
+
+    = f.semantic_fields_for :addresses do |a|
+      = a.inputs :name => "Адрес организации" do
+        = a.input :post_code
+        = a.input :region_id, :as => :select, :collection => Region.all
+        = a.input :district_id, :as => :select, :collection => District.all
+        = a.input :city_id, :as => :select, :collection => City.all
+        = a.input :address_line
+        = a.input :lat, :as => :hidden
+        = a.input :lng, :as => :hidden
+        %input{:type => "button", :value => "Найти адрес на карте", :id => "find_address", |
+          :data => {"form-name" => "company"} } |
+
+      #map_container
+        #map
+
+    = f.input :comment, :as => :text
+
+  = f.buttons do
+    = f.commit_button "Сохранить"
+    %li{:class=>"link"}
+      или
+      = link_to 'Вернутся', companies_path
+
+:javascript
+  function init_point() {
+    init_point_("company");
+  }
+

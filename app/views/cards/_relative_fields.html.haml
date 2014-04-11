@@ -1,0 +1,30 @@
+.row{:class => "fields"}
+  .col.center
+    = f.select :relationship_id, Relationship.for_select
+  .col.center
+    = f.fields_for :person do |p|
+      = p.text_field :last_name, :size => "20"
+      = p.text_field :first_name, :size => "20"
+      = p.text_field :middle_name, :size => "20"
+  .col
+    = f.text_field :birthday,:class => "datepick",:size => 9, :value =>(f.object.birthday.blank? ? '' : f.object.birthday.strftime('%d.%m.%Y'))
+    -#= f.text_field :birthday, :size => "10", :id => 'datepicker'
+    -#= f.calendar_date_select :birthday, :size => "10"
+    -#= f.text_field :birthday, :size => "10"
+  .col.center
+    = f.check_box :cohabitation
+  .col.center
+    = f.text_area :address, :size => "15x2"
+  .col.center
+    = f.text_area :comment, :size => "25x2"
+    = link_to_remove_fields "Удалить", f
+
+:javascript 
+  $(document).ready(function() {
+      $(".datepick").datepicker({ buttonText: 'choose' });
+      //$("#datepicker").each( function(){
+      //  $(this.id).datepicker();
+      //  $(this.id).datepicker($.datepicker.regional['ru']);
+      //});
+    });
+

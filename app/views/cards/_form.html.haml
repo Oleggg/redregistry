@@ -1,0 +1,622 @@
+- javascript_include_yandex_map_api
+
+= semantic_form_for @card, :html => {:multipart => true} do |f|
+
+  .flash
+    = f.error_messages
+
+  #tabs
+    %ul
+      %li= link_to "Обзор", "#tabs-1"
+      %li= link_to "Регистрация", "#tabs-2"
+      %li= link_to "Рождение", "#tabs-3"
+      %li= link_to "Место жительства", "#tabs-4"
+      %li= link_to "Статус", "#tabs-5"
+      %li= link_to "Семья", "#tabs-6"
+      %li= link_to "Идентификация", "#tabs-7"
+      %li= link_to "Здоровье", "#tabs-8"
+      %li= link_to "Работа", "#tabs-14"
+      -#%li= link_to "Перемещения", "#tabs-9"
+      %li= link_to "Личное дело", "#tabs-10"
+      %li= link_to "Судимости", "#tabs-13"
+      %li= link_to "Мероприятия", "#tabs-11"
+      %li= link_to "Фото", "#tabs-12"
+
+    #tabs-1
+      %fieldset{:class=>:inputs}
+        %ol
+          .table
+            .row
+              .col 
+                %li
+                  = f.label :full_name, "ФИО"
+              .col 
+                = @card.person.full_name
+            .row
+              .col 
+                %li
+                  = f.label :registered_at
+              .col 
+                = @card.registered_at.strftime("%d.%m.%Y") if @card.registered_at
+            .row
+              .col 
+                %li
+                  = f.label :full_address, "Адрес"
+              .col 
+                = @card.person.address.full_address
+            .row
+              .col 
+                %li
+                  = f.label :health_status, "Здоровье"
+              .col 
+                = @card.health_status_text
+            .row
+              .col 
+                %li
+                = f.label :family
+                %li
+                  = @card.family_type.name if @card.family_type            
+                  -if @card.family_structure 
+                    &= "("
+                    = @card.family_structure.name
+                    &= ")"
+              .col 
+                = @card.family.family_name if @card.family
+            .row
+              .col 
+                %li
+                  = f.label :registration_cause
+              .col 
+                - @card.card_registration_causes.all.each do |reg_cause|
+                  = reg_cause.registration_cause.name
+                  %br
+            -#.table
+              -#.row
+              -#  .col
+              -#    = f.label :child_help
+              -#  .col
+              -#    - @card.card_child_helps.all.each do |ch_help|
+              -#      %ul
+              -#        %li
+              -#          = ch_help.child_help.name
+              -#          %br
+            .row
+              .col
+                = f.label :family_help
+              .col
+                - @card.card_family_helps.all.each do |fam_help|
+                  %ul
+                    %li
+                      = fam_help.family_help.name
+                      %br
+          %li
+
+    #tabs-2
+      = f.semantic_fields_for :person do |p|
+        = p.inputs do
+          = p.input :last_name, :required => true
+          = p.input :first_name, :required => true
+          = p.input :middle_name, :required => true
+          = p.input :gender, :as => :radio, :required => true, :collection => Person.gender_for_select
+
+      = f.inputs do
+        %li
+          = f.label :reg_num
+          = f.text_field :reg_num,:size => 9
+        %li
+          = f.label :convicted_at
+          = f.text_field :convicted_at,:class => "datepick",:size => 9, :value => (f.object.convicted_at.blank? ? '' : f.object.convicted_at.strftime('%d.%m.%Y'))
+
+          -#= f.input :convicted_at
+        %li
+          = f.label :released_at
+          = f.text_field :released_at,:class => "datepick",:size => 9
+          -#= f.input :released_at
+        %li
+          = f.input :release_cause, :as => :select, :collection => Card.release_cause_for_select
+        %li
+          = f.label :registered_at
+          = f.text_field :registered_at,:class => "datepick_im",:size => 9, :value =>(f.object.registered_at.blank? ? '' : f.object.registered_at.strftime('%d.%m.%Y'))
+          -#= f.input :registered_at
+        %li
+          = f.label :repeat
+          = f.check_box :repeat
+        %li
+          = f.label :is_archived
+          = f.check_box :is_archived
+        = f.input :registration_reason, :collection => RegistrationReason.sorted.all
+        %li
+          = f.label :unregistered_at
+          = f.text_field :unregistered_at,:class => "datepick",:size => 9, :value =>(f.object.unregistered_at.blank? ? '' : f.object.unregistered_at.strftime('%d.%m.%Y'))
+          -#= f.input :unregistered_at
+        = f.input :unregistration_cause, :collection => UnregistrationCause.sorted.all
+        = f.input :comment, :as => :text
+
+    #tabs-3
+      = f.semantic_fields_for :person do |p|
+        = p.inputs do
+          %li
+            = p.label :birthday
+            = p.text_field :birthday,:class => "datepick_im",:size => 9, :value => (p.object.birthday.blank? ? '' : p.object.birthday.strftime('%d.%m.%Y'))
+          %li
+            = p.input :birthplace
+            -#= p.input :birthday
+
+
+    #tabs-4
+      = f.semantic_fields_for :person do |p|
+        = p.semantic_fields_for :addresses do |a|
+          = a.inputs :name => "Адрес по прописке" do
+            = a.input :post_code
+            = a.input :region_id, :as => :select, :collection => Region.all
+            .spin1
+              = image_tag(image_path("spinner.gif"))
+            = a.input :district_id, :as => :select, :collection => District.all
+            -#= a.input :district_id, :as => :select, :collection => District.all, :onchange => remote_function(:update => "card_person_attributes_addresses_attributes_0_district_id", :method => "put", :with => "'district_id=' + this.options[this.selectedIndex].value", :url => { :controller => :cards, :action => :city_by_district } )
+            -#= a.input :district_id, :as => :select, :collection => District.all, :onchange => remote_function(:url => find_city_url, :with => "'district_id='+this.options[this.selectedIndex].value", :method => :get  )
+            .spin2
+              = image_tag(image_path("spinner.gif"))
+            = a.input :city_id, :as => :select, :collection => City.all
+            .spin3
+              = image_tag(image_path("spinner.gif"))
+            = a.input :town_id, :as => :select, :collection => Town.all
+            = a.input :street_id, :as => :select, :collection => Street.all
+            = a.input :address_line
+            = a.input :lat, :as => :hidden
+            = a.input :lng, :as => :hidden
+
+      = f.inputs do
+        = f.input :accommodation, :collection => Accommodation.sorted.all
+        = f.input :registration_address, :hint => 'Если не совпадает с адресом прописки'
+        = f.input :address_comment
+
+    #tabs-5
+      .table
+        .row
+          .col.head Категория учёта
+          .col.head Примечание
+        = f.fields_for :card_categories do |builder|
+          = render 'card_category_fields', :f => builder
+        .row
+          = link_to_add_fields "Добавить", f, :card_categories
+
+      .table
+        .row
+          .col.head Причина постановки на учёт
+          .col.head Примечание
+        = f.fields_for :card_registration_causes do |builder|
+          = render 'card_registration_cause_fields', :f => builder
+        .row
+          = link_to_add_fields "Добавить", f, :card_registration_causes
+
+      = f.inputs do
+        = f.input :employment_type, :collection => EmploymentType.sorted.all
+        = f.input :status_comment
+
+    #tabs-6
+      = f.inputs do
+        = f.input :family, :collection => Family.for_select
+        -#= f.input :family_type, :collection => FamilyType.sorted.all
+        = f.input :family_structure, :collection => FamilyStructure.sorted.all
+
+      %h3 Родственники
+      .table
+        .row
+          .col.head Родство
+          .col.head ФИО
+          .col.head Дата рожд-я
+          .col.head Проживает вместе
+          .col.head Адрес
+          .col.head Примечание
+        = f.fields_for :relatives do |builder|
+          = render 'relative_fields', :f => builder
+        .row
+          = link_to_add_fields "Добавить", f, :relatives
+
+    #tabs-7
+      .table
+        .row
+          .col.head Характеристика
+          .col.head Примечание
+        = f.fields_for :card_child_characters do |builder|
+          = render 'card_child_character_fields', :f => builder
+        .row
+          = link_to_add_fields "Добавить", f, :card_child_characters
+      = f.inputs do
+        = f.input :special_signs
+        -#= f.input :characteristic_list
+
+    #tabs-8
+      = f.inputs do
+        -#= f.input :health_status, :as => :select, :collection => Card.health_status_for_select
+        = f.input :health_status, :as => :select, :collection => HealthStatus.for_select
+      .table
+        .row
+          .col.head Врач-специалист
+          .col.head Дата учета
+          .col.head Примечание(заболевания)
+        = f.fields_for :card_doctors do |builder|
+          = render 'card_doctor_fields', :f => builder
+        .row
+          = link_to_add_fields "Добавить", f, :card_doctors
+
+
+    -##tabs-9
+    -#  .table
+    -#    .row
+    -#      .col.head Местонахождение
+    -#      .col.head Дата поступления
+    -#      .col.head Дата выбытия
+    -#      .col.head Примечание
+    -#    = f.fields_for :card_locations do |builder|
+    -#      = render 'card_location_fields', :f => builder
+    -#    .row
+    -#      = link_to_add_fields "Добавить", f, :card_locations
+
+    #tabs-10
+      = f.inputs do
+        %li
+          = f.label :passport_serie
+          = f.text_field :passport_serie,:size => 5
+        %li
+          = f.label :passport_num
+          = f.text_field :passport_num,:size => 15
+        %li
+          = f.label :issued_by
+          = f.text_field :issued_by,:size => 35
+        %li
+          = f.label :issued_at
+          = f.text_field :issued_at,:class => "datepick",:size => "9", :value =>(f.object.issued_at.blank? ? '' : f.object.issued_at.strftime('%d.%m.%Y'))
+          -#= f.input :issued_at
+        %li
+          = f.label :pension_cert_num
+          = f.text_field :pension_cert_num,:size => "15"
+          -#= f.input :pension_cert_num,:size => 10
+
+      .table
+        .row
+          -#.col.head Наименование
+          -#.col.head{:width => "5"} Дата
+          -#.col.head Рег.№
+          -#.col.head Вид
+          -#.col.head Примечание
+        -#= f.fields_for :card_privacy_document_types do |builder|
+          -#= render 'card_privacy_document_type_fields', :f => builder
+        .row
+          -#= link_to_add_fields "Добавить", f, :card_privacy_document_types
+
+    #tabs-11
+      -#.table
+      -#  .row
+      -#    .col.head Оказана помощь ребенку
+      -#    .col.head Дата
+      -#    .col.head Кем оказана
+      -#  = f.fields_for :card_child_helps do |builder|
+      -#    = render 'card_child_help_fields', :f => builder
+      -#  .row
+      -#    = link_to_add_fields "Добавить", f, :card_child_helps
+
+      .table
+        .row
+          .col.head Оказана помощь семье
+          .col.head Дата
+          .col.head Кем оказана
+        = f.fields_for :card_family_helps do |builder|
+          = render 'card_family_help_fields', :f => builder
+        .row
+          = link_to_add_fields "Добавить", f, :card_family_helps
+
+      = f.inputs do
+        = f.input :help_comment
+
+    #tabs-12
+      - if @card.person.photo_file_name
+        = link_to(image_tag(@card.person.photo.url(:thumb)), @card.person.photo.url(:resized), :rel => "lightbox" )
+      - else
+        = image_tag("/photos/thumb/missing.png")
+      = f.semantic_fields_for :person do |p|
+        = p.inputs do
+          = p.input :photo, :as => :file
+          = p.input :comment
+
+    #tabs-13
+      .table
+        .row
+          .col.head{:width => "30"} Осужден
+          .col.head Статья УК
+          .col.head{:width => "5"} Срок
+          .col.head{:width => "25"} Освобожден
+          .col.head{:width => "15"} Основание освобождения
+          .col.head Примечание
+        = f.fields_for :convictions do |builder|
+          = render 'conviction_fields', :f => builder
+        .row
+          = link_to_add_fields "Добавить", f, :convictions
+
+    #tabs-14
+      = f.inputs do
+        -#= f.input :employment_type, :collection => EmploymentType.sorted.all
+        -#= f.input :company_id, :collection => Company.for_select
+        .table
+          .row
+            .col.head Учреждение
+            .col.head Период
+            .col.head С: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; по:
+            .col.head Примечание
+          = f.fields_for :card_companies do |builder|
+            = render 'card_company_fields', :f => builder
+          .row
+            = link_to_add_fields "Добавить", f, :card_companies
+        -#= f.input :status_comment
+
+  = f.buttons do
+    = f.commit_button "Сохранить"
+    %li{:class=>"link"}
+      или
+      = link_to 'Вернуться', cards_path
+
+:javascript 
+  $(document).ready(function() {
+      //$("#datepick").each( function(){
+      //  $(this.id).datepicker();
+      //  $(this.id).datepicker($.datepicker.regional['ru']);
+      //});
+      //$("#datepicker").datepicker($.datepicker.regional['ru']);
+      /*$(".datepick").each( function(){
+        $(this).datepicker({ changeYear: true });
+      });*/
+      $(".spin1").hide();
+      $(".spin2").hide();
+      $(".spin3").hide();
+      $(".datepick").datepicker('option', 'changeYear', true);
+      $.datepicker.regional['ru'] = {
+        closeText: 'Закрыть',
+        prevText: '&#x3c;Пред',
+        nextText: 'След&#x3e;',
+        currentText: 'Сегодня',
+        monthNames: ['Январь','Февраль','Март','Апрель','Май','Июнь',
+        'Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'],
+        monthNamesShort: ['Янв','Фев','Мар','Апр','Май','Июн',
+        'Июл','Авг','Сен','Окт','Ноя','Дек'],
+        dayNames: ['воскресенье','понедельник','вторник','среда','четверг','пятница','суббота'],
+        dayNamesShort: ['вск','пнд','втр','срд','чтв','птн','сбт'],
+        dayNamesMin: ['Вс','Пн','Вт','Ср','Чт','Пт','Сб'],
+        weekHeader: 'Не',
+        dateFormat: 'dd.mm.yy',
+        firstDay: 1,
+        isRTL: false,
+        showMonthAfterYear: false,
+        yearSuffix: ''};
+      $.datepicker.setDefaults($.datepicker.regional['ru']);
+      $(".datepick_im").datepicker({  
+        showOn: 'both',
+        buttonImage: "#{image_path("calendar.gif")}", 
+        buttonImageOnly: true,
+        changeYear: true
+      });
+
+      $(function(){
+        $("select#card_person_attributes_addresses_attributes_1_district_id").change(function(){
+          $.getJSON("/city_by_district/",{id: $(this).val(), ajax: 'true'}, function(data){
+            var options_c = '';
+            var options_t = '';
+            $("select#card_person_attributes_addresses_attributes_0_city_id").children().remove();
+            $("select#card_person_attributes_addresses_attributes_0_town_id").children().remove();
+            options_c = "<option value=\"" + "" + "\">" + "         " + "</option>";
+            options_t = "<option value=\"" + "" + "\">" + "         " + "</option>";
+            $.each(data[0], function(i){
+              options_c += '<option value="' + data[0][i].city.id + '">' + data[0][i].city.name + '</option>';
+            });
+            $.each(data[1], function(i){
+              options_t += '<option value="' + data[1][i].town.id + '">' + data[1][i].town.name + '</option>';
+            });
+            $(options_c).appendTo("select#card_person_attributes_addresses_attributes_0_city_id");
+            $(options_t).appendTo("select#card_person_attributes_addresses_attributes_0_town_id");
+          })
+        })
+      });
+
+
+
+      $(function(){
+        $("select#card_person_attributes_addresses_attributes_0_district_id").change(function(){
+          $.ajax({
+            dataType: "json",
+            cache: false,
+            url: '../city_by_district/'+$(this).val(),
+            timeout: 5000,
+            error: function(XMLHttpRequest, errorTextStatus, error){
+              alert("Failed to submit : "+ errorTextStatus +" ;"+ error);
+            },
+            beforeSend: function(){                    
+              $(".spin1").show();
+            },
+            complete: function(){                    
+              $(".spin1").hide();
+            },
+            success: function(data){                    
+              var options = '';
+
+              // Clear all options from sub category select
+              //$("select#card_person_attributes_addresses_attributes_0_city_id").remove();
+              //$maxValue = $resultArr[0];  
+              maxlength = '';
+              //foreach($searchArr as $val) {  
+              //res1 = fill_max_element(data[0],'city');
+              //////////////////////////////////////////////////////////////////////////////////////////////
+              /*$.each(data[0], function(i){
+               //check for all the values for maximum value and compare it with default value    
+                if(data[0][i].city.name.length > maxlength.length){
+                //if($val["total_points"] > $maxPoint) {
+                  //$maxPoint = $val["total_points"];  
+                  maxlength += data[0][i].city.name;
+                }  
+              });*/
+              //////////////////////////////////////////////////////////////////////////////////////////////
+              //alert(maxlength.length);
+              //test = maxlength.replace(/./g,'-');
+              //////////////////////////////////////////////////////////////////////////////////////////////
+              //res1 = (maxlength.length > 0)?maxlength.replace(/./g,'-'):"---------------";
+              //////////////////////////////////////////////////////////////////////////////////////////////
+              //res1 = fill_max_elem(data[1],'town');
+              //////////////////////////////////////////////////////////////////////////////////////////////
+              /*
+              maxlength = '';
+              $.each(data[1], function(i){
+                if(data[1][i].town.name.length > maxlength.length){
+                  maxlength += data[1][i].town.name;
+                }  
+              });
+              res2 = (maxlength.length > 0)?maxlength.replace(/./g,'-'):"---------------";*/
+              //////////////////////////////////////////////////////////////////////////////////////////////
+              $("select#card_person_attributes_addresses_attributes_0_city_id").children().remove();
+              $("select#card_person_attributes_addresses_attributes_0_town_id").children().remove();
+              //res1 = fill_max_element(data[0],'city');
+              //options_c = "<option value=\"" + "" + "\">" + res1 + "</option>";
+              options_c = "<option value=\"" + "" + "\">" + "---------------" + "</option>";
+              //res2 = fill_max_element(data[1],'town');
+              //options_t = "<option value=\"" + "" + "\">" + res2 + "</option>";
+              options_t = "<option value=\"" + "" + "\">" + "---------------" + "</option>";
+              $.each(data[0], function(i){
+                options_c += '<option value="' + data[0][i].city.id + '">' + data[0][i].city.name + '</option>';
+                //options_c += '<option value="' + data[0][i].id + '">' + data[0][i].name + '</option>';
+              });
+              $.each(data[1], function(i){
+                options_t += '<option value="' + data[1][i].town.id + '">' + data[1][i].town.name + '</option>';
+                //options_t += '<option value="' + data[1][i].id + '">' + data[1][i].name + '</option>';
+              });
+              $(options_c).appendTo("select#card_person_attributes_addresses_attributes_0_city_id");
+              $(options_t).appendTo("select#card_person_attributes_addresses_attributes_0_town_id");
+              //put in a empty default line
+              //var row = "<option value=\"" + "" + "\">" + "" + "</option>";
+              //$(row).appendTo("select#card_person_attributes_addresses_attributes_0_city_id");
+              /*options = "<option value=\"" + "" + "\">" + "         " + "</option>";
+              $.each(data, function(i){
+                options += '<option value="' + data[i].city.id + '">' + data[i].city.name + '</option>';
+                //$("#card_person_attributes_addresses_attributes_0_city_id").html(options);
+              });
+              $(options).appendTo("select#card_person_attributes_addresses_attributes_0_city_id");
+              $("#card_person_attributes_addresses_attributes_0_city_id").html(options);*/
+            }
+          });
+          /*$.getJSON("edit",{id: $(this).val(), ajax: 'true'}, function(j){
+            alert("good");
+            //$.getJSON("/index",{id: $(this).val(), ajax: 'true'}, function(j){
+            var options = '';
+            for (var i = 0; i < 3; i++) {
+            //for (var i = 0; i < j.length; i++) {
+              //options += '<option value="' + j[i].optionValue + '">' + j[i].optionDisplay + '</option>';
+              options += '<option value="' + j[i].optionValue + '">' + j[i].optionDisplay + '</option>';
+              alert(options);
+              alert("good");
+            };
+            //$("select#ctlPerson").html(options);
+            $("#card_person_attributes_addresses_attributes_0_city_id").html(options);
+          })*/
+        })
+      });
+
+      $(function(){
+        $("select#card_person_attributes_addresses_attributes_0_city_id").change(function(){
+          $.ajax({
+            dataType: "json",
+            cache: false,
+            url: '../streets_by_city/'+$(this).val(),
+            timeout: 5000,
+            error: function(XMLHttpRequest, errorTextStatus, error){
+              alert("Failed to submit : "+ errorTextStatus +" ;"+ error);
+            },
+            beforeSend: function(data){                  
+              $(".spin2").show();
+            },
+            complete: function(data){                    
+              $(".spin2").hide();
+            },
+            success: function(data){                    
+              var options = '';
+              $("select#card_person_attributes_addresses_attributes_0_street_id").children().remove();
+              //res1 = fill_max_element(data,'street');
+              options = "<option value=\"" + "" + "\">" + "---------------" + "</option>";
+              //options = "<option value=\"" + "" + "\">" + res1 + "</option>";
+              $.each(data, function(i){
+                options += '<option value="' + data[i].street.id + '">' + data[i].street.name + '</option>';
+                //options += '<option value="' + data[i].id + '">' + data[i].name + '</option>';
+              });
+              $(options).appendTo("select#card_person_attributes_addresses_attributes_0_street_id");
+            }
+          });
+        })
+      });
+
+      $(function(){
+        $("select#card_person_attributes_addresses_attributes_0_town_id").change(function(){
+          $.ajax({
+            dataType: "json",
+            cache: false,
+            url: '../streets_by_town/'+$(this).val(),
+            timeout: 5000,
+            error: function(XMLHttpRequest, errorTextStatus, error){
+              alert("Failed to submit : "+ errorTextStatus +" ;"+ error);
+            },
+            beforeSend: function(data){                  
+              $(".spin3").show();
+            },
+            complete: function(data){                    
+              $(".spin3").hide();
+            },
+            success: function(data){                    
+              var options = '';
+              $("select#card_person_attributes_addresses_attributes_0_street_id").children().remove();
+              //res1 = fill_max_element(data,'street');
+              options = "<option value=\"" + "" + "\">" + "---------------" + "</option>";
+              //options = "<option value=\"" + "" + "\">" + res1 + "</option>";
+              $.each(data, function(i){
+                options += '<option value="' + data[i].street.id + '">' + data[i].street.name + '</option>';
+                //options += '<option value="' + data[i].id + '">' + data[i].name + '</option>';
+              });
+              $(options).appendTo("select#card_person_attributes_addresses_attributes_0_street_id");
+            }
+          });
+        })
+      });
+
+
+      function fill_max_element_old(data,entity) {
+              maxlength = '';
+              curlength = 0;
+              //alert(entity);
+              var i = 0;
+              $.each(data, function(i){
+                //alert("In each");
+                //alert('curlength = data[0]['+i+'].' + entity + '.name.length');
+                //alert(eval('curlength = data[0]['+i+'].' + entity + '.name.length'));
+                //alert(eval('curlength = data['+i+'].name.length'));
+                //check for all the values for maximum value and compare it with default value    
+                //var i = 0;
+                //eval('curlength = data[0].' + entity + '.name.length');
+                //alert('curlength = data[0].' + entity + '.name.length');
+                //if(data[0][i].city.name.length > maxlength.length){
+                eval('curlength = data['+i+'].name.length');
+                if(curlength > maxlength.length){
+                  //maxlength += data[0][i].city.name;
+                  //eval('maxlength += data[0][' + i + '].' + entity + '.name');
+                  eval('maxlength += data[' + i + '].name');
+                }  
+              });
+              res = (maxlength.length > 0)?maxlength.replace(/./g,'-'):"---------------";
+              return res;  
+      }
+      /*$(".spin").ajaxStart(function() {
+        $(".spin").hide();
+      });
+      $(".spin").ajaxComplete(function() {  
+        $(".spin").show();
+      });*/
+      /*$.ajax({
+        success: function(){
+            alert("good");
+            $("#card_person_attributes_addresses_attributes_0_city_id").html("test");
+        }
+      });*/
+
+    });

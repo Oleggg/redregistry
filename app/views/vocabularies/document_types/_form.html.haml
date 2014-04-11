@@ -1,0 +1,9 @@
+= semantic_form_for [:vocabularies, @document_type] do |f|
+  = f.inputs do
+    = f.input :name, :required => true
+  = f.buttons do
+    = f.commit_button "Сохранить"
+    %li{:class=>"link"}
+      или
+      = link_to 'Вернутся', vocabularies_document_types_path
+

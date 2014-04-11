@@ -1,0 +1,229 @@
+body {
+  background-color: #eee;
+  color: #000;
+  font-family: Verdana;
+  font-size: 12px;
+}
+
+h1 {
+  font-size: 1.7em;
+  font-weight: bold;
+  padding-bottom: 15px;
+}
+
+h3 {
+  font-size: 1.0em;
+  font-weight: bold;
+  padding-bottom: 0px;
+}
+
+p {
+  padding-bottom: 5px;
+}
+
+strong {
+  font-weight: bold;
+}
+
+a {
+  color: #278CCD;
+}
+
+a:hover {
+  color: #58bdfe;
+}
+
+.header {
+  height: 100px;
+  background-color: #fff;
+}
+
+.logo {
+  float: left;
+  padding: 10px 10px;
+}
+
+ul.mainmenu {
+  float: left;
+  font-size: 14px;
+  padding: 30px 20px 30px 20px;
+}
+
+ul.mainmenu li {
+  float: left;
+  padding: 0px 15px;
+}
+
+ul.mainmenu li a {
+  padding: 10px 25px;
+  color: #636363;
+  border: 1px solid #eee;
+}
+
+ul.mainmenu li.active a {
+  background-color: #eee;
+  color: #070980;
+}
+
+ul.mainmenu li a:hover {
+  background-color: #eee;
+  color: #070980;
+}
+
+.login {
+  float: left;
+  padding-top: 20px;
+  margin-left: 30px;
+}
+
+.container {
+  background-color: #fff;
+  padding-bottom: 50px;
+  padding-top: 20px;
+  min-height: 400px;
+}
+
+.menu {
+  width: 210px;
+  float: left;
+  margin: 0px 20px;
+}
+
+.menu ul {
+  line-height:1.5em;
+}
+
+.menu ul li ul {
+  font-size: 0.9em;
+  padding-bottom: 20px;
+  padding-left: 10px;
+}
+
+.menu ul li ul li a {
+  color: #555;
+}
+
+.menu ul li ul li a:hover {
+  background-color: #ccc;
+}
+
+.menu ul li ul li.active a {
+  color: #0000FF;
+}
+
+.menu h2 {
+  color: #666;
+  font-size: 1.3em;
+  font-weight: bold;
+  padding-bottom: 0px;
+}
+
+.content {
+  float: left;
+}
+
+#tabs {
+  width: 980px;
+/*  width: 850px;*/
+}
+
+#tabs div.spin1,#tabs div.spin2,#tabs div.spin3 {
+  /*width: 115px;*/
+  float:left;
+  margin-right: 15px;
+}
+
+.content table {
+  margin-bottom: 8px;
+}
+
+.content table th {
+  background-color: #ebebeb;
+  border: 1px solid #dcdcdc;
+  text-align: center;
+  padding: 0px 5px 3px 5px;
+  vertical-align:middle;
+  font-weight: bold;
+}
+
+.content table th a {
+  color: #5C6063;
+}
+
+.content table td {
+  border: 1px solid #dcdcdc;
+  padding: 0px 5px 2px 5px;
+  vertical-align: middle;
+}
+
+.content table tr.even {
+}
+
+.content table tr.odd td {
+  background-color: #f0f0f0;
+}
+
+.content table tr.selected{
+  background-color: #003533;
+  background-color: #DCDCDC;    
+}
+
+.footer {
+  font-size: 0.9em;
+  margin: 10px 0px 20px 20px;
+}
+
+.filter {
+  padding-bottom: 10px;
+}
+
+.show ul li {
+  padding-bottom: 10px;
+}
+
+.show .label {
+  font-weight: bold;
+}
+
+.show .label:after {
+  content: ":";
+}
+
+#map_container {
+  width: 400px;
+  margin-top: 10px;
+  padding: 5px 5px;
+  border: solid 1px #eee;
+}
+
+#map {
+  width: 400px;
+  height: 300px
+}
+
+.table {
+  display: table;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.table .row {
+  display: table-row;
+  padding: 0px 5px 2px 5px;
+}
+
+.table .row .col {
+  border: 1px solid #dcdcdc;
+  display: table-cell;
+  padding: 3px 5px 3px 5px;
+  vertical-align: top;
+}
+
+.table .head {
+  display: table-caption;
+  background-color: #ebebeb;
+  text-align: center;
+  vertical-align: middle;
+  font-weight: bold;
+}
+

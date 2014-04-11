@@ -1,0 +1,47 @@
+!!!
+%html
+  %head
+    %meta{:"http-equiv" => "Content-type", :content => "text/html; charset=utf-8"}
+    %title
+      - title = yield(:title)
+      = title.empty? ? "Big Brother" : title
+    = stylesheet_link_tag 'reset', '/javascripts/jquery-ui-1.8/themes/base/jquery.ui.all.css',
+        'slimbox2',  'common', 'styles', 'formtastic', 'formtastic_changes'
+
+    = javascript_include_tag "http://www.google.com/jsapi"
+    :javascript
+      google.load("jquery", "1.4");
+      google.load("jqueryui", "1.8");
+
+    = javascript_include_tag 'rails', 'slimbox2'
+    = yield(:yandex_maps_api)
+    = javascript_include_tag 'application'
+    = csrf_meta_tag
+  %body
+    .header
+      .logo= link_to image_tag("big-brother-logo.gif"), root_path
+      %ul.mainmenu
+        = tag_main_menu
+      - if logged_in?
+        .login
+          = link_to current_user.login, account_path
+          = link_to "Выход", user_session_path, :method => :delete, :confirm => "Вы уверены?"
+    .clear
+    .container
+      .menu
+        %ul
+          = tag_sub_menu
+      .content
+        - if flash[:notice]
+          %div.flash.notice= flash[:notice]
+        - if flash[:error]
+          %div.flash.error= flash[:error]
+        = yield
+      .clear
+    .footer
+      &copy; 2010
+      %br
+      = "Сейчас в системе #{User.logged_in.count} " + Russian.p(User.logged_in.count, "пользователь", "пользователя", "пользователей")
+      %br
+      = "сборка: #{Settings.build_time}, ревизия: #{Settings.revision}"
+

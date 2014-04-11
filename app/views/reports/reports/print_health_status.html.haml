@@ -1,0 +1,45 @@
+- title("Здоровье")
+
+%h1 &laquo;Здоровье&raquo;
+
+.date
+  на дату:
+  = Date.today.strftime("%d.%m.%Y г.")
+
+%table
+  %tr
+    %th
+    %th Название
+    %th Количество детей
+    %th Количество семей
+
+  - Doctor.all.each_with_index do |doctor, i|
+    %tr
+      %td= i+1
+      %td= doctor.name
+      %td.center= doctor.total_children_count
+      %td.center= doctor.total_families_count
+
+  %tr
+    %td
+    %td Всего на учёте:
+    %td.center= @total_children
+    %td.center= @total_families
+  %tr
+    %td
+    %td{:colspan=>3} В том числе
+  -#- Card.all.each_with_index do |card, i|
+  %tr
+    %td
+    %td= Card.health_status_for_select[0][0]
+    %td.center= @total_children_healthy
+    %td.center= @total_families_healthy
+    -#%td.right= card.health_status_children_count
+    -#%td.right= card.health_status_families_count
+  %tr
+    %td
+    %td= Card.health_status_for_select[1][0]
+    %td.center= @total_children_disabled
+    %td.center= @total_families_disabled
+
+

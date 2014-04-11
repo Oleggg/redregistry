@@ -1,0 +1,16 @@
+- title("Пользователь")
+
+%h1 Пользователь
+
+%p
+  %strong Имя пользователя:
+  = @user.login
+%p
+  %strong Дата последнего входа:
+  = @user.last_login_at.strftime("%d.%m.%Y %H:%M:%S") if @user.last_login_at
+%p
+  %strong IP адрес:
+  = @user.last_login_ip
+%p
+  = link_to 'Изменить', edit_account_path
+

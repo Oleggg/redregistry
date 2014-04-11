@@ -1,0 +1,47 @@
+- title("Регистрационная карточка")
+
+%h1 Отчёт &laquo;Регистрационная карточка&raquo;
+
+= form_tag print_card_reports_report_path, :method => :get  do
+  %table
+    %tr
+      %th= Person.human_attribute_name(:full_name)
+      %th= Person.human_attribute_name(:age)
+      %th= Person.human_attribute_name(:gender)
+      %th= Card.human_attribute_name(:reg_num)
+      %th= Card.human_attribute_name(:registered_at)
+      %th= Card.human_attribute_name(:unregistered_at)
+      %th Печать
+
+    - @cards.each do |card|
+      %tr.list
+        :javascript
+          :onclick
+            alert("this is my javascript")
+        %td= card.person.full_name
+        %td.center= card.person.age
+        %td.center= card.person.gender_text
+        %td= card.reg_num
+        %td= card.registered_at.strftime("%d.%m.%Y") if card.registered_at
+        %td= card.unregistered_at.strftime("%d.%m.%Y") if card.unregistered_at
+        /%td= link_to 'Просмотр', card
+        %td.center
+          = check_box_tag 'card', card.id , false, options = {:class => "select_checkbox"}
+          %input{:type =>  "hidden", :value => card.id }
+          -#%= check_box_tag 'card[selected][]', card.id, false, {:class => "select_checkbox"} %
+          -#%input{:type =>  "radio", :checked => @added ? true : true, :disabled => @added ? nil : true} 
+
+  = will_paginate @cards
+
+  = submit_tag "Печать", :name => :print , :name => :print
+
+
+  :javascript
+    $(document).ready(function() {
+      $('#list').click( function() {
+        //$('#list').css("background-color",'green');
+      })
+    })
+
+
+

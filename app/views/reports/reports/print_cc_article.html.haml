@@ -1,0 +1,34 @@
+- title("Статьи УК")
+
+%h1 &laquo;Статьи УК&raquo;
+
+.date
+  на дату:
+  = Date.today.strftime("%d.%m.%Y г.")
+
+%table
+  %tr
+    %th Номер
+    %th Наименование
+    %th Количество детей
+
+  - CcArticle.all.each_with_index do |cc_article, i|
+    %tr
+      %td= i+1
+      %td= cc_article.name
+      %td.right= cc_article.cards_count
+      -#%td.right= cc_article.families_count
+  %tr
+    %td
+    %td  Всего имеет судимости
+    %td.right= CcArticle.all_cards_count
+  %tr
+    %td
+    %td  Всего на учёте
+    %td.right= @total_children
+  -#%tr
+    %td
+      %td.right Всего на учёте семей:
+      %td.right= @total_children
+      %td.right= @total_families
+

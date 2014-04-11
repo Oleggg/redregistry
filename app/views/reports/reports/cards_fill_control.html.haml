@@ -1,0 +1,7 @@
+- title("Контроль заполнения картотеки")
+
+%h1 Отчёт &laquo;Контроль заполнения картотеки&raquo;
+
+= form_tag print_cards_fill_control_reports_report_path, :method => :get do
+  = submit_tag "Печать", :name => :print
+

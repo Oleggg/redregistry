@@ -1,0 +1,31 @@
+- title("Списочный состав семей")
+
+%h1 &laquo;Списочный состав семей&raquo;
+
+.date
+  на дату:
+  = Date.today.strftime("%d.%m.%Y г.")
+%hr
+%hr
+
+%table
+  %tr
+    %th Семья
+    %th Категория
+    %th Состав
+
+  - Family.all.each_with_index do |fam,i|
+    %tr
+      %td  
+        %b
+          =i+1 
+          &="."
+        %b
+          = fam.family_name
+      %td
+        -#= fam.family_family_type.family_type.name if fam.family_family_type.family_type
+        - fam.family_family_types.each do |fam_type|
+          =fam_type.family_type.name if fam_type.family_type
+      %td
+        = fam.family_structure.name if fam.family_structure
+

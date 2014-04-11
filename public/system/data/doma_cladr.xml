@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataroot xmlns:od="urn:schemas-microsoft-com:officedata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  xsi:noNamespaceSchemaLocation="DOMA.xsd" generated="2010-07-20T21:31:55">
+<DOMA>
+<NAME>4,6-8,10,25,38,44,45,47,50-52,59,61,62</NAME>
+<SOCR>ДОМ</SOCR>
+<CODE>0200000500000010001</CODE>
+<INDEX>453252</INDEX>
+<GNINMB>0266</GNINMB>
+<OCATD>80439000000</OCATD>
+</DOMA>
+<DOMA>
+<NAME>69,70</NAME>
+<SOCR>ДОМ</SOCR>
+<CODE>0200000500000010002</CODE>
+<INDEX>453252</INDEX>
+<GNINMB>0266</GNINMB>
+<OCATD>80439000000</OCATD>
+</DOMA>
+</dataroot>

@@ -1,0 +1,31 @@
+- title("Контроль заполнения картотеки")
+
+%h1 &laquo;Контроль заполнения картотеки&raquo;
+
+%hr
+.date
+  на дату:
+  = Date.today.strftime("%d.%m.%Y г.")
+
+%hr
+%table
+  %tr
+    %th= Person.human_attribute_name(:full_name)
+    %th
+    -#Person.human_attribute_name(:age)
+
+  - Person.all.each_with_index do |p,i|
+    - if p.adult?
+      %tr
+        %td
+          %b
+            =i+1 
+            &="."
+          %b
+          = p.full_name
+        %td.center 
+          &= "cнять с учета ("
+          = p.age
+          &= ")!"
+
+

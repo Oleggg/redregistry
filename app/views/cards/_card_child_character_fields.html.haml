@@ -1,0 +1,8 @@
+.row{:class => "fields"}
+  .col.center
+    = f.select :child_character_id, ChildCharacter.for_select
+    -#= f.input :child_character_id,:as => :select,:collection => ChildCharacter.for_select
+  .col.center
+    = f.text_field :comment, :size => "10"
+    = link_to_remove_fields "Удалить", f
+

@@ -1,0 +1,121 @@
+- title(Card.model_name.human)
+
+%h1= Card.model_name.human
+
+.filter
+  = form_tag cards_path, :method => :get do
+    = hidden_field_tag :page, @page
+    %h3 Поиск
+    -#= date_select "date_from", @d_from_c
+    -#= date_select "date_to", @d_to_c
+    %br
+    = Person.human_attribute_name(:full_name)
+    = text_field_tag "name", params[:name], :size => 10
+    = Person.human_attribute_name(:gender)
+    = select_tag "gender", options_for_select(Person.gender_for_select(:include_blank => true), params[:gender])
+    Возраст от
+    = text_field_tag "age_from", params[:age_from], :size => 3
+    до
+    = text_field_tag "age_to", params[:age_to], :size => 3
+    %br
+    = Card.human_attribute_name(:registration_reason)
+    = select_tag "registration_reason", options_for_select(RegistrationReason.for_select(:include_blank => true), |
+      params[:registration_reason].to_i) |
+
+    = submit_tag "Найти", :name => :search
+
+%table#con
+  %tr
+    -#%th= th_sort_link "#{Person.human_attribute_name(:full_name)}","full_name"
+    %th= Person.human_attribute_name(:full_name)
+    -#%th= th_sort_link "Name","reg_num"
+    %th= Person.human_attribute_name(:age)
+    %th= Person.human_attribute_name(:gender)
+    %th= Card.human_attribute_name(:reg_num)
+    -#%th= th_sort_link "#{Card.human_attribute_name(:reg_num)}","reg_num"
+    %th= Card.human_attribute_name(:registered_at)
+    %th= Card.human_attribute_name(:unregistered_at)
+    %th{:colspan=>"2"}
+
+  - @cards.each do |card|
+    %tr
+      %td= card.person.full_name
+      %td.center= card.person.age
+      %td.center= card.person.gender_text
+      %td= card.reg_num
+      %td= card.registered_at.strftime("%d.%m.%Y") if card.registered_at
+      %td= card.unregistered_at.strftime("%d.%m.%Y") if card.unregistered_at
+      /%td= link_to 'Просмотр', card
+      %td= link_to 'Изменить', edit_card_path(card),:class => "button"
+      %td= link_to 'Удалить', card, :confirm => 'Вы уверены?', :method => :delete,:class => "button"
+
+= will_paginate @cards
+
+= link_to 'Добавить', new_card_path
+
+
+:javascript
+    $("#sort_link").bind("ajax:complete", function(et, e){
+      $("#content").html(e.responseText);
+    });
+
+    //$("a:#sort_link").hide();
+    $("a:#sort_link").bind("ajax:complete", function(et, e){
+      $("#con").html(e.responseText);
+    });
+    $("a:#sort_link").bind("ajax:loading", function(et, e){
+      $(this).hide();
+      //$("#products-spinner").show();
+    });
+
+  $(document).ready(function() {
+     /*$("a:#sort_link").click(function() {
+     // make a POST call and replace the content
+        $.post( function(data) {
+          $("table:#con").html(data);
+          //$("table:#con").html("test");
+        });
+    });*/
+
+    //$("table:#con").html("test");
+    $("a:#sort_link").bind("ajax:complete", function(et, e){
+      $("table:#con").html(e.responseText);
+      $("table:#con").html("test");
+    });
+    $("a:#sort_link").bind("ajax:success", function(et, e){
+      $("table:#con").html("test");
+    });
+    $("a:#sort_link").bind("ajax:loading", function(et, e){
+      //$(this).hide();
+      $("a:#sort_link").hide();
+      $("table:#con").html("test");
+    });
+
+    //$(".button").button();
+    //$("a", ".demo").click(function() { return false; });
+
+    $(function() {
+      //var availableTags = ["c++", "java", "php", "coldfusion", "javascript", "asp", "ruby", "python", "c", "scala", "groovy", "haskell", "perl"];
+      var availableTags = ["Петров", "Иванов", "Кузнецов", "Сидоров", "Сидоркин"];
+      $("#name").autocomplete({
+        //source: availableTags
+        //source: "#{@new_cards}"
+        source: "/cards", minLength: 2,
+        dataType: 'json',
+        formatItem: function(item) {
+          return item.person.last_name;
+        }
+        //source: "#{@cards}", minLength: 1
+        //source: "/cards", minLength: 2
+      });
+      //$("#name").autocomplete({
+      //source: "/cards", minLength: 1
+      //dataType: 'json',
+      //mustMatch: true,
+      //});
+    });
+
+  });
+
+
+

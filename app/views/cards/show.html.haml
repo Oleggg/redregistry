@@ -1,0 +1,81 @@
+- title("Карточка подростка")
+
+%h1 Карточка подростка
+
+#tabs
+  %ul
+    %li= link_to "Обзор", "#tabs-1"
+    %li= link_to "Регистрация", "#tabs-2"
+    %li= link_to "Рождение", "#tabs-3"
+    %li= link_to "Место жительства", "#tabs-4"
+    %li= link_to "Статус", "#tabs-5"
+    %li= link_to "Семья", "#tabs-6"
+    %li= link_to "Идентификация", "#tabs-7"
+    %li= link_to "Здоровье", "#tabs-8"
+    %li= link_to "Перемещения", "#tabs-9"
+    %li= link_to "Личное дело", "#tabs-10"
+    %li= link_to "Помощь", "#tabs-11"
+
+  #tabs-1
+    .show
+      %ul
+        %li
+          .label= Card.human_attribute_name(:category_id)
+          = @card.category.name if @card.category
+        %li
+          .label= Person.human_attribute_name(:full_name)
+          = @card.person.full_name
+        %li
+          .label= Person.human_attribute_name(:gender)
+          = @card.person.gender_text
+        %li
+          .label= Person.human_attribute_name(:birthday)
+          = @card.person.birthday.strftime("%d.%m.%Y") if @card.person.birthday
+        %li
+          .label= Person.human_attribute_name(:age)
+          = @card.person.age
+        %li
+          .label= Person.human_attribute_name(:birthplace)
+          = @card.person.birthplace
+        %li
+          .label= Person.human_attribute_name(:phone)
+          = @card.person.phone
+        %li
+          .label= Person.human_attribute_name(:mobile)
+          = @card.person.mobile
+        %li
+          .label= Person.human_attribute_name(:address)
+          = @card.person.addresses.first.full_address if @card.person.addresses.first
+        %li
+          .label= Person.human_attribute_name(:photo)
+          - if @card.person.photo_file_name
+            = link_to(image_tag(@card.person.photo.url(:thumb)), @card.person.photo.url(:resized), :rel => "lightbox" )
+          - else
+            = image_tag("/photos/thumb/missing.png")
+        %li
+          .label= Person.human_attribute_name(:comment)
+          = @card.person.comment
+
+  #tabs-2
+
+  #tabs-3
+
+  #tabs-4
+
+  #tabs-5
+
+  #tabs-6
+
+  #tabs-7
+
+  #tabs-8
+
+  #tabs-9
+
+  #tabs-10
+
+  #tabs-11
+
+.buttons
+  = link_to 'Вернутся', cards_path
+

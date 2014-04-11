@@ -1,0 +1,21 @@
+- title(ChildHelp.model_name.human)
+
+%h1= ChildHelp.model_name.human
+
+%table
+  %tr
+    %th= ChildHelp.human_attribute_name(:id)
+    %th= ChildHelp.human_attribute_name(:name)
+    %th{:colspan=>"2"}
+
+  - @child_helps.each do |child_help|
+    %tr
+      %td= child_help.id
+      %td= child_help.name
+      %td= link_to 'Изменить', edit_vocabularies_child_help_path(child_help)
+      %td= link_to 'Удалить', vocabularies_child_help_path(child_help), :confirm => 'Вы уверены?', :method => :delete
+
+= will_paginate @child_helps
+
+= link_to 'Добавить', new_vocabularies_child_help_path
+

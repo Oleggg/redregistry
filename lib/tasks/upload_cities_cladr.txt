@@ -1,0 +1,19 @@
+  task :upload_cities, :roles => :app do
+
+    puts "Hello World!"
+#   require 'rubygems'
+#   xml_data = YAML::load(open("#{RAILS_ROOT}/public/cladr.xml"))
+#   xml_data = YAML::load(open("#{RAILS_ROOT}/public/system/data/cladr.xml")).read
+#    xml_data = YAML.load_file("#{RAILS_ROOT}/public/system/data/cladr.xml").read
+#    doc = REXML::Document.new( xml_data )
+#    system "File opened"
+
+#    @doc.xpath("//product").each do |item|
+#      Product.create(:productname => product.css("name").text)
+#    end
+
+#    system "svnversion > config/version.txt"
+#    system "date +\"%Y-%m-%d %H:%M:%S\" >> config/version.txt"
+#    system "svn ci config/version.txt -m \"deploy at #{Time.now.strftime("%F %T")}\""
+  end
+

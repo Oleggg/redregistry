@@ -1,0 +1,25 @@
+- title(User.model_name.human)
+
+%h1= User.model_name.human
+
+%table
+  %tr
+    %th= User.human_attribute_name(:id)
+    %th= User.human_attribute_name(:login)
+    %th= User.human_attribute_name(:email)
+    %th= User.human_attribute_name(:last_login_at)
+    %th{:colspan=>"2"}
+
+  - @users.each do |user|
+    %tr
+      %td= user.id
+      %td= user.login
+      %td= user.email
+      %td= user.last_login_at.strftime("%d.%m.%Y %H:%M:%S") if user.last_login_at
+      %td= link_to 'Изменить', edit_user_path(user)
+      %td= link_to 'Удалить', user, :confirm => 'Вы уверены?', :method => :delete
+
+= will_paginate @users
+
+= link_to 'Добавить', new_user_path
+

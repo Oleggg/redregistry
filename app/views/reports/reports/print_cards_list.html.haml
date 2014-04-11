@@ -1,0 +1,27 @@
+- title("Карточки списком")
+
+%h1 &laquo;Карточки списком&raquo;
+
+.date
+  на дату:
+  = Date.today.strftime("%d.%m.%Y г.")
+
+%table
+  %tr
+    %th= Person.human_attribute_name(:full_name)
+    %th= Person.human_attribute_name(:age)
+    %th= Person.human_attribute_name(:gender)
+    %th= Card.human_attribute_name(:reg_num)
+    %th= Card.human_attribute_name(:registered_at)
+    %th= Card.human_attribute_name(:unregistered_at)
+
+  - @cards.each do |card|
+    %tr
+      %td= card.person.full_name
+      %td.center= card.person.age
+      %td.center= card.person.gender_text
+      %td= card.reg_num
+      %td= card.registered_at.strftime("%d.%m.%Y") if card.registered_at
+      %td= card.unregistered_at.strftime("%d.%m.%Y") if card.unregistered_at
+
+

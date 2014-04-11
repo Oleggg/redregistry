@@ -1,0 +1,30 @@
+- title(Eventlog.model_name.human)
+
+%h1= Eventlog.model_name.human
+
+.filter
+  = form_tag eventlogs_path, :method => :get do
+    = hidden_field_tag :page, @page
+    %h3 Поиск
+    = Eventlog.human_attribute_name(:event_type)
+    = select_tag "event_type", options_for_select(Eventlog.event_type_for_select(:include_blank => true), params[:event_type].to_i)
+    = submit_tag "Найти", :name => :search
+
+%table
+  %tr
+    %th= Eventlog.human_attribute_name(:id)
+    %th= Eventlog.human_attribute_name(:created_at)
+    %th= Eventlog.human_attribute_name(:event_type)
+    %th= Eventlog.human_attribute_name(:user_id)
+    %th= Eventlog.human_attribute_name(:data)
+
+  - @events.each do |event|
+    %tr
+      %td= event.id
+      %td= event.created_at.strftime("%d.%m.%Y %H:%M:%S")
+      %td.center= t "eventlog.#{Eventlog::EVENT_TYPES.index(event.event_type).to_s}"
+      %td.center= event.user.login if event.user
+      %td!= event_text(event)
+
+= will_paginate @events
+

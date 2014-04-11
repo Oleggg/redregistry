@@ -1,0 +1,12 @@
+- title("Списочный состав картотеки")
+
+%h1 Отчёт &laquo;Списочный состав картотеки&raquo;
+
+= form_tag print_payroll_reports_report_path, :method => :get do
+  %br
+    В архиве
+  = check_box_tag :is_archived, "0"
+  %br
+  %br
+  = submit_tag "Печать", :name => :print
+

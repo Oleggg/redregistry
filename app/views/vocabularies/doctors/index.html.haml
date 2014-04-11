@@ -1,0 +1,21 @@
+- title(Doctor.model_name.human)
+
+%h1= Doctor.model_name.human
+
+%table
+  %tr
+    %th= Doctor.human_attribute_name(:id)
+    %th= Doctor.human_attribute_name(:name)
+    %th{:colspan=>"2"}
+
+  - @doctors.each do |doctor|
+    %tr
+      %td= doctor.id
+      %td= doctor.name
+      %td= link_to 'Изменить', edit_vocabularies_doctor_path(doctor)
+      %td= link_to 'Удалить', vocabularies_doctor_path(doctor), :confirm => 'Вы уверены?', :method => :delete
+
+= will_paginate @doctors
+
+= link_to 'Добавить', new_vocabularies_doctor_path
+

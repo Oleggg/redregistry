@@ -1,0 +1,52 @@
+- title(Person.model_name.human)
+
+%h1= Person.model_name.human
+
+.filter
+  = form_tag people_path, :method => :get do
+    = hidden_field_tag :page, @page
+    %h3 Поиск
+    = Person.human_attribute_name(:full_name)
+    = text_field_tag "name", params[:name], :size => 10
+    = Person.human_attribute_name(:gender)
+    = select_tag "gender", options_for_select(Person.gender_for_select(:include_blank => true), params[:gender])
+    Возраст от
+    = text_field_tag "age_from", params[:age_from], :size => 3
+    до
+    = text_field_tag "age_to", params[:age_to], :size => 3
+    = submit_tag "Найти", :name => :search
+
+%table
+  %tr
+    %th= Person.human_attribute_name(:id)
+    -#%th= th_sort_link "#{Person.human_attribute_name(:full_name)}","full_name"
+    %th= Person.human_attribute_name(:full_name)
+    -#%th= th_sort_link "#{Person.human_attribute_name(:gender)}","gender"
+    %th= Person.human_attribute_name(:gender)
+    %th= Person.human_attribute_name(:age)
+    %th{:colspan=>"3"}
+
+  - @people.each do |person|
+    %tr
+      %td= person.id
+      %td= person.full_name
+      %td.center= person.gender_text
+      %td.center= person.age
+      %td= link_to 'Просмотр', person
+      %td= link_to 'Изменить', edit_person_path(person)
+      %td= link_to 'Удалить', person, :confirm => 'Вы уверены?', :method => :delete
+
+= will_paginate @people
+
+= link_to 'Добавить', new_person_path
+
+:javascript
+  $(document).ready(function() {
+      $("#name").autocomplete({
+        source: "/people", minLength: 2,
+        dataType: 'json'
+        /*formatItem: function(item) {
+          return item.person.last_name;
+        }*/
+      });
+  });

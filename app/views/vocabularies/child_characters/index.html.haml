@@ -1,0 +1,21 @@
+- title(ChildCharacter.model_name.human)
+
+%h1= ChildCharacter.model_name.human
+
+%table
+  %tr
+    %th= ChildCharacter.human_attribute_name(:id)
+    %th= ChildCharacter.human_attribute_name(:name)
+    %th{:colspan=>"2"}
+
+  - @child_characters.each do |child_character|
+    %tr
+      %td= child_character.id
+      %td= child_character.name
+      %td= link_to 'Изменить', edit_vocabularies_child_character_path(child_character)
+      %td= link_to 'Удалить', vocabularies_child_character_path(child_character), :confirm => 'Вы уверены?', :method => :delete
+
+= will_paginate @child_characters
+
+= link_to 'Добавить', new_vocabularies_child_character_path
+

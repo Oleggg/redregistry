@@ -1,0 +1,20 @@
+= semantic_form_for [:vocabularies, @street] do |f|
+  = f.inputs do
+    %li
+      = f.input :name, :required => true
+    %li
+      -#= f.input :region, :required => true, :as => :select, :collection => Region.all
+      = f.label :region
+      = f.select :region_id, Region.for_select
+    %li
+      -#= f.input :district, :required => true, :as => :select, :collection => District.all
+      = f.label :district
+      = f.select :district_id, District.for_select
+    = f.input :city, :required => true, :as => :select, :collection => City.for_select
+    = f.input :town, :required => true, :as => :select, :collection => Town.for_select
+  = f.buttons do
+    = f.commit_button "Сохранить"
+    %li{:class=>"link"}
+      или
+      = link_to 'Вернуться', vocabularies_streets_path
+

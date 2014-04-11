@@ -1,0 +1,23 @@
+- title(Relationship.model_name.human)
+
+%h1= Relationship.model_name.human
+
+%table
+  %tr
+    %th= Relationship.human_attribute_name(:id)
+    %th= Relationship.human_attribute_name(:name)
+    %th= Relationship.human_attribute_name(:gender)
+    %th{:colspan=>"2"}
+
+  - @relationships.each do |relationship|
+    %tr
+      %td= relationship.id
+      %td= relationship.name
+      %td= relationship.gender_text
+      %td= link_to 'Изменить', edit_vocabularies_relationship_path(relationship)
+      %td= link_to 'Удалить', vocabularies_relationship_path(relationship), :confirm => 'Вы уверены?', :method => :delete
+
+= will_paginate @relationships
+
+= link_to 'Добавить', new_vocabularies_relationship_path
+

@@ -1,0 +1,137 @@
+- title("Регистрационная карточка")
+
+%h1 
+  &laquo;Регистрационная карточка №
+  = @card.id
+  &raquo;
+  от:
+  = Date.today.strftime("%d.%m.%Y г.")
+
+.date
+  от:
+  = Date.today.strftime("%d.%m.%Y г.")
+%table{:width => "50%"}
+  %tr
+    %td{:colspan => "2"}
+      %h1.center= @card.person.full_name
+  %tr
+    %td  
+      %b Рождение 
+      = @card.person.birthday 
+      %br
+      = @card.person.birthplace
+    %td 
+      %b Возраст
+      = @card.person.age
+  %tr
+    %td
+      %b Место фактического проживания
+    %td  
+      = @card.person.address.full_address if @card.person.address
+  %tr
+    %td
+      %b Условия проживания
+    %td
+      = @card.accommodation.name if @card.accommodation
+  %tr
+    %td{:colspan => "2"}
+      %h1.center Социальный статус
+  %tr
+    %td  
+      %b Род занятий
+    %td  
+      = @card.employment_type.name if @card.employment_type
+  %tr
+    %td  
+      %b Категория учета
+    %td  
+      - @card.card_categories.all.each do |cat|
+        = cat.category.name
+  %tr
+    %td  
+      %b Причины постановки на учет
+    %td  
+      - @card.card_registration_causes.all.each do |reg_cause|
+        = reg_cause.registration_cause.name
+        %br
+  %tr
+    %td{:colspan => "2"}
+      %h1.center Семья
+  %tr
+    %td  
+      %b Категория
+    %td  
+      = @card.family_type.name if @card.family_type
+  %tr
+    %td  
+      %b Состав
+    %td  
+      = @card.family_structure.name if @card.family_structure
+  %tr
+    %td  
+      %b Список родственников
+    %td  
+      - @card.relatives.all.each do |rel|
+        = rel.relationship.name
+        %br
+        = rel.comment
+  %tr
+    %td{:colspan => "3"}
+      %h1.center Идентификация
+  %tr
+    %td  
+      %b На учете в УВД
+    %td  
+  %tr
+    %td
+      %b Список документов  
+    %td  
+      - @card.card_privacy_document_types.all.each do |pdt|
+        = pdt.privacy_document_type.name
+        %br
+        = pdt.registered_at
+        %br
+        = pdt.comment
+  %tr
+    %td{:colspan => "3"}
+      %h1.center Здоровье
+  %tr
+    %td  
+      %b= @card.health_status_text
+    %td  
+  %tr
+    %td  
+      %b На учете у врачей-специалистов
+    %td  
+  %tr
+    %td{:colspan => "3"}
+      %h1.center Перемещения
+  %tr
+    %td  
+      %b Список перемещений
+    %td  
+    %hr
+  %tr
+    %td{:colspan => "3"}
+      %h1.center Оказана помощь
+  %tr
+    %td  
+      %b Ребенку
+    %td  
+  %tr
+    %td  
+      %b Семье
+    %td  
+
+
+
+
+
+
+
+
+
+
+
+
+

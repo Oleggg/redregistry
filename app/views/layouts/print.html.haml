@@ -1,0 +1,25 @@
+!!!
+%html
+  %head
+    %meta{:"http-equiv" => "Content-type", :content => "text/html; charset=utf-8"}
+    %title
+      = yield(:title) || "Отчёт"
+    = stylesheet_link_tag 'reset', 'common', 'print',:media => "screen"
+    = stylesheet_link_tag 'print',:media => "print"
+  %body
+    .header
+
+    = link_to_function 'Напечатать', "print_report()",:id=>"print_link"
+    = yield
+
+    .footer
+      %hr
+      %p
+        &copy; 2010 &laquo;Большой Брат&raquo;
+
+    :javascript
+      function print_report(){
+        //document.getElementById('print_link').style.visibility = 'hidden'; 
+        window.print();
+        //$('.print_link').hide();
+      };

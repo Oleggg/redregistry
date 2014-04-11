@@ -1,0 +1,11 @@
+- title("Редактировать профиль")
+
+%h1 Редактировать профиль
+
+= form_for @user, :url => account_path do |f|
+  = f.error_messages
+  = render :partial => "form", :object => f
+  = f.submit "Сохранить"
+  %br
+  = link_to "Вернутся", account_path
+

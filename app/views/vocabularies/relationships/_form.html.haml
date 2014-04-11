@@ -1,0 +1,10 @@
+= semantic_form_for [:vocabularies, @relationship] do |f|
+  = f.inputs do
+    = f.input :name, :required => true
+    = f.input :gender, :as => :radio, :required => true, :collection => Person.gender_for_select
+  = f.buttons do
+    = f.commit_button "Сохранить"
+    %li{:class=>"link"}
+      или
+      = link_to 'Вернутся', vocabularies_relationships_path
+

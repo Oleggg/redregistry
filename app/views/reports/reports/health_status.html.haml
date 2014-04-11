@@ -1,0 +1,11 @@
+- title("Здоровье")
+
+%h1 Отчёт &laquo;Здоровье&raquo;
+
+= form_tag print_health_status_reports_report_path, :method => :get do
+  = submit_tag "Печать", :name => :print
+%br
+%br
+= image_tag("#{@graph}")
+
+

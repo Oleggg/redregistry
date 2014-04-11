@@ -1,0 +1,50 @@
+- javascript_include_yandex_map_api
+
+= semantic_form_for @person, :html => {:multipart => true}, :remote => true do |f|
+  = f.error_messages
+
+  = f.inputs do
+    = f.input :last_name, :required => true
+    = f.input :first_name, :required => true
+    = f.input :middle_name, :required => true
+    = f.input :gender, :as => :radio, :required => true, :collection => Person.gender_for_select
+    = f.input :birthday, :start_year => 1950
+    = f.input :birthplace
+    = f.input :phone
+    = f.input :mobile
+
+    = f.semantic_fields_for :addresses do |a|
+      = a.inputs :name => "Адрес регистрации" do
+        = a.input :post_code
+        = a.input :region_id, :as => :select,  :collection => Region.all
+        = a.input :district_id, :as => :select, :collection => District.all
+        = a.input :city_id, :as => :select, :collection => City.all
+        = a.input :address_line
+        = a.input :lat, :as => :hidden
+        = a.input :lng, :as => :hidden
+        %input{:type => "button", :value => "Найти адрес на карте", :id => "find_address", |
+          "data-form-name" => "person" } |
+
+      #map_container
+        #map
+
+    %li
+      - if @person.photo_file_name
+        = link_to(image_tag(@person.photo.url(:thumb)), @person.photo.url(:resized), :rel => "lightbox" )
+      - else
+        = image_tag("/photos/thumb/missing.png")
+
+    = f.input :photo, :as => :file
+    = f.input :comment
+
+  = f.buttons do
+    = f.commit_button "Сохранить"
+    %li{:class=>"link"}
+      или
+      = link_to 'Вернуться', people_path
+
+:javascript
+  function init_point() {
+    init_point_("person");
+  }
+

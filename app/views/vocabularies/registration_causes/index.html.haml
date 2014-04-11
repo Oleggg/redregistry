@@ -1,0 +1,21 @@
+- title(RegistrationCause.model_name.human)
+
+%h1= RegistrationCause.model_name.human
+
+%table
+  %tr
+    %th= RegistrationCause.human_attribute_name(:id)
+    %th= RegistrationCause.human_attribute_name(:name)
+    %th{:colspan=>"2"}
+
+  - @registration_causes.each do |registration_cause|
+    %tr
+      %td= registration_cause.id
+      %td= registration_cause.name
+      %td= link_to 'Изменить', edit_vocabularies_registration_cause_path(registration_cause)
+      %td= link_to 'Удалить', vocabularies_registration_cause_path(registration_cause), :confirm => 'Вы уверены?', :method => :delete
+
+= will_paginate @registration_causes
+
+= link_to 'Добавить', new_vocabularies_registration_cause_path
+

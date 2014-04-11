@@ -1,0 +1,21 @@
+- title(HealthStatus.model_name.human)
+
+%h1= HealthStatus.model_name.human
+
+%table
+  %tr
+    %th= HealthStatus.human_attribute_name(:id)
+    %th= HealthStatus.human_attribute_name(:name)
+    %th{:colspan=>"2"}
+
+  - @health_statuses.each do |health_status|
+    %tr
+      %td= health_status.id
+      %td= health_status.name
+      %td= link_to 'Изменить', edit_vocabularies_health_status_path(health_status)
+      %td= link_to 'Удалить', vocabularies_health_status_path(health_status), :confirm => 'Вы уверены?', :method => :delete
+
+= will_paginate @health_statuses
+
+= link_to 'Добавить', new_vocabularies_health_status_path
+

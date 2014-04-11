@@ -1,0 +1,57 @@
+- title("Просмотр персоны")
+- javascript_include_yandex_map_api
+
+%h1= "Просмотр персоны"
+
+.show
+  %ul
+    %li
+      .label= Person.human_attribute_name(:full_name)
+      = @person.full_name
+    %li
+      .label= Person.human_attribute_name(:gender)
+      = @person.gender_text
+    %li
+      .label= Person.human_attribute_name(:birthday)
+      = @person.birthday.strftime("%d.%m.%Y") if @person.birthday
+    %li
+      .label= Person.human_attribute_name(:age)
+      = @person.age
+    %li
+      .label= Person.human_attribute_name(:birthplace)
+      = @person.birthplace
+    %li
+      .label= Person.human_attribute_name(:phone)
+      = @person.phone
+    %li
+      .label= Person.human_attribute_name(:mobile)
+      = @person.mobile
+    %li
+      .label= Person.human_attribute_name(:address)
+      = @person.addresses.first.full_address if @person.addresses.first
+
+      #map_container
+        #map
+    %li
+      .label= Person.human_attribute_name(:photo)
+      - if @person.photo_file_name
+        = link_to(image_tag(@person.photo.url(:thumb)), @person.photo.url(:resized), :rel => "lightbox" )
+      - else
+        = image_tag("/photos/thumb/missing.png")
+    %li
+      .label= Person.human_attribute_name(:comment)
+      = @person.comment
+
+  .buttons
+    = link_to 'Вернутся', people_path
+
+:javascript
+  function init_point() {
+    lat = #{@person_address.lat};
+    lng = #{@person_address.lng};
+    var point = new YMaps.GeoPoint(lat, lng);
+    placemark.setOptions({draggable: false});
+    placemark.setGeoPoint(point);
+    map.setCenter(point, 12);
+  }
+

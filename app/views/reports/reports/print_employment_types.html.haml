@@ -1,0 +1,30 @@
+- title("Занятость")
+
+%h1 &laquo;Занятость&raquo;
+
+.date
+  на дату:
+  = Date.today.strftime("%d.%m.%Y г.")
+
+%table
+  %tr
+    %th
+    %th Название
+    %th Количество детей
+    %th Количество семей
+
+  - EmploymentType.all.each_with_index do |emp_type, i|
+    %tr
+      %td= i+1
+      %td= emp_type.name
+      %td.center= emp_type.children_count
+      %td.center= emp_type.families_count
+  %tr
+    %td
+    %td  Всего на учёте
+    %td.center= @total_children
+    %td.center= @total_families
+
+
+
+

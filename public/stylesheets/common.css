@@ -1,0 +1,40 @@
+/* Common styles */
+.clear { clear: both; }
+.spacer { clear: both; }
+.spacer300 { clear: both; height: 300px; }
+.center { text-align: center; }
+.right { text-align: right; }
+.justify { text-align: justify; }
+.hidden { display: none; }
+.red { color: #f00; }
+.yellow { color: #ccca04; }
+.green { color: #00a000; }
+.noborder, .noborder td { border-width: 0px !important; }
+/* Common styles end */
+
+/* Common pagination and errors */
+.flash {font-weight: bold; padding: 5px; margin: 10px 10px 0px 0px;}
+.error {background-color: #FAA; border: solid 2px red;}
+.warning {background-color: #FFA; border: solid 2px yellow;}
+.notice {background-color: #AFA; border: solid 2px green;}
+.errorExplanation {color:#A52A2A; padding-top:10px; padding-bottom:10px; line-height:1.2em;}
+.errorExplanation h2{font-size:1em;}
+.errorExplanation ul{padding-left:30px;}
+.errorExplanation ul li {padding-left:0px; list-style-type: disc;}
+.fieldWithErrors {display: inline; color:red;}
+.fieldWithErrors input { border: 1px solid red;}
+
+.pagination {padding-top:3px; padding-bottom: 5px;}
+.pagination a {padding:2px 5px 2px 5px; margin:2px; border:1px solid #DCDCDC; text-decoration:none; color:#278CCD;}
+.pagination a:hover, .pagination a:active {border:1px solid #278CCD; color:#fff; background-color:#278CCD;}
+.pagination span.current {padding:2px 5px 2px 5px; margin:2px; border:1px solid #278CCD; font-weight:normal; background-color:#278CCD; color:#FFF;}
+.pagination span.disabled {padding:2px 5px 2px 5px; margin:2px; border:1px solid #eee; color:#ddd;}
+.pagination_info {font-size: 0.8em;}
+.pagination_info b {font-weight: normal;}
+
+.form_part {background-color:#ccc; padding-bottom:3px; margin-bottom:5px; margin-top:5px;}
+.form_part h2 {font-size:1.1em; padding-left:20px; line-height: 1.2em; padding-bottom:0px; padding-top:0px;}
+.form_part h2.expand {background:transparent url(/images/zippy_minus_sm.gif) no-repeat scroll 3px 3px;}
+.form_part h2.collapse {background:transparent url(/images/zippy_plus_sm.gif) no-repeat scroll 3px 3px;}
+/* Common pagination and errors end */
+.ui-datepicker-trigger{margin:0 0 0 7px;}

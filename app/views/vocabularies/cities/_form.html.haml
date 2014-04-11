@@ -1,0 +1,11 @@
+= semantic_form_for [:vocabularies, @city] do |f|
+  = f.inputs do
+    = f.input :name, :required => true
+    = f.input :region, :required => true, :as => :select, :collection => Region.for_select
+    -#= f.input :region, :required => true, :as => :select, :collection => Region.all
+  = f.buttons do
+    = f.commit_button "Сохранить"
+    %li{:class=>"link"}
+      или
+      = link_to 'Вернуться', vocabularies_cities_path
+

@@ -1,0 +1,45 @@
+- title("Просмотр #{Company.model_name.human.mb_chars.downcase}")
+- javascript_include_yandex_map_api
+
+%h1= "Просмотр #{Company.model_name.human.mb_chars.downcase}"
+
+.show
+  %ul
+    %li
+      .label= Company.human_attribute_name(:name)
+      = @company.name
+    %li
+      .label= Company.human_attribute_name(:company_type_id)
+      = @company.company_type.name if @company.company_type
+    %li
+      .label= Company.human_attribute_name(:full_name)
+      = @company.full_name
+    %li
+      .label= Company.human_attribute_name(:phone1)
+      = @company.phone1
+    %li
+      .label= Company.human_attribute_name(:phone2)
+      = @company.phone2
+    %li
+      .label= Company.human_attribute_name(:address)
+      = @company_address.full_address if @company_address
+
+      #map_container
+        #map
+    %li
+      .label= Company.human_attribute_name(:comment)
+      = @company.comment
+
+  .buttons
+    = link_to 'Вернутся', companies_path
+
+:javascript
+  function init_point() {
+    lat = #{@company_address.lat};
+    lng = #{@company_address.lng};
+    var point = new YMaps.GeoPoint(lat, lng);
+    placemark.setOptions({draggable: false});
+    placemark.setGeoPoint(point);
+    map.setCenter(point, 12);
+  }
+

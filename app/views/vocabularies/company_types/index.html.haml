@@ -1,0 +1,21 @@
+- title(CompanyType.model_name.human)
+
+%h1= CompanyType.model_name.human
+
+%table
+  %tr
+    %th= CompanyType.human_attribute_name(:id)
+    %th= CompanyType.human_attribute_name(:name)
+    %th{:colspan=>"2"}
+
+  - @company_types.each do |company_type|
+    %tr
+      %td= company_type.id
+      %td= company_type.name
+      %td= link_to 'Изменить', edit_vocabularies_company_type_path(company_type)
+      %td= link_to 'Удалить', vocabularies_company_type_path(company_type), :confirm => 'Вы уверены?', :method => :delete
+
+= will_paginate @company_types
+
+= link_to 'Добавить', new_vocabularies_company_type_path
+
