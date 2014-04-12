@@ -1,7 +1,7 @@
 development:
   adapter: mysql
   encoding: utf8
-  database: bb_development
+  database: redreg_development
   username: root
   password: root
   socket: /var/run/mysqld/mysqld.sock
@@ -9,7 +9,7 @@ development:
 test:
   adapter: mysql
   encoding: utf8
-  database: bb_test
+  database: redreg_test
   username: root
   password: root
   socket: /var/run/mysqld/mysqld.sock
@@ -17,7 +17,7 @@ test:
 production:
   adapter: mysql
   encoding: utf8
-  database: bb_production
+  database: redreg_production
   username: root
   password: damanuit
   socket: /var/run/mysqld/mysqld.sock
