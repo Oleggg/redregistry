@@ -13,6 +13,7 @@ Bigbrother::Application.routes.draw do |map|
   match 'city_by_district' => "cards#city_by_district", :as => :city_by_district
   match 'streets_by_city' => "cards#streets_by_city", :as => :streets_by_city
   match 'streets_by_town' => "cards#streets_by_town", :as => :streets_by_town
+  match 'tenants/import' => "people#import", :as => :people_import
 #  map.name_of_route 'cards/archive', :controller => 'cards', :action => 'archive'
 #  map.with_options :controller => 'cards' do |cards|
  #    cards '', :action  => 'index'

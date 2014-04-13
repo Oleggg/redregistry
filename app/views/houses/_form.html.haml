@@ -1,0 +1,38 @@
+- javascript_include_yandex_map_api
+
+= semantic_form_for @house do |f|
+  = f.inputs do
+    = f.input :description, :required => true
+    = f.input :storeys
+    = f.input :porch_num
+    = f.input :apartments_num
+    = f.input :house_problems, :as => :text
+
+    = f.semantic_fields_for :addresses do |a|
+      = a.inputs :name => "Адрес дома" do
+        = a.input :post_code
+        = a.input :region_id, :as => :select, :collection => Region.all
+        = a.input :district_id, :as => :select, :collection => District.all
+        = a.input :city_id, :as => :select, :collection => City.all
+        = a.input :address_line
+        = a.input :lat, :as => :hidden
+        = a.input :lng, :as => :hidden
+        %input{:type => "button", :value => "Найти адрес на карте", :id => "find_address", |
+          :data => {"form-name" => "company"} } |
+
+      #map_container
+        #map
+
+    
+
+  = f.buttons do
+    = f.commit_button "Сохранить"
+    %li{:class=>"link"}
+      или
+      = link_to 'Вернутся', houses_path
+
+:javascript
+  function init_point() {
+    init_point_("house");
+  }
+

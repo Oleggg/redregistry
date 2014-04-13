@@ -1,3 +1,5 @@
+require 'rake'
+require 'csv'
 class PeopleController < BaseController
   set_main_menu :cards
   set_sub_menu :people
@@ -112,5 +114,34 @@ class PeopleController < BaseController
     @person.destroy
     redirect_to(people_path)
   end
+
+  def import
+    excel_file = params[:file]
+    if params[:file]
+    #  puts params[:file][:tempfile].path
+    #  excel_file = File.read(params[:file])
+       path = params[:file]
+       #params['event']['filename']
+       #puts "# Uploading #{params['event']['filename']} ..."
+    end
+    puts "# Uploading #{excel_file} ..."
+    #if excel_file
+      #CSV.foreach(excel_file, headers: true) do |row|
+      #CSV.foreach(excel_file.path, headers: true) do |row|    
+    #  CSV.open(params[:file].path, 'r') do |row|
+        #Product.create! row.to_hash  
+    #    puts "# Uploading row ..."
+    #  end
+    #end
+    #redirect_to(people_path)
+  end
+
+  def upload
+    excel_file = params[:file]
+    @person = Person.find(params[:id])
+    @person.destroy
+    redirect_to(people_path)
+  end
+
 end
 

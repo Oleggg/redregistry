@@ -1,0 +1,11 @@
+- title("Импорт #{Person.model_name.human.mb_chars.downcase}")
+
+%h1= "Импорт #{Person.model_name.human.mb_chars.downcase}"
+
+
+= form_tag(people_import_path, :multipart => true)  do
+  %br
+  = file_field :file, 'Файл CSV'
+  = submit_tag "Загрузить"
+
+

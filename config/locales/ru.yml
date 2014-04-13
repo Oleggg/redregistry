@@ -3,6 +3,7 @@ ru:
     models:
       address: "Адреса"
       company: "Организации"
+      house: "Дом"
       eventlog: "Журнал событий"
       friend: "Друзья"
       inspector: "Инспекторы"
@@ -58,6 +59,12 @@ ru:
         phone2: "Телефон 2"
         comment: "Комментарий"
         company_type_id: "Тип"
+        address: "Адрес"
+      house:
+        id: "#"
+        description: "Описание"
+        storeys: "Этажность"
+        house_problems: "Проблемы дома"
         address: "Адрес"
       eventlog:
         id: "#"

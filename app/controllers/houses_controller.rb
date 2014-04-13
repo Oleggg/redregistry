@@ -19,12 +19,17 @@ class HousesController < BaseController
     #       when "name"  then "people.last_name"
     #       when "name_reverse"  then "people.first_name"
     #       end
-    @houses = houses.paginate(:page => @page, :order => sort)
+    @houses = houses.scoped.paginate(:page => @page)
 
   end
 
   def new
     @house = House.new
+    @house.addresses.build
+    @house_address = @house.addresses.first
+    # по умолчанию ставим точку на площадь Ленина
+    @house_address.lat = 45.018662
+    @house_address.lng = 53.195097
     #@house.build_person
     #@house.person.addresses.build
   end

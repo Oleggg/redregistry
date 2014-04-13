@@ -5,5 +5,12 @@ class House < ActiveRecord::Base
 
   validates_presence_of :description
   
-  scope :sorted
+  scope :sorted, order("description")
 
+
+  def self.subscribers_count
+    #Person.where(:house_id => self.id, :is_subscriber => true).count
+    Person.where(:house_id => self.id).count
+  end
+
+end
