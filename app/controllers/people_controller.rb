@@ -1,5 +1,8 @@
 require 'rake'
 require 'csv'
+#require 'fastercsv'
+require 'tempfile'
+
 class PeopleController < BaseController
   set_main_menu :cards
   set_sub_menu :people
@@ -118,6 +121,22 @@ class PeopleController < BaseController
   def import
     excel_file = params[:file]
     if params[:file]
+      #tmp = params[:file].tempfile
+      tfile = Tempfile.new("tmp.csv")
+      tfile << excel_file
+      tfile.close
+      puts "# Uploading #{tfile.path} ..."
+      #IO.read t.path
+      #CSV.open(tfile.path, 'r') do |row|
+      #CSV.foreach(tfile.path, {:col_sep => ";"}) do |row|
+      CSV.foreach(tfile.path) do |row|
+        #Product.create! row.to_hash  
+        puts "# Uploading row #{row[0]}..."
+        puts "# Uploading row #{row[0].class}..."
+      end
+      #file = params[:document][:file].tempfile.read
+      #tmp = params[:file].filename
+      puts "# Uploading #{tfile} ..."
     #  puts params[:file][:tempfile].path
     #  excel_file = File.read(params[:file])
        path = params[:file]
