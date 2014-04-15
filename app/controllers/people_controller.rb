@@ -120,35 +120,61 @@ class PeopleController < BaseController
 
   def parse(file)
     #list = IO.readlines("#{Rails.root}/public/system/data/tenants.txt")
-    list = IO.readlines(file)
+    #list = IO.readlines(file)
+    list = IO.readlines("#{Rails.root}/public/uploads/#{file}")
+    puts list.inspect
     #list = IO.read file
 
+    new_house = House.create(:description => "#{file}" )
     list.each_with_index do |s,i|
       person = s.split(";")
       puts "----------# Uploading #{person} ----------------- ..."
-      puts "----------# Uploading #{person[0]} - #{person[1]} ..."
+      puts "----------# Uploading #{person[0]} - #{person[1]} - #{person[2]}"
       #new_tenant = Person.create(:first_name => "#{person[0]}", :last_name => "#{person[1]}", :middle_name => "#{person[2]}", :birthday => "#{person[3]}")
       #puts "----------# New tenant - #{new_tenant.id}"
-      #Address.create(:address_line => "#{person[4]}", :addressable_type => "Person", :addressable_id => "#{new_tenant.id}" )
+      new_tenant = Person.create(:first_name => "#{person[1]}", :last_name => "#{person[0]}", :middle_name => "#{person[2]}", :birthday => "#{person[3]}", :house_id => new_house.id)
+      Address.create(:address_line => "#{person[4]}", :addressable_type => "Person", :addressable_id => "#{new_tenant.id}" )
     end
   end
 
   def import
     excel_file = params[:file]
     if params[:file]
+      #puts excel_file.inspect
+      uploaded_io = params[:file]['file']
+      puts uploaded_io.inspect
+      File.open(Rails.root.join('public', 'uploads', uploaded_io.original_filename), 'wb') do |file|
+        file.write(uploaded_io.read)
+      end
+      parse(uploaded_io.original_filename)
+      require 'fastercsv'
+      #FasterCSV.foreach(Rails.root.join('public', 'uploads', uploaded_io.original_filename), :headers => true) do |fcsv_obj|
+      FasterCSV.foreach(Rails.root.join('public', 'uploads', uploaded_io.original_filename),  :col_sep => ";" ) do |fcsv_obj|
+        #puts "# FCSV #{fcsv_obj}"
+        puts "#FCSV " + fcsv_obj.inspect
+      end
+
       #tmp = params[:file].tempfile
+      #csv_contents = File.read(excel_file)
+      #csv_contents = excel_file.read
+      #puts csv_contents.inspect
       tfile = Tempfile.new("tmp.csv")
       tfile << excel_file
       tfile.close
-      puts "# Uploading #{tfile.path} ..."
-      parse(tfile.path)
+      #puts "# Uploading #{tfile.path} ..."
+      #puts excel_file.inspect
+      puts tfile.inspect
+      #puts "Paramm class #{excel_file.class.name}"
+      #parse(tfile.path)
       #IO.read t.path
       #CSV.open(tfile.path, 'r') do |row|
       #CSV.foreach(tfile.path, {:col_sep => ";"}) do |row|
-      CSV.foreach(tfile.path) do |row|
+      #CSV.foreach(tfile.path) do |row|
+      CSV.foreach(Rails.root.join('public', 'uploads', uploaded_io.original_filename),  :col_sep => ";" ) do |row|
         #Product.create! row.to_hash  
-        puts "# Uploading row #{row[0]}..."
-        puts "# Uploading row #{row[0].class}..."
+        puts "# CSV Uploading row #{row[0]}"
+        #puts "# CSV Uploading row #{row[0].class}..."
+        puts "# CSV Uploading row #{row[1]}"
       end
       #file = params[:document][:file].tempfile.read
       #tmp = params[:file].filename
@@ -159,7 +185,7 @@ class PeopleController < BaseController
        #params['event']['filename']
        #puts "# Uploading #{params['event']['filename']} ..."
     end
-    puts "# Uploading #{excel_file} ..."
+    #puts "# Uploading #{excel_file} ..."
     #if excel_file
       #CSV.foreach(excel_file, headers: true) do |row|
       #CSV.foreach(excel_file.path, headers: true) do |row|    

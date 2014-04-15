@@ -14,6 +14,7 @@
 %table
   %tr
     %th= House.human_attribute_name(:id)
+    %th= House.human_attribute_name(:description)
     %th= House.human_attribute_name(:address)
     %th= House.human_attribute_name(:storeys)
     %th= House.human_attribute_name(:porch_num)
@@ -22,6 +23,7 @@
   - @houses.each do |house|
     %tr
       %td= house.id
+      %td= house.description
       %td= house.addresses.first.full_address if house.addresses.first
       %td= house.storeys
       %td= house.porch_num

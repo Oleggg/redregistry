@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140412115525) do
+ActiveRecord::Schema.define(:version => 20140415163825) do
 
   create_table "accommodations", :force => true do |t|
     t.string   "name"
@@ -321,10 +321,10 @@ ActiveRecord::Schema.define(:version => 20140412115525) do
 
   create_table "houses", :force => true do |t|
     t.text    "description",    :null => false
-    t.integer "storeys",        :null => false
-    t.integer "porch_num",      :null => false
-    t.integer "apartments_num", :null => false
-    t.string  "house_problems", :null => false
+    t.integer "storeys"
+    t.integer "porch_num"
+    t.integer "apartments_num"
+    t.string  "house_problems"
   end
 
   create_table "inspectors", :force => true do |t|
@@ -358,6 +358,7 @@ ActiveRecord::Schema.define(:version => 20140412115525) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "gender",             :default => 0, :null => false
+    t.integer  "house_id"
   end
 
   add_index "people", ["last_name", "first_name", "middle_name"], :name => "index_people_on_last_name_and_first_name_and_middle_name"
