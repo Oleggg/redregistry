@@ -118,6 +118,21 @@ class PeopleController < BaseController
     redirect_to(people_path)
   end
 
+  def parse(file)
+    #list = IO.readlines("#{Rails.root}/public/system/data/tenants.txt")
+    list = IO.readlines(file)
+    #list = IO.read file
+
+    list.each_with_index do |s,i|
+      person = s.split(";")
+      puts "----------# Uploading #{person} ----------------- ..."
+      puts "----------# Uploading #{person[0]} - #{person[1]} ..."
+      #new_tenant = Person.create(:first_name => "#{person[0]}", :last_name => "#{person[1]}", :middle_name => "#{person[2]}", :birthday => "#{person[3]}")
+      #puts "----------# New tenant - #{new_tenant.id}"
+      #Address.create(:address_line => "#{person[4]}", :addressable_type => "Person", :addressable_id => "#{new_tenant.id}" )
+    end
+  end
+
   def import
     excel_file = params[:file]
     if params[:file]
@@ -126,6 +141,7 @@ class PeopleController < BaseController
       tfile << excel_file
       tfile.close
       puts "# Uploading #{tfile.path} ..."
+      parse(tfile.path)
       #IO.read t.path
       #CSV.open(tfile.path, 'r') do |row|
       #CSV.foreach(tfile.path, {:col_sep => ";"}) do |row|
