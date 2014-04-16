@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140415163825) do
+ActiveRecord::Schema.define(:version => 20140416171247) do
 
   create_table "accommodations", :force => true do |t|
     t.string   "name"
@@ -438,6 +438,18 @@ ActiveRecord::Schema.define(:version => 20140415163825) do
     t.integer  "code",        :limit => 8
     t.integer  "city_id",     :limit => 8
     t.integer  "town_id",     :limit => 8
+  end
+
+  create_table "subscribers", :force => true do |t|
+    t.date     "subscription_date",                     :null => false
+    t.date     "unsubscription_date"
+    t.boolean  "is_subscribed",       :default => true, :null => false
+    t.string   "subscription_reason"
+    t.integer  "shipping_type"
+    t.integer  "total_subscribers"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "person_id"
   end
 
   create_table "taggings", :force => true do |t|

@@ -1,0 +1,39 @@
+- title(House.model_name.human)
+
+%h1= Subscriber.model_name.human
+
+.filter
+  = form_tag subscribers_path, :method => :get do
+    = hidden_field_tag :page, @page
+    %h3 Поиск
+    = Subscriber.human_attribute_name(:name)
+    = text_field_tag "name", params[:name], :size => 10
+    = Subscriber.human_attribute_name(:company_type_id)
+    = submit_tag "Найти", :name => :search
+
+%table
+  %tr
+    %th= Subscriber.human_attribute_name(:id)
+    %th= Subscriber.human_attribute_name(:address)
+    %th= Subscriber.human_attribute_name(:full_name)
+    %th= Subscriber.human_attribute_name(:subscription_date)
+    %th= Subscriber.human_attribute_name(:subscription_reason)
+    %th= Subscriber.human_attribute_name(:shipping_type)
+    %th{:colspan=>"3"}
+
+  - @subscribers.each do |subscriber|
+    %tr
+      %td= subscriber.id
+      %td= subscriber.person.address.address_line
+      %td= subscriber.person.full_name
+      %td= subscriber.subscription_date
+      %td= subscriber.subscription_reason
+      %td= subscriber.shipping_type
+      %td= link_to 'Просмотр', subscriber_path(subscriber)
+      %td= link_to 'Изменить', edit_subscriber_path(subscriber)
+      %td= link_to 'Удалить', subscriber, :confirm => 'Вы уверены?', :method => :delete
+
+= will_paginate @subscribers
+
+= link_to 'Добавить', new_subscriber_path
+

@@ -36,7 +36,7 @@ class HousesController < BaseController
 
   def edit
     @house = House.find(params[:id])
-    #@card.person.addresses.build if @card.person.addresses.empty?
+    @house.addresses.build if @house.addresses.empty?
 
     respond_to do |format|  
         format.html
@@ -67,7 +67,7 @@ class HousesController < BaseController
   end
 
   def show
-    @card = House.find(params[:id])
+    @house = House.find(params[:id])
   end
 
   def destroy

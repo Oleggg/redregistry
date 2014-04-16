@@ -87,5 +87,12 @@ class Person < ActiveRecord::Base
   def address
     addresses.first if addresses.length>0
   end
+
+  def self.for_select(options = {:include_blank => false})
+    o = sorted.all.collect{|i| [i.full_name, i.id]}
+    o = [['', nil]] + o if options[:include_blank]
+    o
+  end
+
 end
 

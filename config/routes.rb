@@ -4,6 +4,7 @@ Bigbrother::Application.routes.draw do |map|
   resources :people
   resources :families
   resources :houses
+  resources :subscribers
   match 'cards' => "cards#index", :as => :cards
   match 'archive' => "cards#archive", :as => :archive
   #match 'city_by_district' => "cards#city_by_district", :as => :city_by_district

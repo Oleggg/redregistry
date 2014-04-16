@@ -73,6 +73,7 @@ class ApplicationController < ActionController::Base
           {:title => 'Поиск', :items => [
             {:title => "Карточки (#{Card.not_archived_count})", :url => cards_path},
             {:title => "Персоны (#{Person.count})", :url => people_path},
+            {:title => "Подписчики (#{Subscriber.count})", :url => subscribers_path},
             {:title => "Семьи (#{Family.count})", :url => families_path},
             {:title => "Организации (#{Company.count})", :url => companies_path},
             {:title => "Дома (#{House.count})", :url => houses_path},
