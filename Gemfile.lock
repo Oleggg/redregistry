@@ -64,7 +64,6 @@ GEM
     builder (2.1.2)
     erubis (2.6.6)
       abstract (>= 1.0.0)
-    fastercsv (1.5.5)
     formtastic (1.1.0)
       actionpack (>= 2.3.0)
       activesupport (>= 2.3.0)
@@ -113,7 +112,6 @@ PLATFORMS
 DEPENDENCIES
   acts-as-taggable-on
   authlogic!
-  fastercsv
   formtastic
   gchartrb
   haml

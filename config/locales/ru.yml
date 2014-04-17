@@ -4,7 +4,7 @@ ru:
       address: "Адреса"
       company: "Организации"
       house: "Дома"
-      subscribers: "Подписчики"
+      subscriber: "Подписчики"
       eventlog: "Журнал событий"
       friend: "Друзья"
       inspector: "Инспекторы"
@@ -63,6 +63,7 @@ ru:
         address: "Адрес"
       house:
         id: "#"
+        number: "Номер"
         description: "Описание"
         storeys: "Этажность"
         house_problems: "Проблемы дома"
@@ -298,3 +299,8 @@ ru:
     release_cause:
       udo: "УДО"
       end_of_term: "Конец срока"
+
+  subscribers:
+    shipping_type:
+      by_post: "почта"
+      myself: "собственные силы"

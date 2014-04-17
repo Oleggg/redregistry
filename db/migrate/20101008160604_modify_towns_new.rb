@@ -1,4 +1,4 @@
-class ModifyTowns < ActiveRecord::Migration
+class ModifyTownsNew < ActiveRecord::Migration
   def self.up
     create_table :towns do |t|
       t.string :name, :null => false
