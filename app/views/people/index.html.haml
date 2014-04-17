@@ -21,6 +21,7 @@
     %th= Person.human_attribute_name(:id)
     -#%th= th_sort_link "#{Person.human_attribute_name(:full_name)}","full_name"
     %th= Person.human_attribute_name(:full_name)
+    %th= Person.human_attribute_name(:apartment_num)
     -#%th= th_sort_link "#{Person.human_attribute_name(:gender)}","gender"
     %th= Person.human_attribute_name(:gender)
     %th= Person.human_attribute_name(:age)
@@ -30,6 +31,7 @@
     %tr
       %td= person.id
       %td= person.full_name
+      %td= person.apartment_num
       %td.center= person.gender_text
       %td.center= person.age
       %td= link_to 'Просмотр', person

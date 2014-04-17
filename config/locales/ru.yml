@@ -85,6 +85,7 @@ ru:
         last_name: "Фамилия"
         middle_name: "Отчество"
         full_name: "ФИО"
+        apartment_num: "Номер квартиры"
         gender: "Пол"
         age: "Возраст"
         birthday: "Дата рождения"
