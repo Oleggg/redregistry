@@ -18,7 +18,7 @@
     %th= House.human_attribute_name(:address)
     %th= House.human_attribute_name(:storeys)
     %th= House.human_attribute_name(:porch_num)
-    %th{:colspan=>"3"}
+    %th{:colspan=>"4"}
 
   - @houses.each do |house|
     %tr
@@ -30,6 +30,7 @@
       %td= link_to 'Просмотр', house_path(house)
       %td= link_to 'Изменить', edit_house_path(house)
       %td= link_to 'Удалить', house, :confirm => 'Вы уверены?', :method => :delete
+      %td= link_to 'Список жильцов', house_path(house)
 
 = will_paginate @houses
 

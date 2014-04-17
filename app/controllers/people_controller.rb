@@ -9,8 +9,15 @@ class PeopleController < BaseController
 
   def index
     @page = params[:page] || 1
-    #people = Person.scoped
-    people = Person.all
+    people = Person.scoped
+    #people = Person.all
+
+    # if we have autocomplete request
+    if params[:term]
+      people = Person.find(:all,:conditions => ['last_name LIKE ?', "#{params[:term]}%"],  :limit => 5)
+    else
+      people = Person.scoped
+    end
 
     if params[:name] && !params[:name].empty?
       people = people.where("first_name LIKE :name OR last_name LIKE :name OR middle_name LIKE :name",
@@ -43,11 +50,11 @@ class PeopleController < BaseController
     #@people = people.sorted.paginate(:page => @page)
 
     #@people = people.paginate(:page => @page,:order => sort)
-    if params[:term]
-      people = Person.find(:all,:conditions => ['last_name LIKE ?', "#{params[:term]}%"],  :limit => 5)
-    else
-      people = Person.all
-    end
+    #if params[:term]
+    #  people = Person.find(:all,:conditions => ['last_name LIKE ?', "#{params[:term]}%"],  :limit => 5)
+    #else
+    #  people = Person.all
+    #end
     @people = people.paginate(:page => @page,:order => sort)
     @peoplej = @people.map(&:last_name).to_json
     respond_to do |format|  

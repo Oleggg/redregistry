@@ -94,6 +94,7 @@ Bigbrother::Application.routes.draw do |map|
   resource :account, :controller => "users"
   resource :user_session
 
-  root :to => "cards#index"
+  #root :to => "cards#index"
+  root :to => "people#index"
 end
 
