@@ -132,15 +132,39 @@ class PeopleController < BaseController
     puts list.inspect
     #list = IO.read file
 
-    new_house = House.create(:description => "#{file}" )
+    #new_house = House.create(:description => "#{file}" )
+    puts "HOUSE #{file.to_i}"
+    new_house = House.find_or_create_by_number(file.to_i)
+    new_house.description = "#{file}"
+    new_house.save!
+    puts new_house.inspect
     list.each_with_index do |s,i|
       person = s.split(";")
+      puts person.inspect
+      #person.each {|a| a.delete("\"") }
+      #person.collect{|p| p.delete("\"") }
+      #person.each do |p|
+        #puts p
+        #p = p.delete("\"")
+        #puts "#{p.delete("\"")}"
+        #puts p
+      #end
+      puts person.inspect
       puts "----------# Uploading #{person} ----------------- ..."
-      puts "----------# Uploading #{person[0]} - #{person[1]} - #{person[2]}"
+      puts "----------# Uploading #{person[0]} - #{person[1]} - #{person[2]} - #{person[3]}"
+      #lastname = person[0].delete("\"")
+      #lastname = person[0].tr("\"", "")
+      person[0].tr("\"", "")
+      lastname = person[2]
+      puts lastname
+      puts "# #{person[2].delete("\"")}"
+      person.map! { |p| p.delete("\"") }
+      puts "----------# Uploading #{person[0]} - #{person[1]} - #{person[2]} - #{person[3]}"
       #new_tenant = Person.create(:first_name => "#{person[0]}", :last_name => "#{person[1]}", :middle_name => "#{person[2]}", :birthday => "#{person[3]}")
       #puts "----------# New tenant - #{new_tenant.id}"
-      new_tenant = Person.create(:first_name => "#{person[1]}", :last_name => "#{person[0]}", :middle_name => "#{person[2]}", :birthday => "#{person[3]}", :house_id => new_house.id)
-      Address.create(:address_line => "#{person[4]}", :addressable_type => "Person", :addressable_id => "#{new_tenant.id}" )
+      new_tenant = Person.create(:apartment_num => "#{person[0]}", :first_name => "#{person[2]}", :last_name => "#{person[1]}", :middle_name => "#{person[3]}", :birthday => "#{person[4]}", :birthyear => "#{person[4]}", :house_id => new_house.id)
+      puts "# New tenant - #{new_tenant.inspect}"
+      #Address.create(:address_line => "#{person[4]}", :addressable_type => "Person", :addressable_id => "#{new_tenant.id}" )
     end
   end
 
@@ -177,12 +201,15 @@ class PeopleController < BaseController
       #CSV.open(tfile.path, 'r') do |row|
       #CSV.foreach(tfile.path, {:col_sep => ";"}) do |row|
       #CSV.foreach(tfile.path) do |row|
-      CSV.foreach(Rails.root.join('public', 'uploads', uploaded_io.original_filename),  :col_sep => ";" ) do |row|
+
+      # WORKING PART
+      #CSV.foreach(Rails.root.join('public', 'uploads', uploaded_io.original_filename),  :col_sep => ";" ) do |row|
         #Product.create! row.to_hash  
-        puts "# CSV Uploading row #{row[0]}"
+        #puts "# CSV Uploading row #{row[0]}"
         #puts "# CSV Uploading row #{row[0].class}..."
-        puts "# CSV Uploading row #{row[1]}"
-      end
+        #puts "# CSV Uploading row #{row[1]}"
+      #end
+
       #file = params[:document][:file].tempfile.read
       #tmp = params[:file].filename
       puts "# Uploading #{tfile} ..."

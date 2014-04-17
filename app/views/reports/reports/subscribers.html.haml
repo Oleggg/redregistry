@@ -1,0 +1,12 @@
+- title("Подписчики по домам")
+
+%h1 Отчёт &laquo;Подписчики по домам&raquo;
+
+= form_tag subscribers_reports_report_path, :method => :post do
+  = select_tag "house_id", options_for_select(House.for_select(:include_blank => true), params[:house_id].to_i)
+  = submit_tag "Печать", :name => :print
+%br
+%br
+= image_tag("#{@graph}")
+
+

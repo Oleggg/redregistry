@@ -13,6 +13,8 @@
     = f.input :phone
     = f.input :mobile
 
+    = f.input :house_id, :as => :select, :collection => House.for_select(:include_blank => true)
+
     = f.semantic_fields_for :addresses do |a|
       = a.inputs :name => "Адрес регистрации" do
         = a.input :post_code

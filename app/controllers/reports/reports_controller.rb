@@ -284,5 +284,29 @@ class Reports::ReportsController < BaseController
     render :layout => "print"
   end
 
+  def subscribers
+    if params[:house_id]
+      puts '### POST ' + params[:house_id]
+      @house = House.find(params[:house_id])
+      GoogleChart::PieChart.new('500x200',"\nПодписчики",false) do |pc|
+        pc.data "Жильцы (#{@house.tenants_count})", @house.tenants_count, "#{COLORS[1]}"      
+        pc.data "Подписчики (#{@house.subscribers_count})", @house.subscribers_count, "#{COLORS[2]}"
+        puts pc.to_url
+        pc.show_labels = true
+        puts "\nPie Chart (with no labels)"
+        @graph = pc.to_url  
+      end
+    else
+      #@cards = cards.where("is_archived = false OR is_archived IS NULL").sorted.paginate(:page => @page)
+    end
+    set_sub_menu :subscribers
+  end
+
+  def print_subscribers
+    #@total_tenants = Card.count
+    #@total_subscribers = Family.count
+    #render :layout => "print"
+  end
+
 end
 

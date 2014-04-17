@@ -25,6 +25,7 @@ class Person < ActiveRecord::Base
 
   has_many :addresses, :as => :addressable, :dependent => :destroy
   has_many :relatives, :dependent => :destroy
+  belongs_to :person # redregistry
 
   has_attached_file :photo,
     :styles => {:thumb => "135x100>", :resized => "600x400>"},

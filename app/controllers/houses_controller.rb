@@ -68,12 +68,19 @@ class HousesController < BaseController
 
   def show
     @house = House.find(params[:id])
+    @house_address = @house.addresses.first if @house.addresses.first
   end
 
   def destroy
     @house = House.find(params[:id])
     @house.destroy
     redirect_to(houses_path)
+  end
+
+  def tenants
+    @house = House.find(params[:id])
+    @house_tenants = @house.tenants
+    #@house_tenants = @house.subscribers
   end
 
 end

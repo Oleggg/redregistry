@@ -4,6 +4,7 @@ Bigbrother::Application.routes.draw do |map|
   resources :people
   resources :families
   resources :houses
+  match '/house/:id/tenants' => "houses#tenants", :as => :house_tenants
   resources :subscribers
   match 'cards' => "cards#index", :as => :cards
   match 'archive' => "cards#archive", :as => :archive
@@ -52,6 +53,9 @@ Bigbrother::Application.routes.draw do |map|
       get :print_cc_article
       get :employment_types
       get :print_employment_types
+      get :subscribers
+      post :subscribers
+      get :print_subscribers
     end
   end
 

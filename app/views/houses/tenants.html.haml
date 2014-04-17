@@ -1,0 +1,33 @@
+- title(House.model_name.human)
+
+%h1= House.model_name.human
+
+.filter
+  = form_tag houses_path, :method => :get do
+    = hidden_field_tag :page, @page
+    %h3 Поиск
+    = House.human_attribute_name(:name)
+    = text_field_tag "name", params[:name], :size => 10
+    = House.human_attribute_name(:company_type_id)
+    = submit_tag "Найти", :name => :search
+
+%table
+  %tr
+    %th= Person.human_attribute_name(:id)
+    %th= Person.human_attribute_name(:full_name)
+    %th= Person.human_attribute_name(:address)
+    %th{:colspan=>"4"}
+
+  - @house_tenants.each do |tenant|
+    %tr
+      %td= tenant.id
+      %td= tenant.full_name
+      %td= tenant.addresses.first.full_address if tenant.addresses.first
+      %td= link_to 'Просмотр', person_path(tenant)
+      %td= link_to 'Изменить', person_path(tenant)
+      %td= link_to 'Удалить', tenant, :confirm => 'Вы уверены?', :method => :delete
+
+//= will_paginate @house_tenants
+
+= link_to 'Добавить', new_person_path
+

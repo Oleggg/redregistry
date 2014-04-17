@@ -30,7 +30,7 @@
       %td= link_to 'Просмотр', house_path(house)
       %td= link_to 'Изменить', edit_house_path(house)
       %td= link_to 'Удалить', house, :confirm => 'Вы уверены?', :method => :delete
-      %td= link_to 'Список жильцов', house_path(house)
+      %td= link_to 'Список жильцов', house_tenants_path(house)
 
 = will_paginate @houses
 

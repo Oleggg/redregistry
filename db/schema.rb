@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140416171247) do
+ActiveRecord::Schema.define(:version => 20140417174031) do
 
   create_table "accommodations", :force => true do |t|
     t.string   "name"
@@ -325,6 +325,7 @@ ActiveRecord::Schema.define(:version => 20140416171247) do
     t.integer "porch_num"
     t.integer "apartments_num"
     t.string  "house_problems"
+    t.integer "number"
   end
 
   create_table "inspectors", :force => true do |t|
@@ -359,6 +360,8 @@ ActiveRecord::Schema.define(:version => 20140416171247) do
     t.datetime "updated_at"
     t.integer  "gender",             :default => 0, :null => false
     t.integer  "house_id"
+    t.integer  "apartment_num"
+    t.integer  "birthyear"
   end
 
   add_index "people", ["last_name", "first_name", "middle_name"], :name => "index_people_on_last_name_and_first_name_and_middle_name"

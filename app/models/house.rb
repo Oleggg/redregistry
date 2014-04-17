@@ -1,5 +1,6 @@
 class House < ActiveRecord::Base
   has_many :addresses, :as => :addressable, :dependent => :destroy
+  has_many :tenants, :foreign_key => 'house_id', :class_name => "Person"
 
   accepts_nested_attributes_for :addresses
 
@@ -7,10 +8,25 @@ class House < ActiveRecord::Base
   
   scope :sorted, order("description")
 
+  def tenants_count
+    tenants = self.tenants.count
+  end
 
-  def self.subscribers_count
+  def subscribers_count
     #Person.where(:house_id => self.id, :is_subscriber => true).count
-    Person.where(:house_id => self.id).count
+    #Person.where(:house_id => self.id).count
+    subscribers = Subscriber.joins(:person).where("people.house_id = #{self.id}").count
+  end
+
+  def subscribers
+    subscribers = Subscriber.joins(:person)
+    subscribers = subscribers.where("people.house_id = #{self.id}").all
+  end
+
+  def self.for_select(options = {:include_blank => false})
+    o = sorted.all.collect{|i| [i.description, i.id]}
+    o = [['', nil]] + o if options[:include_blank]
+    o
   end
 
 end

@@ -82,6 +82,9 @@ class ApplicationController < ActionController::Base
         ]
 
         sub_menu_reports = [
+          {:title => 'Подписчики', :items => [
+            {:title => "Подписчики по домам", :url => subscribers_reports_report_path},
+          ]},
           {:title => 'Карточки', :items => [
             {:title => "Регистрационная карточка", :url => card_reports_report_path},
             {:title => "Карточки списком", :url => cards_list_reports_report_path},

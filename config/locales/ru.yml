@@ -3,7 +3,8 @@ ru:
     models:
       address: "Адреса"
       company: "Организации"
-      house: "Дом"
+      house: "Дома"
+      subscribers: "Подписчики"
       eventlog: "Журнал событий"
       friend: "Друзья"
       inspector: "Инспекторы"
@@ -66,6 +67,12 @@ ru:
         storeys: "Этажность"
         house_problems: "Проблемы дома"
         address: "Адрес"
+      subscriber:
+        id: "#"
+        subscription_date: "Дата подписки"
+        subscription_reason: "Причина подписки"
+        shipping_type: "Вид доставки"
+        address: "Адрес"
       eventlog:
         id: "#"
         created_at: "Дата"
@@ -87,6 +94,7 @@ ru:
         comment: "Комментарий"
         photo: "Фото"
         address: "Адрес"
+        house: "Дом"
       role:
         id: "#"
         name: "Название"
