@@ -289,7 +289,8 @@ class Reports::ReportsController < BaseController
       puts '### POST ' + params[:house_id]
       @house = House.find(params[:house_id])
       GoogleChart::PieChart.new('500x200',"\nПодписчики",false) do |pc|
-        pc.data "Жильцы (#{@house.tenants_count})", @house.tenants_count, "#{COLORS[1]}"      
+        #pc.data "Жильцы (#{@house.tenants_count})", @house.tenants_count, "#{COLORS[1]}"
+        pc.data "Не подписаны (#{@house.tenants_count - @house.subscribers_count})", (@house.tenants_count - @house.subscribers_count), "#{COLORS[1]}"
         pc.data "Подписчики (#{@house.subscribers_count})", @house.subscribers_count, "#{COLORS[2]}"
         puts pc.to_url
         pc.show_labels = true
@@ -305,7 +306,13 @@ class Reports::ReportsController < BaseController
   def print_subscribers
     #@total_tenants = Card.count
     #@total_subscribers = Family.count
-    #render :layout => "print"
+    if params[:house_id]
+      puts '### POST ' + params[:house_id]
+      @house = House.find(params[:house_id])
+      @total_tenants = @house.tenants_count
+      @total_subscribers = @house.subscribers_count
+    end
+    render :layout => "print"
   end
 
 end

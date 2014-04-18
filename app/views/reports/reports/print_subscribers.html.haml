@@ -1,0 +1,44 @@
+- title("Подписчики по домам")
+
+%h1 &laquo;Подписчики по домам&raquo;
+
+.date
+  на дату:
+  = Date.today.strftime("%d.%m.%Y г.")
+
+%table
+  %tr
+    %th № квартиры
+    %th ФИО
+    %th Год рождения
+
+  - @house.tenants.each_with_index do |tenant, i|
+    %tr
+      %td.center= tenant.apartment_num
+      %td= tenant.full_name
+      %td.center= tenant.birthyear
+
+  %tr
+    %td Всего жильцов:
+    %td.center{:colspan=>2}= @total_tenants
+  %tr
+    %td Из них подписчиков:
+    %td.center{:colspan=>2}= @total_subscribers
+  -#%tr
+  -#  %td
+  -#  %td{:colspan=>3} В том числе
+  -#- @total_tenants
+  -#  %tr
+  -#    %td
+  -#    %td= Card.health_status_for_select[0][0]
+  -#    %td.center= @total_children_healthy
+  -#    %td.center= @total_families_healthy
+    -#%td.right= card.health_status_children_count
+    -#%td.right= card.health_status_families_count
+  -#  %tr
+  -#%td
+  -#    %td= Card.health_status_for_select[1][0]
+  -#    %td.center= @total_children_disabled
+  -#    %td.center= @total_families_disabled
+
+

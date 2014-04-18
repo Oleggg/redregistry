@@ -66,6 +66,8 @@ ru:
         number: "Номер"
         description: "Описание"
         storeys: "Этажность"
+        apartments_num: "Число квартир"
+        porch_num: "Число подъездов"
         house_problems: "Проблемы дома"
         address: "Адрес"
       subscriber:
@@ -86,7 +88,6 @@ ru:
         last_name: "Фамилия"
         middle_name: "Отчество"
         full_name: "ФИО"
-        apartment_num: "Номер квартиры"
         gender: "Пол"
         age: "Возраст"
         birthday: "Дата рождения"
@@ -96,7 +97,8 @@ ru:
         comment: "Комментарий"
         photo: "Фото"
         address: "Адрес"
-        house: "Дом"
+        house_id: "Дом"
+        apartment_num: "Номер квартиры"
       role:
         id: "#"
         name: "Название"

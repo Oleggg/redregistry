@@ -134,8 +134,10 @@ class PeopleController < BaseController
 
     #new_house = House.create(:description => "#{file}" )
     puts "HOUSE #{file.to_i}"
-    new_house = House.find_or_create_by_number(file.to_i)
-    new_house.description = "#{file}"
+    house_name = File.basename("#{Rails.root}/public/uploads/#{file}", ".csv")
+    puts "HOUSE #{house_name}"
+    new_house = House.find_or_create_by_number(house_name.to_i)
+    new_house.description = "#{house_name}"
     new_house.save!
     puts new_house.inspect
     list.each_with_index do |s,i|
@@ -178,12 +180,12 @@ class PeopleController < BaseController
         file.write(uploaded_io.read)
       end
       parse(uploaded_io.original_filename)
-      require 'fastercsv'
+      #require 'fastercsv'
       #FasterCSV.foreach(Rails.root.join('public', 'uploads', uploaded_io.original_filename), :headers => true) do |fcsv_obj|
-      FasterCSV.foreach(Rails.root.join('public', 'uploads', uploaded_io.original_filename),  :col_sep => ";" ) do |fcsv_obj|
+      #FasterCSV.foreach(Rails.root.join('public', 'uploads', uploaded_io.original_filename),  :col_sep => ";" ) do |fcsv_obj|
         #puts "# FCSV #{fcsv_obj}"
-        puts "#FCSV " + fcsv_obj.inspect
-      end
+        #puts "#FCSV " + fcsv_obj.inspect
+      #end
 
       #tmp = params[:file].tempfile
       #csv_contents = File.read(excel_file)
@@ -218,6 +220,7 @@ class PeopleController < BaseController
        path = params[:file]
        #params['event']['filename']
        #puts "# Uploading #{params['event']['filename']} ..."
+       flash[:notice] = "Импорт жильцов завершен."
     end
     #puts "# Uploading #{excel_file} ..."
     #if excel_file

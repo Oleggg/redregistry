@@ -14,6 +14,7 @@
 %table
   %tr
     %th= Subscriber.human_attribute_name(:id)
+    //%th= House.human_attribute_name(:number)
     %th= Subscriber.human_attribute_name(:address)
     %th= Person.human_attribute_name(:full_name)
     %th= Subscriber.human_attribute_name(:subscription_date)
@@ -24,7 +25,8 @@
   - @subscribers.each do |subscriber|
     %tr
       %td= subscriber.id
-      %td= subscriber.person.address.address_line
+      //%td= subscriber.person.house.number if subscriber.person.house
+      %td= subscriber.person.house.addresses.first.full_address if subscriber.person.house and subscriber.person.house.addresses.first
       %td= subscriber.person.full_name
       %td= subscriber.subscription_date
       %td= subscriber.subscription_reason

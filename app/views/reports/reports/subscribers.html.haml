@@ -4,9 +4,14 @@
 
 = form_tag subscribers_reports_report_path, :method => :post do
   = select_tag "house_id", options_for_select(House.for_select(:include_blank => true), params[:house_id].to_i)
-  = submit_tag "Печать", :name => :print
+  = submit_tag "Вывод", :name => :print
 %br
 %br
-= image_tag("#{@graph}")
+- if @graph
+  = image_tag("#{@graph}")
 
+  = form_tag print_subscribers_reports_report_path, :method => :get do
+    -#= hidden_field :house_id, value: 1
+    %input{ :type => "hidden", :value => params[:house_id], :name => :house_id }
+    = submit_tag "Печать", :name => :print
 

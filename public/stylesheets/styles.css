@@ -27,10 +27,15 @@ strong {
 
 a {
   color: #278CCD;
+  color: #DA7171
 }
 
 a:hover {
   color: #58bdfe;
+}
+
+a:active {
+  color: #DA7171;
 }
 
 .header {
@@ -62,7 +67,8 @@ ul.mainmenu li a {
 
 ul.mainmenu li.active a {
   background-color: #eee;
-  color: #070980;
+  /*color: #070980;*/
+  color: #D62E2E;
 }
 
 ul.mainmenu li a:hover {
@@ -108,7 +114,8 @@ ul.mainmenu li a:hover {
 }
 
 .menu ul li ul li.active a {
-  color: #0000FF;
+  /*color: #0000FF;*/
+  color: #D62E2E;
 }
 
 .menu h2 {

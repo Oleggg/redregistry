@@ -1,6 +1,8 @@
 - title(House.model_name.human)
 
-%h1= House.model_name.human
+%h1= "Список жильцов"
+
+%h1= "Дом № #{@house.number}"
 
 .filter
   = form_tag houses_path, :method => :get do

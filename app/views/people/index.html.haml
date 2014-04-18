@@ -1,6 +1,7 @@
 - title(Person.model_name.human)
 
-%h1= Person.model_name.human
+//%h1= Person.model_name.human
+%h1= "Жители"
 
 .filter
   = form_tag people_path, :method => :get do
@@ -22,6 +23,7 @@
     -#%th= th_sort_link "#{Person.human_attribute_name(:full_name)}","full_name"
     %th= Person.human_attribute_name(:full_name)
     %th= Person.human_attribute_name(:apartment_num)
+    %th= Person.human_attribute_name(:address)
     -#%th= th_sort_link "#{Person.human_attribute_name(:gender)}","gender"
     %th= Person.human_attribute_name(:gender)
     %th= Person.human_attribute_name(:age)
@@ -32,6 +34,7 @@
       %td= person.id
       %td= person.full_name
       %td= person.apartment_num
+      %td= person.house.addresses.first.address_line if person.house
       %td.center= person.gender_text
       %td.center= person.age
       %td= link_to 'Просмотр', person
