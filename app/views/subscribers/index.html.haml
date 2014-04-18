@@ -8,7 +8,7 @@
     %h3 Поиск
     = Subscriber.human_attribute_name(:name)
     = text_field_tag "name", params[:name], :size => 10
-    = Subscriber.human_attribute_name(:company_type_id)
+    //= Subscriber.human_attribute_name(:company_type_id)
     = submit_tag "Найти", :name => :search
 
 %table

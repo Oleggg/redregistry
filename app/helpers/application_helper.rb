@@ -1,6 +1,6 @@
 module ApplicationHelper
   def title(page_title)
-    content_for(:title) { "#{page_title.to_s} - Big Brother" }
+    content_for(:title) { "#{page_title.to_s} - Red Registry" }
   end
 
   def javascript_include_yandex_map_api

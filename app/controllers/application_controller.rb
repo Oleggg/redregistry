@@ -80,6 +80,8 @@ class ApplicationController < ActionController::Base
             #{:title => "Организации (#{Company.count})", :url => companies_path},
             {:title => "Дома (#{House.count})", :url => houses_path},
             #{:title => "Архив (#{Card.archived_count})", :url => archive_path },
+            {:title => "УИКи ()", :url => '#'},
+            {:title => "ТИКи ()", :url => '#'},
           ]},
         ]
 
@@ -142,7 +144,7 @@ class ApplicationController < ActionController::Base
             {:title => "Улицы (#{Street.count})", :url => vocabularies_streets_path},
           ]},
           {:title => 'Импорт', :items => [
-            {:title => "Импорт жителей", :url => tenants_import_path},
+            {:title => "Импорт жителей", :url => people_import_path},
           ]},
         ]
 

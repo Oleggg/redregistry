@@ -8,7 +8,7 @@
     %h3 Поиск
     = House.human_attribute_name(:name)
     = text_field_tag "name", params[:name], :size => 10
-    = House.human_attribute_name(:company_type_id)
+    -# = House.human_attribute_name(:company_type_id)
     = submit_tag "Найти", :name => :search
 
 %table
