@@ -30,7 +30,7 @@
       %td= subscriber.person.full_name
       %td= subscriber.subscription_date
       %td= subscriber.subscription_reason
-      %td= subscriber.shipping_type
+      %td= subscriber.shipping_type_for_display
       %td= link_to 'Просмотр', subscriber_path(subscriber)
       %td= link_to 'Изменить', edit_subscriber_path(subscriber)
       %td= link_to 'Удалить', subscriber, :confirm => 'Вы уверены?', :method => :delete

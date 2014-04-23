@@ -16,4 +16,8 @@ class Subscriber < ActiveRecord::Base
     [:by_post, :myself].collect {|s| [I18n.t("subscribers.shipping_type.#{s}"), SHIPPING_TYPE[s]] }
   end
 
+  def shipping_type_for_display
+    I18n.t("subscribers.shipping_type.#{SHIPPING_TYPE.index(self.shipping_type)}")
+  end
+
 end

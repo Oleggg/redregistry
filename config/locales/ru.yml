@@ -73,6 +73,7 @@ ru:
         address: "Адрес"
       subscriber:
         id: "#"
+        person_id: "Подписчик"
         subscription_date: "Дата подписки"
         subscription_reason: "Причина подписки"
         shipping_type: "Вид доставки"

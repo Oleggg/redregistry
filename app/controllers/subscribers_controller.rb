@@ -34,6 +34,7 @@ class SubscribersController < ApplicationController
   def create
     p = params[:subscriber]
     @subscriber = Subscriber.new(params[:subscriber])
+    @subscriber.total_subscribers = Subscriber.count
     if @subscriber.save
       redirect_to(subscribers_path, :notice => 'Подписчик успешно добавлен.')
     else
@@ -43,6 +44,7 @@ class SubscribersController < ApplicationController
 
   def update
     @subscriber = Subscriber.find(params[:id])
+    @subscriber.total_subscribers = Subscriber.count
     subscriber_params = params[:subscriber]
 
     if @subscriber.update_attributes(subscriber_params)

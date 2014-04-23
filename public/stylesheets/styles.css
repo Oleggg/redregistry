@@ -127,6 +127,7 @@ ul.mainmenu li a:hover {
 
 .content {
   float: left;
+  max-width: 80%;
 }
 
 #tabs {
