@@ -5,6 +5,7 @@ ru:
       company: "Организации"
       house: "Дома"
       subscriber: "Подписчики"
+      region_committee: "Райком КПРФ"
       eventlog: "Журнал событий"
       friend: "Друзья"
       inspector: "Инспекторы"
@@ -75,6 +76,11 @@ ru:
         subscription_date: "Дата подписки"
         subscription_reason: "Причина подписки"
         shipping_type: "Вид доставки"
+        address: "Адрес"
+      region_committee:
+        id: "#"
+        first_secretary: "Первый секретарь"
+        note: "Примечание"
         address: "Адрес"
       eventlog:
         id: "#"

@@ -16,7 +16,7 @@ class RegionCommitteesController < BaseController
     @rcommittee.addresses.build
     @rcommittee_address = @rcommittee.addresses.first
     # по умолчанию ставим точку на площадь Ленина
-    @rcommitttee_address.lat = 45.018662
+    @rcommittee_address.lat = 45.018662
     @rcommittee_address.lng = 53.195097
     #@house.build_person
     #@house.person.addresses.build
@@ -37,7 +37,7 @@ class RegionCommitteesController < BaseController
     p = params[:house]
     @rcommittee = RegionCommittee.new(params[:region_committee])
     if @rcommittee.save
-      redirect_to(region_committtees_path, :notice => 'Райком успешно создан.')
+      redirect_to(region_committees_path, :notice => 'Райком успешно создан.')
     else
       render :action => "new"
     end
@@ -62,7 +62,7 @@ class RegionCommitteesController < BaseController
   def destroy
     @rcommittee = RegionCommittee.find(params[:id])
     @rcommittee.destroy
-    redirect_to(hregion_committees_path)
+    redirect_to(region_committees_path)
   end
 
 end

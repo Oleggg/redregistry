@@ -14,20 +14,20 @@
 %table
   %tr
     %th= RegionCommittee.human_attribute_name(:id)
-    %th= RegionCommittee.human_attribute_name(:note)
-    %th= RegionCommittee.human_attribute_name(:note)
+    %th= RegionCommittee.human_attribute_name(:first_secretary)
     %th= RegionCommittee.human_attribute_name(:address)
+    %th= RegionCommittee.human_attribute_name(:note)
     %th{:colspan=>"4"}
 
   - @rcommittees.each do |rcommittee|
     %tr
-      %td= rcommittees.id
-      %td= rcommittees.first_secretary
-      %td= rcommittees.addresses.first.full_address if house.addresses.first
-      %td= rcommittees.note
+      %td= rcommittee.id
+      %td= rcommittee.first_secretary
+      %td= rcommittee.addresses.first.full_address if rcommittee.addresses.first
+      %td= rcommittee.note
       %td= link_to 'Просмотр', region_committee_path(rcommittee)
       %td= link_to 'Изменить', edit_region_committee_path(rcommittee)
-      %td= link_to 'Удалить', region_committee, :confirm => 'Вы уверены?', :method => :delete
+      %td= link_to 'Удалить', rcommittee, :confirm => 'Вы уверены?', :method => :delete
       %td= link_to 'ТИК', region_committee_path(rcommittee)
 
 = will_paginate @rcommittees

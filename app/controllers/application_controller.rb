@@ -79,6 +79,7 @@ class ApplicationController < ActionController::Base
             #{:title => "Семьи (#{Family.count})", :url => families_path},
             #{:title => "Организации (#{Company.count})", :url => companies_path},
             {:title => "Дома (#{House.count})", :url => houses_path},
+            {:title => "Райкомы КПРФ (#{RegionCommittee.count})", :url => region_committees_path},
             #{:title => "Архив (#{Card.archived_count})", :url => archive_path },
             {:title => "УИКи ()", :url => '#'},
             {:title => "ТИКи ()", :url => '#'},
