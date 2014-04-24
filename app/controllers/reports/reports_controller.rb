@@ -315,5 +315,47 @@ class Reports::ReportsController < BaseController
     render :layout => "print"
   end
 
+  def subscribers_total
+    subsribers_data = []
+    subscribers = Subscriber.all
+    subsribers_data = subscribers.collect {|s| [ s.total_subscribers ] }
+    puts subsribers_data
+    subsribers_data.each &:compact!
+    puts subsribers_data
+    lc = GoogleChart::LineChart.new('500x200',"\nПодписчики",false) do |lc|
+    #lc.data "Line green", [3,5,1,9,0,2], '00ff00'
+    #lc.data "Line red", [2,4,0,6,9,3], 'ff0000'
+    lc.data "Обшее число подписчиков", subsribers_data, 'ff0000'
+    lc.axis :y, :range => [0,10], :font_size => 10, :alignment => :center
+    lc.show_legend = true
+    lc.shape_marker :circle, :color => '0000ff', :data_set_index => 0, :data_point_index => -1, :pixel_size => 10
+    end
+    @graph = lc.to_url
+
+
+    #GoogleChart::PieChart.new('500x200',"\nПодписчики",false) do |pc|
+      #pc.data "Жильцы (#{@house.tenants_count})", @house.tenants_count, "#{COLORS[1]}"
+    #  pc.data "Не подписаны (#{@house.tenants_count - @house.subscribers_count})", (@house.tenants_count - @house.subscribers_count), "#{COLORS[1]}"
+    #  pc.data "Подписчики (#{@house.subscribers_count})", @house.subscribers_count, "#{COLORS[2]}"
+    #  puts pc.to_url
+    #  pc.show_labels = true
+    #  puts "\nPie Chart (with no labels)"
+    #  @graph = pc.to_url  
+    #end
+    #set_sub_menu :subscribers
+  end
+
+  def print_subscribers_total
+    #@total_tenants = Card.count
+    #@total_subscribers = Family.count
+    if params[:house_id]
+      puts '### POST ' + params[:house_id]
+      @house = House.find(params[:house_id])
+      @total_tenants = @house.tenants_count
+      @total_subscribers = @house.subscribers_count
+    end
+    render :layout => "print"
+  end
+
 end
 

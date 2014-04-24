@@ -88,6 +88,7 @@ class ApplicationController < ActionController::Base
 
         sub_menu_reports = [
           {:title => 'Подписчики', :items => [
+            {:title => "Подписчики", :url => subscribers_total_reports_report_path},
             {:title => "Подписчики по домам", :url => subscribers_reports_report_path},
           ]},
           #{:title => 'Карточки', :items => [

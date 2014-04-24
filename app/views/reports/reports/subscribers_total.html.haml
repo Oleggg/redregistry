@@ -1,0 +1,14 @@
+- title("Подписчики по домам")
+
+%h1 Отчёт &laquo;Подписчики&raquo;
+
+%br
+%br
+- if @graph
+  = image_tag("#{@graph}")
+
+  = form_tag print_subscribers_reports_report_path, :method => :get do
+    -#= hidden_field :house_id, value: 1
+    %input{ :type => "hidden", :value => params[:house_id], :name => :house_id }
+    = submit_tag "Печать", :name => :print
+

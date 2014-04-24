@@ -57,6 +57,8 @@ Bigbrother::Application.routes.draw do |map|
       get :subscribers
       post :subscribers
       get :print_subscribers
+      get :subscribers_total
+      post :print_subscribers_total
     end
   end
 
