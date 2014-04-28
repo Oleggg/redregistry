@@ -6,6 +6,7 @@ ru:
       house: "Дома"
       subscriber: "Подписчики"
       region_committee: "Райком КПРФ"
+      member: "Член КПРФ"
       eventlog: "Журнал событий"
       friend: "Друзья"
       inspector: "Инспекторы"
@@ -83,6 +84,15 @@ ru:
         first_secretary: "Первый секретарь"
         note: "Примечание"
         address: "Адрес"
+      member:
+        id: "#"
+        region_committee_id: "Райком КПРФ"
+        mission: "Партийное поручение"
+        post: "Должность"
+        party_post: "Должность в партии"
+        note: "Примечание"
+        address: "Адрес"
+        photo: "Фото"
       eventlog:
         id: "#"
         created_at: "Дата"
