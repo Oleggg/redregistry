@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140422162014) do
+ActiveRecord::Schema.define(:version => 20140424174555) do
 
   create_table "accommodations", :force => true do |t|
     t.string   "name"
@@ -339,6 +339,24 @@ ActiveRecord::Schema.define(:version => 20140422162014) do
 
   create_table "locations", :force => true do |t|
     t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "members", :force => true do |t|
+    t.integer  "region_committee_id",                      :null => false
+    t.text     "mission"
+    t.date     "entry_date"
+    t.string   "membershipcard_number",                    :null => false
+    t.string   "phone"
+    t.string   "post"
+    t.string   "party_post"
+    t.boolean  "is_distributor",        :default => false
+    t.text     "note"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
