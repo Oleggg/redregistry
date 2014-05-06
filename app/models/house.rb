@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: houses
+#
+#  id             :integer(4)      not null, primary key
+#  description    :text            default(""), not null
+#  storeys        :integer(4)
+#  porch_num      :integer(4)
+#  apartments_num :integer(4)
+#  house_problems :string(255)
+#  number         :integer(4)
+#
+
 class House < ActiveRecord::Base
   has_many :addresses, :as => :addressable, :dependent => :destroy
   has_many :tenants, :foreign_key => 'house_id', :class_name => "Person"

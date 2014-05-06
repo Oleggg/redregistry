@@ -18,6 +18,9 @@
 #  created_at         :datetime
 #  updated_at         :datetime
 #  gender             :integer(4)      default(0), not null
+#  house_id           :integer(4)
+#  apartment_num      :integer(4)
+#  birthyear          :integer(4)
 #
 
 class Person < ActiveRecord::Base

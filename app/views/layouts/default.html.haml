@@ -5,6 +5,7 @@
     %title
       - title = yield(:title)
       = title.empty? ? "Red Registry" : title
+    = stylesheet_link_tag 'bootstrap.min', 'bootstrap-theme.min'
     = stylesheet_link_tag 'reset', '/javascripts/jquery-ui-1.8/themes/base/jquery.ui.all.css',
         'slimbox2',  'common', 'styles', 'formtastic', 'formtastic_changes'
 
@@ -28,7 +29,7 @@
           = link_to current_user.login, account_path
           = link_to "Выход", user_session_path, :method => :delete, :confirm => "Вы уверены?"
     .clear
-    .container
+    .container_main
       .menu
         %ul
           = tag_sub_menu

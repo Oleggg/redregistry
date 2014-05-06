@@ -5,6 +5,7 @@ Bigbrother::Application.routes.draw do |map|
   resources :families
   resources :houses
   resources :region_committees
+  resources :members
   match '/house/:id/tenants' => "houses#tenants", :as => :house_tenants
   resources :subscribers
   match 'cards' => "cards#index", :as => :cards

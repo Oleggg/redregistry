@@ -1,3 +1,19 @@
+# == Schema Information
+#
+# Table name: subscribers
+#
+#  id                  :integer(4)      not null, primary key
+#  subscription_date   :date            not null
+#  unsubscription_date :date
+#  is_subscribed       :boolean(1)      default(TRUE), not null
+#  subscription_reason :string(255)
+#  shipping_type       :integer(4)
+#  total_subscribers   :integer(4)
+#  created_at          :datetime
+#  updated_at          :datetime
+#  person_id           :integer(4)
+#
+
 class Subscriber < ActiveRecord::Base
   SHIPPING_TYPE = {:by_post => 1, :myself => 2}
 
