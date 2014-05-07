@@ -2,12 +2,12 @@
 
 = semantic_form_for @house do |f|
   = f.inputs do
-    = f.input :number
-    = f.input :description, :required => true
-    = f.input :storeys
-    = f.input :porch_num
-    = f.input :apartments_num
-    = f.input :house_problems, :as => :text
+    = f.input :number, :input_html => { :class => "form-control" }
+    = f.input :description, :required => true, :input_html => { :class => "form-control" }
+    = f.input :storeys, :input_html => { :class => "form-control" }
+    = f.input :porch_num, :input_html => { :class => "form-control" }
+    = f.input :apartments_num, :input_html => { :class => "form-control" }
+    = f.input :house_problems, :as => :text, :input_html => { :class => "form-control" }
 
     = f.semantic_fields_for :addresses do |a|
       = a.inputs :name => "Адрес дома" do
@@ -27,7 +27,7 @@
     
 
   = f.buttons do
-    = f.commit_button "Сохранить"
+    = f.commit_button "Сохранить", :button_html => { :class => "btn btn-default btn-sm" }
     %li{:class=>"link"}
       или
       = link_to 'Вернутся', houses_path

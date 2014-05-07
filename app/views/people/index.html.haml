@@ -1,7 +1,7 @@
 - title(Person.model_name.human)
 
 //%h1= Person.model_name.human
-%h1= "Жители"
+%h1.page-header= "Жители"
 
 .filter
   = form_tag people_path, :method => :get do
@@ -15,7 +15,7 @@
     = text_field_tag "age_from", params[:age_from], :size => 3
     до
     = text_field_tag "age_to", params[:age_to], :size => 3
-    = submit_tag "Найти", :name => :search
+    = submit_tag "Найти", :name => :search, :class => "btn btn-default btn-sm"
 
 %table
   %tr

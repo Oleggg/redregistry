@@ -244,3 +244,19 @@ ul.mainmenu li a:hover {
   font-weight: bold;
 }
 
+/* --------------------------- */
+h1.header {
+    border-bottom: 1px solid red;
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+    height: auto;
+}
+.page-header {
+    border-bottom: 1px solid #EEEEEE;
+    margin: 5px 0 20px;
+    padding-bottom: 9px;
+}
+input{
+    min-height: 2.2em;
+    border: 1px solid #CCCCCC;
+}

@@ -5,7 +5,7 @@
     = f.input :last_name, :required => true, :input_html => { :class => "form-control" }
     = f.input :first_name, :required => true, :input_html => { :class => "form-control" }
     = f.input :middle_name, :required => true, :input_html => { :class => "form-control" }
-    = f.input :region_committee_id, :as => :select, :collection => RegionCommittee.all
+    = f.input :region_committee_id, :as => :select, :collection => RegionCommittee.for_select
     = f.input :mission, :as => :text, :input_html => { :class => "form-control" }
     = f.label :entry_date, :input_html => { :class => "form-control" }
     = f.text_field :entry_date, :class => "datepick_im",:size => 9, :required => true

@@ -19,4 +19,10 @@ class RegionCommittee < ActiveRecord::Base
   
   scope :sorted, order("note")
 
+  def self.for_select(options = {:include_blank => true})
+    o = sorted.all.collect{|i| [ (i.addresses.first.full_address if i.addresses.first) , i.id]}
+    o = [['', nil]] + o if options[:include_blank]
+    o
+  end
+
 end

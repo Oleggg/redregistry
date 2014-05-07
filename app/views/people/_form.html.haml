@@ -4,28 +4,30 @@
   = f.error_messages
 
   = f.inputs do
-    = f.input :last_name, :required => true
-    = f.input :first_name, :required => true
-    = f.input :middle_name, :required => true
-    = f.input :gender, :as => :radio, :required => true, :collection => Person.gender_for_select
-    = f.input :birthday, :start_year => 1950
-    = f.input :birthplace
-    = f.input :phone
-    = f.input :mobile
+    = f.input :last_name, :required => true, :input_html => { :class => "form-control" }
+    = f.input :first_name, :required => true, :input_html => { :class => "form-control" }
+    = f.input :middle_name, :required => true, :input_html => { :class => "form-control" }
+    .form-group
+      = f.input :gender, :as => :radio, :required => true, :collection => Person.gender_for_select
+    .form-group
+      = f.input :birthday, :start_year => 1950
+    = f.input :birthplace, :input_html => { :class => "form-control" }
+    = f.input :phone, :input_html => { :class => "form-control" }
+    = f.input :mobile, :input_html => { :class => "form-control" }
 
     = f.input :house_id, :as => :select, :collection => House.for_select(:include_blank => true)
-    = f.input :apartment_num
+    = f.input :apartment_num, :input_html => { :class => "form-control" }
 
     = f.semantic_fields_for :addresses do |a|
       = a.inputs :name => "Адрес регистрации" do
-        = a.input :post_code
+        = a.input :post_code, :input_html => { :class => "form-control" }
         = a.input :region_id, :as => :select,  :collection => Region.all
         = a.input :district_id, :as => :select, :collection => District.all
         = a.input :city_id, :as => :select, :collection => City.all
-        = a.input :address_line
+        = a.input :address_line, :input_html => { :class => "form-control" }
         = a.input :lat, :as => :hidden
         = a.input :lng, :as => :hidden
-        %input{:type => "button", :value => "Найти адрес на карте", :id => "find_address", |
+        %input{:type => "button", :value => "Найти адрес на карте", :id => "find_address", :class => "btn btn-default btn-sm", |
           "data-form-name" => "person" } |
 
       #map_container
@@ -38,10 +40,10 @@
         = image_tag("/photos/thumb/missing.png")
 
     = f.input :photo, :as => :file
-    = f.input :comment
+    = f.input :comment, :input_html => { :class => "form-control" }
 
   = f.buttons do
-    = f.commit_button "Сохранить"
+    = f.commit_button "Сохранить", :button_html => { :class => "btn btn-default btn-sm" }
     %li{:class=>"link"}
       или
       = link_to 'Вернуться', people_path

@@ -44,7 +44,11 @@ form.formtastic fieldset {
 form.formtastic fieldset.inputs label {
   font-weight: normal;
 }
-
+/* ---------------------------------- */
 form.formtastic input.btn, form.formtastic fieldset.buttons input.btn{
   padding: 5px 10px;
+}
+.form-control:focus {
+  border-color: red;
+  outline: 0 none;
 }

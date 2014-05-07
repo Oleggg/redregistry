@@ -326,7 +326,7 @@ class Reports::ReportsController < BaseController
     #lc.data "Line green", [3,5,1,9,0,2], '00ff00'
     #lc.data "Line red", [2,4,0,6,9,3], 'ff0000'
     lc.data "Обшее число подписчиков", subsribers_data, 'ff0000'
-    lc.axis :y, :range => [0,10], :font_size => 10, :alignment => :center
+    lc.axis :y, :range => [0,Subscriber.all.count ], :font_size => 10, :alignment => :center
     lc.show_legend = true
     lc.shape_marker :circle, :color => '0000ff', :data_set_index => 0, :data_point_index => -1, :pixel_size => 10
     end

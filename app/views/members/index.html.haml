@@ -1,6 +1,6 @@
 - title(Member.model_name.human)
 
-%h1= Member.model_name.human
+%h1.page-header= Member.model_name.human
 
 .filter
   = form_tag members_path, :method => :get do

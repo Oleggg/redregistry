@@ -1,6 +1,6 @@
 - title(House.model_name.human)
 
-%h1= House.model_name.human
+%h1.page-header= House.model_name.human
 
 .filter
   = form_tag houses_path, :method => :get do
@@ -9,7 +9,7 @@
     = House.human_attribute_name(:name)
     = text_field_tag "name", params[:name], :size => 10
     -# = House.human_attribute_name(:company_type_id)
-    = submit_tag "Найти", :name => :search
+    = submit_tag "Найти", :name => :search, :class => "btn btn-default btn-sm"
 
 %table
   %tr

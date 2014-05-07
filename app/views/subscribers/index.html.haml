@@ -1,6 +1,6 @@
 - title(Subscriber.model_name.human)
 
-%h1= Subscriber.model_name.human
+%h1.page-header= Subscriber.model_name.human
 
 .filter
   = form_tag subscribers_path, :method => :get do
@@ -9,7 +9,7 @@
     = Subscriber.human_attribute_name(:name)
     = text_field_tag "name", params[:name], :size => 10
     //= Subscriber.human_attribute_name(:company_type_id)
-    = submit_tag "Найти", :name => :search
+    = submit_tag "Найти", :name => :search, :class => "btn btn-default btn-sm"
 
 %table
   %tr

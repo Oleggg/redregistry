@@ -1,44 +1,33 @@
-- title("Просмотр #{House.model_name.human.mb_chars.downcase}")
+- title("Просмотр #{Member.model_name.human.mb_chars.downcase}")
 - javascript_include_yandex_map_api
 
-%h1= "Просмотр #{House.model_name.human.mb_chars.downcase}"
+%h1= "Просмотр #{Member.model_name.human.mb_chars.downcase}"
 
 .show
   %ul
     %li
-      .label= House.human_attribute_name(:description)
-      = @house.description
-    %li
-      .label= House.human_attribute_name(:storeys)
-      = @house.storeys
-    %li
-      .label= House.human_attribute_name(:porch_num)
-      = @house.porch_num
-    %li
-      .label= House.human_attribute_name(:apartments_num)
-      = @house.apartments_num
-    %li
-      .label= House.human_attribute_name(:address)
-      = @house_address.full_address if @house_address
+      .label= Member.human_attribute_name(:full_name)
+      = @member.full_name
+      .label= Member.human_attribute_name(:address)
+      = @member_address.full_address if @member_address
 
       #map_container
         #map
     %li
-      .label= House.human_attribute_name(:house_problems)
-      = @house.house_problems
+      .label= Member.human_attribute_name(:note)
+      = @member.note
 
   .buttons
-    = link_to 'Вернуться', houses_path
+    = link_to 'Вернуться', members_path
 
 :javascript
   function init_point() {
-    lat = #{@house_address.lat if @house_address};
-    lng = #{@house_address.lng if @house_address};
+    lat = #{@member_address.lat if @member_address};
+    lng = #{@member_address.lng if @member_address};
     var point = new YMaps.GeoPoint(lat, lng);
     placemark.setOptions({draggable: false});
     placemark.setGeoPoint(point);
-    placemark.name = "#{@house.description}";
-    placemark.description = "Подписчиков: #{@house.subscribers_count}";
+    //placemark.name = "#{@member}";
     map.setCenter(point, 12);
   }
 
