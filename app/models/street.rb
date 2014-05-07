@@ -36,4 +36,8 @@ class Street < ActiveRecord::Base
     Street.where(:town_id => town_id ).all
   end
 
+  def self.for_select(electoral_district_id)
+    Street.where(:electoral_district_id => electoral_district_id ).all
+  end
+
 end

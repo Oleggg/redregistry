@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140506122615) do
+ActiveRecord::Schema.define(:version => 20140507170142) do
 
   create_table "accommodations", :force => true do |t|
     t.string   "name"
@@ -250,6 +250,14 @@ ActiveRecord::Schema.define(:version => 20140506122615) do
 
   create_table "document_types", :force => true do |t|
     t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "electoral_districts", :force => true do |t|
+    t.integer  "number",     :null => false
+    t.string   "name"
+    t.text     "note"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
