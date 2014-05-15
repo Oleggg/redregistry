@@ -45,16 +45,18 @@
 
 - @electoral_district.houses.each do |house|
   :javascript
+    $(document).ready(function() {
     var lat = "#{house.addresses.first.lat if house.addresses.first}";
     var lng = "#{house.addresses.first.lng if house.addresses.first}";
     var point_#{house.id} = new YMaps.GeoPoint(lat, lng);
     placemark_#{house.id} = new YMaps.Placemark( point_#{house.id}, {draggable: true});
-    map.addOverlay(placemark_#{house.id});
     placemark_#{house.id}.setOptions({draggable: true});
     placemark_#{house.id}.setGeoPoint(point_#{house.id});
     placemark_#{house.id}.name = "#{house.description}";
     placemark_#{house.id}.description = "Подписчиков: #{house.subscribers_count}";
+    map.addOverlay(placemark_#{house.id});
     //map.setCenter(point, 12);
+    });
 
 
 :javascript
