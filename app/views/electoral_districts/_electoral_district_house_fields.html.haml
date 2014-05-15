@@ -1,0 +1,7 @@
+.row{:class => "fields"}
+  .col.center
+    = f.select :house_id, House.for_select
+  .col.center
+
+    = link_to_remove_fields "Удалить", f
+

@@ -22,6 +22,8 @@ module ApplicationHelper
     #new_object.build_family_help if new_object.is_a?(CardFamilyHelp)
     #new_object.build_child_character if new_object.is_a?(CardChildCharacter)
 
+    #new_object.build_person if new_object.is_a?(Relative)
+
     fields = f.fields_for(association, new_object, :child_index => "new_#{association}") do |builder|
       render(association.to_s.singularize + "_fields", :f => builder)
     end

@@ -30,7 +30,7 @@ class Town < ActiveRecord::Base
     o
   end
 
-  def self.for_select(district_id)
+  def self.for_select(district_id = nil)
     Town.where(:district_id => district_id ).all
   end
 

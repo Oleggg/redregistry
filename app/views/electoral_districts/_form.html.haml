@@ -1,0 +1,26 @@
+-# javascript_include_yandex_map_api
+
+= semantic_form_for @electoral_district do |f|
+  = f.inputs do
+    = f.input :number, :required => true, :input_html => { :class => "form-control" }
+    = f.input :name, :input_html => { :class => "form-control" }
+    = f.input :note, :as => :text, :input_html => { :class => "form-control" }
+  -#= f.fields_for :houses do |builder|
+  -#  = render 'house_fields', :f => builder
+  -#  = link_to_add_fields "Добавить", f, :houses
+
+    -#map_container
+      -#map
+    
+
+  = f.buttons do
+    = f.commit_button "Сохранить", :button_html => { :class => "btn btn-default btn-sm" }
+    %li{:class=>"link"}
+      или
+      = link_to 'Вернуться', electoral_districts_path
+
+:javascript
+  function init_point() {
+    //init_point_("electoral_district");
+  }
+

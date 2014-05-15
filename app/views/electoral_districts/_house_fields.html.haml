@@ -1,0 +1,8 @@
+-#= f.select :house_id, House.for_select
+= f.input :description
+= f.input :storeys
+= f.input :porch_num
+= f.input :apartments_num
+-#= f.text_field :comment, :size => "10"
+= link_to_remove_fields "Удалить", f
+

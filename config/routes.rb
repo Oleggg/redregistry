@@ -6,6 +6,8 @@ Bigbrother::Application.routes.draw do |map|
   resources :houses
   resources :region_committees
   resources :members
+  match 'electoral_districts/import' => "electoral_districts#import", :as => :electoral_districts_import
+  resources :electoral_districts
   match '/house/:id/tenants' => "houses#tenants", :as => :house_tenants
   resources :subscribers
   match 'cards' => "cards#index", :as => :cards

@@ -18,6 +18,9 @@ class Street < ActiveRecord::Base
   belongs_to :district, :primary_key => "code"
   belongs_to :city, :primary_key => "code"
   belongs_to :town, :primary_key => "code"
+  belongs_to :electoral_district
+
+  accepts_nested_attributes_for :electoral_district
 
   validates_presence_of :name
   validates_uniqueness_of :name

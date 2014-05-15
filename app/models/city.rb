@@ -26,7 +26,7 @@ class City < ActiveRecord::Base
     o
   end
 
-  def self.for_select(district_id)
+  def self.for_select(district_id = nil)
     #[[' - не выбран - ', nil]] + find(:all, :conditions => {:district_id => district_id}).collect{|p| [p.name, p.id]}
     City.where(:district_id => district_id ).all
     #find(:all, :conditions => {:district_id => district_id}).collect{|i| [i.name, i.id]}

@@ -15,7 +15,10 @@ class House < ActiveRecord::Base
   has_many :addresses, :as => :addressable, :dependent => :destroy
   has_many :tenants, :foreign_key => 'house_id', :class_name => "Person"
 
+  belongs_to :electoral_district
+
   accepts_nested_attributes_for :addresses
+  accepts_nested_attributes_for :electoral_district
 
   validates_presence_of :description
   

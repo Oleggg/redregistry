@@ -1,0 +1,11 @@
+- title("Импорт #{ElectoralDistrict.model_name.human.mb_chars.downcase}")
+
+%h1= "Импорт #{ElectoralDistrict.model_name.human.mb_chars.downcase}"
+
+
+= form_tag(electoral_districts_import_path, :multipart => true)  do
+  %br
+  = file_field :file, 'file'
+  = submit_tag "Загрузить"
+
+

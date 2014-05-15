@@ -81,6 +81,7 @@ class ApplicationController < ActionController::Base
             {:title => "Дома (#{House.count})", :url => houses_path},
             {:title => "Райкомы КПРФ (#{RegionCommittee.count})", :url => region_committees_path},
             {:title => "Члены КПРФ (#{Member.count})", :url => members_path},
+            {:title => "Избирательные округа (#{ElectoralDistrict.count})", :url => electoral_districts_path},
             #{:title => "Архив (#{Card.archived_count})", :url => archive_path },
             {:title => "УИКи ()", :url => '#'},
             {:title => "ТИКи ()", :url => '#'},
@@ -148,6 +149,7 @@ class ApplicationController < ActionController::Base
           ]},
           {:title => 'Импорт', :items => [
             {:title => "Импорт жителей", :url => people_import_path},
+            {:title => "Импорт округов", :url => electoral_districts_import_path},
           ]},
         ]
 

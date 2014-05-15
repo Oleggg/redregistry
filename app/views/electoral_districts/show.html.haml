@@ -1,0 +1,71 @@
+- title("Просмотр #{ElectoralDistrict.model_name.human.mb_chars.downcase}")
+- javascript_include_yandex_map_api
+
+%h1= "Просмотр #{ElectoralDistrict.model_name.human.mb_chars.downcase}"
+
+.show
+  %ul
+    %li
+      .label= ElectoralDistrict.human_attribute_name(:number)
+      = @electoral_district.number
+    %li
+      .label= ElectoralDistrict.human_attribute_name(:name)
+      = @electoral_district.name
+    %li
+      .label= ElectoralDistrict.human_attribute_name(:note)
+      = @electoral_district.note
+
+    - @electoral_district.houses.each do |house|
+      %li
+        //= house.id
+        = house.number
+        //= house.addresses.first.lat
+
+    #map_container
+      #map
+
+  .buttons
+    = link_to 'Вернуться', electoral_districts_path
+
+:javascript
+  initialize_map();
+  function init_point() {
+    //lat = #{@start_point.lat if @start_point};
+    //lng = #{@start_point.lng if @start_point};
+    //var point = new YMaps.GeoPoint(lat, lng);
+    //placemark = new YMaps.Placemark( point, {draggable: true});
+    //map.addOverlay(placemark);
+    //placemark.setOptions({draggable: false});
+    //placemark.setGeoPoint(point);
+    //placemark.name = "{house.description}";
+    //placemark.description = "Подписчиков: {house.subscribers_count}";
+    //map.setCenter(point, 12);
+  }
+
+
+- @electoral_district.houses.each do |house|
+  :javascript
+    var lat = "#{house.addresses.first.lat if house.addresses.first}";
+    var lng = "#{house.addresses.first.lng if house.addresses.first}";
+    var point_#{house.id} = new YMaps.GeoPoint(lat, lng);
+    placemark_#{house.id} = new YMaps.Placemark( point_#{house.id}, {draggable: true});
+    map.addOverlay(placemark_#{house.id});
+    placemark_#{house.id}.setOptions({draggable: true});
+    placemark_#{house.id}.setGeoPoint(point_#{house.id});
+    placemark_#{house.id}.name = "#{house.description}";
+    placemark_#{house.id}.description = "Подписчиков: #{house.subscribers_count}";
+    //map.setCenter(point, 12);
+
+
+:javascript
+  function init_point() {
+    //    lat = {@house_address.lat if @house_address};
+    //    lng = {@house_address.lng if @house_address};
+    //var point = new YMaps.GeoPoint(lat, lng);
+    //    placemark.setOptions({draggable: false});
+    //    placemark.setGeoPoint(point);
+    //    placemark.name = "{@house.description}";
+    //    placemark.description = "Подписчиков: {@house.subscribers_count}";
+    //map.setCenter(point, 12);
+  }
+

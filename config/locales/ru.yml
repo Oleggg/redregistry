@@ -7,6 +7,7 @@ ru:
       subscriber: "Подписчики"
       region_committee: "Райком КПРФ"
       member: "Члены КПРФ"
+      electoral_district: "Избирательные округа"
       eventlog: "Журнал событий"
       friend: "Друзья"
       inspector: "Инспекторы"
@@ -99,6 +100,12 @@ ru:
         note: "Примечание"
         address: "Адрес"
         photo: "Фото"
+      electoral_district:
+        id: "#"
+        number: "Номер"
+        name: "Название"
+        note: "Примечание"
+        house: "Дома"
       eventlog:
         id: "#"
         created_at: "Дата"

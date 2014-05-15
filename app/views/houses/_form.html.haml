@@ -8,6 +8,7 @@
     = f.input :porch_num, :input_html => { :class => "form-control" }
     = f.input :apartments_num, :input_html => { :class => "form-control" }
     = f.input :house_problems, :as => :text, :input_html => { :class => "form-control" }
+    = f.input :electoral_district_id, :as => :select, :collection => ElectoralDistrict.all
 
     = f.semantic_fields_for :addresses do |a|
       = a.inputs :name => "Адрес дома" do

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140507170142) do
+ActiveRecord::Schema.define(:version => 20140515133725) do
 
   create_table "accommodations", :force => true do |t|
     t.string   "name"
@@ -328,12 +328,13 @@ ActiveRecord::Schema.define(:version => 20140507170142) do
   end
 
   create_table "houses", :force => true do |t|
-    t.text    "description",    :null => false
+    t.text    "description",           :null => false
     t.integer "storeys"
     t.integer "porch_num"
     t.integer "apartments_num"
     t.string  "house_problems"
     t.integer "number"
+    t.integer "electoral_district_id"
   end
 
   create_table "inspectors", :force => true do |t|
@@ -469,14 +470,15 @@ ActiveRecord::Schema.define(:version => 20140507170142) do
   end
 
   create_table "streets", :force => true do |t|
-    t.string   "name",                     :null => false
-    t.integer  "region_id",                :null => false
+    t.string   "name",                               :null => false
+    t.integer  "region_id",                          :null => false
     t.integer  "district_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "code",        :limit => 8
-    t.integer  "city_id",     :limit => 8
-    t.integer  "town_id",     :limit => 8
+    t.integer  "code",                  :limit => 8
+    t.integer  "city_id",               :limit => 8
+    t.integer  "town_id",               :limit => 8
+    t.integer  "electoral_district_id"
   end
 
   create_table "subscribers", :force => true do |t|
