@@ -12,10 +12,10 @@
 
 %table
   %tr
-    %th= House.human_attribute_name(:id)
-    %th= House.human_attribute_name(:number)
-    %th= House.human_attribute_name(:address)
-    %th= House.human_attribute_name(:storeys)
+    %th= ElectoralDistrict.human_attribute_name(:id)
+    %th= ElectoralDistrict.human_attribute_name(:number)
+    %th= ElectoralDistrict.human_attribute_name(:name)
+    %th= ElectoralDistrict.human_attribute_name(:note)
     %th{:colspan=>"4"}
 
   - @electoral_districts.each do |electoral_district|

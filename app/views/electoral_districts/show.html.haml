@@ -6,20 +6,24 @@
 .show
   %ul
     %li
-      .label= ElectoralDistrict.human_attribute_name(:number)
-      = @electoral_district.number
+      .label = ElectoralDistrict.human_attribute_name(:name)
+      %h1= @electoral_district.name
     %li
-      .label= ElectoralDistrict.human_attribute_name(:name)
-      = @electoral_district.name
+      .label = ElectoralDistrict.human_attribute_name(:number)
+      %h2= @electoral_district.number
     %li
       .label= ElectoralDistrict.human_attribute_name(:note)
       = @electoral_district.note
-
-    - @electoral_district.houses.each do |house|
-      %li
-        //= house.id
-        = house.number
-        //= house.addresses.first.lat
+    %li
+      Улицы:
+      - @electoral_district.streets.each do |street|
+        = street.name 
+        = "&nbsp;".html_safe
+    %li
+      Список домов:
+      - @electoral_district.houses.each do |house|
+        = house.number 
+        = "&nbsp;".html_safe
 
     #map_container
       #map

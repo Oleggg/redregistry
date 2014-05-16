@@ -43,8 +43,8 @@ function initialize_map() {
   penza_center = new YMaps.GeoPoint(45.018662, 53.195097);
   map.setCenter(penza_center, 12);
 
-  //placemark = new YMaps.Placemark(penza_center, {draggable: true});
-  //map.addOverlay(placemark);
+  placemark = new YMaps.Placemark(penza_center, {draggable: true});
+  map.addOverlay(placemark);
 
   init_point();
 }
