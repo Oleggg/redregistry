@@ -6,31 +6,31 @@
 .show
   %ul
     %li
-      .label= Subscriber.human_attribute_name(:name)
-      = @subscriber.name
+      .label= Person.human_attribute_name(:full_name)
+      = @subscriber.person.full_name
     %li
-      .label= Subscriber.human_attribute_name(:company_type_id)
-      = @subscriber.company_type.name if @company.company_type
+      .label= Subscriber.human_attribute_name(:subscription_date)
+      = @subscriber.subscription_date
     %li
-      .label= Subscriber.human_attribute_name(:full_name)
-      = @subscriber.full_name
+      .label= Subscriber.human_attribute_name(:subscription_reason)
+      = @subscriber.subscription_reason
     %li
-      .label= Company.human_attribute_name(:address)
-      = @company_address.full_address if @company_address
+      .label= Subscriber.human_attribute_name(:shipping_type)
+      = @subscriber.shipping_type
+    %li
+      -# .label= Company.human_attribute_name(:address)
+      -# = @company_address.full_address if @company_address
 
       #map_container
         #map
-    %li
-      .label= Subscriber.human_attribute_name(:note)
-      = @subscriber.note
 
   .buttons
     = link_to 'Вернуться', subscribers_path
 
 :javascript
   function init_point() {
-    lat = #{@company_address.lat};
-    lng = #{@company_address.lng};
+    lat = {@company_address.lat};
+    lng = {@company_address.lng};
     var point = new YMaps.GeoPoint(lat, lng);
     placemark.setOptions({draggable: false});
     placemark.setGeoPoint(point);
