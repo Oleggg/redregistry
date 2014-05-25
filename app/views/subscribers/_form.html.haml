@@ -6,6 +6,7 @@
     = f.label :subscription_date
     = f.text_field :subscription_date, :class => "datepick_im",:size => 9, :required => true
     = f.input :subscription_reason, :as => :text
+    = f.input :member, :as => :select, :collection => Member.all
     = f.input :shipping_type, :as => :select, :collection => Subscriber.shipping_type_for_select()
    
 

@@ -15,6 +15,7 @@
   %tr
     %th= RegionCommittee.human_attribute_name(:id)
     %th= RegionCommittee.human_attribute_name(:first_secretary)
+    %th= RegionCommittee.human_attribute_name(:city_district)
     %th= RegionCommittee.human_attribute_name(:address)
     %th= RegionCommittee.human_attribute_name(:note)
     %th{:colspan=>"4"}
@@ -23,6 +24,7 @@
     %tr
       %td= rcommittee.id
       %td= rcommittee.first_secretary
+      %td= rcommittee.city_district.name
       %td= rcommittee.addresses.first.full_address if rcommittee.addresses.first
       %td= rcommittee.note
       %td= link_to 'Просмотр', region_committee_path(rcommittee)

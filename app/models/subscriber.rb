@@ -18,6 +18,7 @@ class Subscriber < ActiveRecord::Base
   SHIPPING_TYPE = {:by_post => 1, :myself => 2}
 
   belongs_to :person
+  belongs_to :member
 
   accepts_nested_attributes_for :person
 

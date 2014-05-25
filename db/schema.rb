@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140515133725) do
+ActiveRecord::Schema.define(:version => 20140525155848) do
 
   create_table "accommodations", :force => true do |t|
     t.string   "name"
@@ -187,6 +187,13 @@ ActiveRecord::Schema.define(:version => 20140515133725) do
     t.datetime "updated_at"
     t.integer  "district_id"
     t.integer  "code",        :limit => 8
+  end
+
+  create_table "city_districts", :force => true do |t|
+    t.string   "name",       :null => false
+    t.integer  "city_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "companies", :force => true do |t|
@@ -371,6 +378,7 @@ ActiveRecord::Schema.define(:version => 20140515133725) do
     t.string   "first_name",                               :null => false
     t.string   "last_name",                                :null => false
     t.string   "middle_name"
+    t.string   "honors"
   end
 
   create_table "people", :force => true do |t|
@@ -409,10 +417,11 @@ ActiveRecord::Schema.define(:version => 20140515133725) do
   end
 
   create_table "region_committees", :force => true do |t|
-    t.string   "first_secretary", :null => false
+    t.string   "first_secretary",  :null => false
     t.text     "note"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "city_district_id"
   end
 
   create_table "regions", :id => false, :force => true do |t|
@@ -491,6 +500,7 @@ ActiveRecord::Schema.define(:version => 20140515133725) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "person_id"
+    t.integer  "member_id"
   end
 
   create_table "taggings", :force => true do |t|

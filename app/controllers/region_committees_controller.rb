@@ -34,7 +34,7 @@ class RegionCommitteesController < BaseController
   end
 
   def create
-    p = params[:house]
+    p = params[:region_committee]
     @rcommittee = RegionCommittee.new(params[:region_committee])
     if @rcommittee.save
       redirect_to(region_committees_path, :notice => 'Райком успешно создан.')
@@ -45,9 +45,9 @@ class RegionCommitteesController < BaseController
 
   def update
     @rcommittee = RegionCommittee.find(params[:id])
-    rcommitttee_params = params[:region_committee]
+    rcommittee_params = params[:region_committee]
 
-    if @rcommittee.update_attributes(house_params)
+    if @rcommittee.update_attributes(rcommittee_params)
       redirect_to(region_committees_path, :notice => 'Райком успешно обновлен.')
     else
       render :action => "edit"

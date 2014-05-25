@@ -1,16 +1,15 @@
 - title("Просмотр #{ElectoralDistrict.model_name.human.mb_chars.downcase}")
 - javascript_include_yandex_map_api
 
-%h1= "Просмотр #{ElectoralDistrict.model_name.human.mb_chars.downcase}"
+%h1.page-header= "Просмотр #{ElectoralDistrict.model_name.human.mb_chars.downcase}"
 
 .show
   %ul
     %li
-      .label = ElectoralDistrict.human_attribute_name(:name)
       %h1= @electoral_district.name
     %li
-      .label = ElectoralDistrict.human_attribute_name(:number)
-      %h2= @electoral_district.number
+      .label= ElectoralDistrict.human_attribute_name(:number)
+      = @electoral_district.number
     %li
       .label= ElectoralDistrict.human_attribute_name(:note)
       = @electoral_district.note

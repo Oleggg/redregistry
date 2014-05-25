@@ -17,6 +17,7 @@
     %th= Member.human_attribute_name(:full_name)
     %th= Member.human_attribute_name(:entry_date)
     %th= Member.human_attribute_name(:membershipcard_number)
+    %th= Member.human_attribute_name(:mission)
     %th= Member.human_attribute_name(:region_committee_id)
     %th= Member.human_attribute_name(:address)
     %th{:colspan=>"3"}
@@ -27,6 +28,7 @@
       %td= member.full_name
       %td= member.entry_date
       %td= member.membershipcard_number
+      %td= member.mission
       %td= member.region_committee.addresses.first.full_address if member.region_committee.addresses.first
       %td= member.addresses.first.full_address if member.addresses.first
       %td= link_to 'Просмотр', member_path(member)

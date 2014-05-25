@@ -1,5 +1,6 @@
 class Member < ActiveRecord::Base
   has_many :addresses, :as => :addressable, :dependent => :destroy
+  has_many :subscribers
 
   accepts_nested_attributes_for :addresses
 

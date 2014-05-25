@@ -12,6 +12,7 @@
 class RegionCommittee < ActiveRecord::Base
   has_many :addresses, :as => :addressable, :dependent => :destroy
   has_many :members
+  belongs_to :city_district
 
   accepts_nested_attributes_for :addresses
 

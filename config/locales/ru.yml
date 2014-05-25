@@ -80,10 +80,12 @@ ru:
         subscription_date: "Дата подписки"
         subscription_reason: "Причина подписки"
         shipping_type: "Вид доставки"
+        member: "Активист КПРФ, осуществляющий доставку газеты"
         address: "Адрес"
       region_committee:
         id: "#"
         first_secretary: "Первый секретарь"
+        city_district: "Район"
         note: "Примечание"
         address: "Адрес"
       electoral_district:
@@ -104,6 +106,8 @@ ru:
         membershipcard_number: "Номер партбилета"
         post: "Должность"
         party_post: "Должность в партии"
+        honors: "Благодарности, награды, поощрения"
+        is_distributor: "Является распространителем"
         note: "Примечание"
         address: "Адрес"
         photo: "Фото"
@@ -267,6 +271,10 @@ ru:
         id: "#"
         name: "Название"
         region: "Регион"
+      city_district:
+        id: "#"
+        name: "Название"
+        city: "Город"
       town:
         id: "#"
         name: "Название"
