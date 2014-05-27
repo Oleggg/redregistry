@@ -10,6 +10,8 @@ Bigbrother::Application.routes.draw do |map|
   resources :electoral_districts
   match '/house/:id/tenants' => "houses#tenants", :as => :house_tenants
   resources :subscribers
+  resources :tics
+  resources :uics
   match 'cards' => "cards#index", :as => :cards
   match 'archive' => "cards#archive", :as => :archive
   #match 'city_by_district' => "cards#city_by_district", :as => :city_by_district

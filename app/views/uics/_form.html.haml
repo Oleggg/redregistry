@@ -1,0 +1,36 @@
+- javascript_include_yandex_map_api
+
+= semantic_form_for @tic, :class => "form" do |f|
+  = f.inputs do
+    = f.select :tic, :required => true, Tic.for_select, :input_html => { :class => "form-control" }
+    = f.input :number, :required => true, :input_html => { :class => "form-control" }
+    = f.input :chairman, :required => true, :input_html => { :class => "form-control" }
+    = f.input :electors_number, :required => true, :input_html => { :class => "form-control" }
+    = f.input :phone, :input_html => { :class => "form-control" }
+    = f.input :note, :as => :text, :input_html => { :class => "form-control" }
+
+    = f.semantic_fields_for :addresses do |a|
+      = a.inputs :name => "Адрес" do
+        = a.input :post_code, :input_html => { :class => "form-control" }
+        = a.input :region_id, :as => :select, :collection => Region.all
+        = a.input :district_id, :as => :select, :collection => District.all
+        = a.input :city_id, :as => :select, :collection => City.all
+        = a.input :address_line, :input_html => { :class => "form-control" }
+        = a.input :lat, :as => :hidden
+        = a.input :lng, :as => :hidden
+        %input{:type => "button", :value => "Найти адрес на карте", :id => "find_address", :class => "btn btn-default btn-sm", |
+          :data => {"form-name" => "uic"} } |
+
+      #map_container
+        #map
+
+  = f.buttons do
+    = f.commit_button "Сохранить", :button_html => { :class => "btn btn-default btn-sm" }
+    %li{:class=>"link"}
+      или
+      = link_to 'Вернуться', uics_path
+
+:javascript
+  function init_point() {
+    init_point_("uic");
+  }

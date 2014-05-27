@@ -1,0 +1,48 @@
+- title("Просмотр #{Uic.model_name.human.mb_chars.downcase}")
+- javascript_include_yandex_map_api
+
+%h1.page-header= "Просмотр #{Uic.model_name.human.mb_chars.downcase}"
+
+.show
+  %ul
+    %li
+      .label= Uic.human_attribute_name(:tic)
+      = @UIC.tic
+    %li
+      .label= Uic.human_attribute_name(:number)
+      = @UIC.number
+    %li
+      .label= Uic.human_attribute_name(:chairman)
+      = @UIC.chairman
+    %li
+      .label= Uic.human_attribute_name(:electors_number)
+      = @UIC.electors_number
+    %li
+      .label= Uic.human_attribute_name(:phone)
+      = @UIC.phone
+
+    %li
+      .label= Uic.human_attribute_name(:address)
+      = @UIC.full_address if @uic_address
+
+      #map_container
+        #map
+
+    %li
+      .label= Uic.human_attribute_name(:note)
+      = @UIC.note
+
+  .buttons
+    = link_to 'Вернуться', uics_path
+
+:javascript
+  function init_point() {
+    lat = #{@uic_address.lat if @uic_address};
+    lng = #{@uic_address.lng if @uic_address};
+    var point = new YMaps.GeoPoint(lat, lng);
+    placemark.setOptions({draggable: false});
+    placemark.setGeoPoint(point);
+    //placemark.name = "#{@tic}";
+    map.setCenter(point, 12);
+  }
+
