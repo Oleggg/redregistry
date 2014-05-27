@@ -1,0 +1,54 @@
+- title("Просмотр #{Member.model_name.human.mb_chars.downcase}")
+- javascript_include_yandex_map_api
+
+%h1.page-header= "Просмотр #{Member.model_name.human.mb_chars.downcase}"
+
+.show
+  %ul
+    %li
+      .label= Member.human_attribute_name(:full_name)
+      = @member.full_name
+    %li
+      .label= Member.human_attribute_name(:entry_date)
+      = @member.entry_date
+    %li
+      .label= Member.human_attribute_name(:mission)
+      = @member.mission
+    %li
+      .label= Member.human_attribute_name(:membershipcard_number)
+      = @member.membershipcard_number
+    %li
+      .label= Member.human_attribute_name(:honors)
+      = @member.honors
+
+    %li
+      .label= Member.human_attribute_name(:address)
+      = @member_address.full_address if @member_address
+
+      #map_container
+        #map
+
+    %li
+      .label= "Подписчики:"
+      - @member.subscribers.each do |subscriber|
+        = subscriber.person.full_name
+        = "&nbsp;".html_safe
+
+    %li
+      .label= Member.human_attribute_name(:note)
+      = @member.note
+
+  .buttons
+    = link_to 'Вернуться', members_path
+
+:javascript
+  function init_point() {
+    lat = #{@member_address.lat if @member_address};
+    lng = #{@member_address.lng if @member_address};
+    var point = new YMaps.GeoPoint(lat, lng);
+    placemark.setOptions({draggable: false});
+    placemark.setGeoPoint(point);
+    //placemark.name = "#{@member}";
+    map.setCenter(point, 12);
+  }
+

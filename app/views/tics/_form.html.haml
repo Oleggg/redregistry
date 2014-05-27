@@ -1,0 +1,84 @@
+- javascript_include_yandex_map_api
+
+= semantic_form_for @member, :class => "form" do |f|
+  = f.inputs do
+    = f.input :last_name, :required => true, :input_html => { :class => "form-control" }
+    = f.input :first_name, :required => true, :input_html => { :class => "form-control" }
+    = f.input :middle_name, :required => true, :input_html => { :class => "form-control" }
+    = f.input :region_committee_id, :as => :select, :collection => RegionCommittee.for_select
+    = f.input :mission, :as => :text, :input_html => { :class => "form-control" }
+    = f.label :entry_date, :input_html => { :class => "form-control" }
+    = f.text_field :entry_date, :class => "datepick_im",:size => 9, :required => true
+    = f.input :membershipcard_number, :input_html => { :class => "form-control" }
+    = f.input :phone, :input_html => { :class => "form-control" }
+    = f.input :post, :input_html => { :class => "form-control" }
+    = f.input :honors, :as => :text, :input_html => { :class => "form-control" }
+    = f.input :party_post, :input_html => { :class => "form-control" }
+    = f.input :is_distributor, :default => 0
+    = f.input :note, :as => :text, :input_html => { :class => "form-control" }
+
+    = f.semantic_fields_for :addresses do |a|
+      = a.inputs :name => "Адрес" do
+        = a.input :post_code, :input_html => { :class => "form-control" }
+        = a.input :region_id, :as => :select, :collection => Region.all
+        = a.input :district_id, :as => :select, :collection => District.all
+        = a.input :city_id, :as => :select, :collection => City.all
+        = a.input :address_line, :input_html => { :class => "form-control" }
+        = a.input :lat, :as => :hidden
+        = a.input :lng, :as => :hidden
+        %input{:type => "button", :value => "Найти адрес на карте", :id => "find_address", :class => "btn btn-default btn-sm", |
+          :data => {"form-name" => "member"} } |
+
+      #map_container
+        #map
+
+    %li
+      - if @member.photo_file_name
+        = link_to(image_tag(@member.photo.url(:thumb)), @member.photo.url(:resized), :rel => "lightbox" )
+      - else
+        = image_tag("/photos/thumb/missing.png")
+
+    = f.input :photo, :as => :file
+    
+
+  = f.buttons do
+    = f.commit_button "Сохранить", :button_html => { :class => "btn btn-default btn-sm" }
+    %li{:class=>"link"}
+      или
+      = link_to 'Вернуться', members_path
+
+:javascript
+  function init_point() {
+    init_point_("member");
+  }
+
+:javascript 
+  $(document).ready(function() {
+      $(".datepick").datepicker('option', 'changeYear', true);
+      $.datepicker.regional['ru'] = {
+        closeText: 'Закрыть',
+        prevText: '&#x3c;Пред',
+        nextText: 'След&#x3e;',
+        currentText: 'Сегодня',
+        monthNames: ['Январь','Февраль','Март','Апрель','Май','Июнь',
+        'Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'],
+        monthNamesShort: ['Янв','Фев','Мар','Апр','Май','Июн',
+        'Июл','Авг','Сен','Окт','Ноя','Дек'],
+        dayNames: ['воскресенье','понедельник','вторник','среда','четверг','пятница','суббота'],
+        dayNamesShort: ['вск','пнд','втр','срд','чтв','птн','сбт'],
+        dayNamesMin: ['Вс','Пн','Вт','Ср','Чт','Пт','Сб'],
+        weekHeader: 'Не',
+        dateFormat: 'dd.mm.yy',
+        firstDay: 1,
+        isRTL: false,
+        showMonthAfterYear: false,
+        yearSuffix: ''};
+      $.datepicker.setDefaults($.datepicker.regional['ru']);
+      $(".datepick_im").datepicker({  
+        showOn: 'both',
+        buttonImage: "#{image_path("calendar.gif")}", 
+        buttonImageOnly: true,
+        changeYear: true
+      });
+  });
+
