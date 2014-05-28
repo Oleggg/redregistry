@@ -83,8 +83,9 @@ class ApplicationController < ActionController::Base
             {:title => "Члены КПРФ (#{Member.count})", :url => members_path},
             {:title => "Избирательные округа (#{ElectoralDistrict.count})", :url => electoral_districts_path},
             #{:title => "Архив (#{Card.archived_count})", :url => archive_path },
-            {:title => "УИКи ()", :url => '#'},
-            {:title => "ТИКи ()", :url => '#'},
+            {:title => "Избирательные комиссии", :url => uics_path},
+            #{:title => "УИКи ()", :url => '#'},
+            #{:title => "ТИКи ()", :url => '#'},
           ]},
         ]
 

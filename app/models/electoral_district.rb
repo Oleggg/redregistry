@@ -9,8 +9,10 @@ class ElectoralDistrict < ActiveRecord::Base
 
   scope :sorted, order("number")
 
-  def self.elections_level_for_select
-    [:national, :regional, :local].collect {|s| [I18n.t("electoral_districts.elections_level.#{s}"), ELECTIONS_LEVEL[s]] }
+  def self.elections_level_for_select(options = {:include_blank => false})
+    o = [:national, :regional, :local].collect {|s| [I18n.t("electoral_districts.elections_level.#{s}"), ELECTIONS_LEVEL[s]] }
+    o = [['', nil]] + o if options[:include_blank]
+    o
   end
 
   def elections_level_for_display

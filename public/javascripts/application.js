@@ -27,7 +27,7 @@ function init_point_(form_name) {
   });
 }
 
-function initialize_map() {
+function initialize_map_v1() {
   var m = document.getElementById("map")
   if(m == null) return;
 
@@ -49,6 +49,64 @@ function initialize_map() {
   init_point();
 }
 
+function initialize_map() { // API v2.0
+  var m = document.getElementById("map")
+  if(m == null) return;
+
+  //map = new YMaps.Map(m);
+  map = new ymaps.Map(m, {
+        // Центр карты
+        //center: [45.018662 , 53.195097],
+        //center: [ 45.018181, 53.194546 ],
+        //center: [55.76, 37.64],
+        center: [45.019, 53.194],
+        // Коэффициент масштабирования
+        zoom: 10,
+        // Тип карты
+        type: "yandex#map"
+    }
+  );
+
+  /*var zoom = new YMaps.Zoom();
+  var typeControl = new YMaps.TypeControl();
+  var scaleLine = new YMaps.ScaleLine();
+  map.addControl(zoom);
+  map.addControl(typeControl);
+  map.addControl(scaleLine);*/
+
+  map.controls.add("mapTools")
+    .add("zoomControl")
+    .add("typeSelector");
+
+  /*penza_center = new YMaps.GeoPoint(45.018662, 53.195097);
+  map.setCenter(penza_center, 12);*/
+  //penza_center = [45.018662, 53.195097];
+  penza_center = [45.019, 53.194];
+
+  //placemark = new YMaps.Placemark(penza_center, {draggable: true});
+  //map.addOverlay(placemark);
+
+  var placemark = new ymaps.Placemark(
+        penza_center, {
+            /* Свойства метки:
+               - контент значка метки */
+            iconContent: "Пенза",
+            // - контент балуна метки
+            balloonContent: "Столица П. области"
+        }, {
+            /* Опции метки:
+               - флаг перетаскивания метки */
+            draggable: true,
+            /* - показывать значок метки 
+               при открытии балуна */
+            hideIconOnBalloonOpen: false
+        }
+    );
+  map.geoObjects.add(placemark);
+
+  init_point();
+}
+
 $(document).ready(function() {
   $("#tabs").tabs();
 
@@ -60,7 +118,9 @@ $(document).ready(function() {
     }
   );
 
-  initialize_map();
+  ymaps.ready(function () {
+    initialize_map();
+  });
 
   $("#find_address").live("click", function() {
     form_name = $(this).attr('data-form-name');

@@ -24,7 +24,7 @@
     %tr
       %td= rcommittee.id
       %td= rcommittee.first_secretary
-      %td= rcommittee.city_district.name
+      %td= rcommittee.city_district.name if rcommittee.city_district
       %td= rcommittee.addresses.first.full_address if rcommittee.addresses.first
       %td= rcommittee.note
       %td= link_to 'Просмотр', region_committee_path(rcommittee)

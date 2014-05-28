@@ -1,4 +1,4 @@
-уru:
+ru:
   activerecord:
     models:
       address: "Адреса"
@@ -104,6 +104,7 @@
         note: "Примечание"
       uic:
         id: "#"
+        tic_id: "ТИК"
         number: "Номер"
         chairman: "Председатель"
         note: "Примечание"

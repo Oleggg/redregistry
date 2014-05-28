@@ -4,7 +4,8 @@ module ApplicationHelper
   end
 
   def javascript_include_yandex_map_api
-    content_for(:yandex_maps_api) { javascript_include_tag "http://api-maps.yandex.ru/1.1/index.xml?key=#{Settings.key}" }
+    #content_for(:yandex_maps_api) { javascript_include_tag "http://api-maps.yandex.ru/1.1/index.xml?key=#{Settings.key}" } # API v1.0
+    content_for(:yandex_maps_api) { javascript_include_tag "http://api-maps.yandex.ru/2.0/?load=package.standard&mode=debug&lang=ru-RU" } # API v2.0
   end
 
   def link_to_remove_fields(name, f)

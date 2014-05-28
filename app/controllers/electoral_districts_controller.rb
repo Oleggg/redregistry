@@ -8,10 +8,11 @@ class ElectoralDistrictsController < BaseController
     electoral_districts = ElectoralDistrict.scoped
 
     if params[:elections_level] && !params[:elections_level].empty?
-      electoral_districts = electoral_districts.where(:name => "#{params[:elections_level]}")
+      electoral_districts = electoral_districts.where(:level => params[:elections_level])
+      @electoral_districts = electoral_districts.scoped.paginate(:page => @page)
     end
 
-    @electoral_districts = electoral_districts.scoped.paginate(:page => @page)
+    #@electoral_districts = electoral_districts.scoped.paginate(:page => @page)
 
   end
 

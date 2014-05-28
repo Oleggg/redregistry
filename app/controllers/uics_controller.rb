@@ -5,7 +5,10 @@ class UicsController < BaseController
   def index
     @page = params[:page] || 1
     uics = Uic.scoped
-    @UICs = uics.scoped.paginate(:page => @page)
+    if params[:tic] && !params[:tic].empty?
+      uics = uics.where(:tic_id => params[:tic])
+      @UICs = uics.scoped.paginate(:page => @page)
+    end
   end
 
   def new
@@ -15,7 +18,7 @@ class UicsController < BaseController
       # по умолчанию ставим точку на площадь Ленина
       @UIC_address.lat = 45.018662
       @UIC_address.lng = 53.195097
-      @UIC.addresses.build
+      #@UIC.addresses.build
   end
 
   def edit

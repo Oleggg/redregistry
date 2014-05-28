@@ -6,9 +6,10 @@
   = form_tag electoral_districts_path, :method => :get do
     = hidden_field_tag :page, @page
     %h3 Поиск
-    = ElectoralDistrict.human_attribute_name(:number)
-    = text_field_tag "name", params[:number], :size => 10
-    = select_tag "elections_level",  options_for_select(ElectoralDistrict.elections_level_for_select()) 
+    -# = ElectoralDistrict.human_attribute_name(:number)
+    -# = text_field_tag "name", params[:number], :size => 10
+    = ElectoralDistrict.human_attribute_name(:elections_level)
+    = select_tag "elections_level",  options_for_select(ElectoralDistrict.elections_level_for_select(:include_blank => true), params[:elections_level]) 
     = submit_tag "Найти", :name => :search, :class => "btn btn-default btn-sm"
 
 %table
@@ -19,17 +20,19 @@
     %th= ElectoralDistrict.human_attribute_name(:note)
     %th{:colspan=>"4"}
 
-  - @electoral_districts.each do |electoral_district|
-    %tr
-      %td= electoral_district.id
-      %td= electoral_district.number
-      %td= electoral_district.name
-      %td= electoral_district.note
-      %td= link_to 'Просмотр', electoral_district_path(electoral_district)
-      %td= link_to 'Изменить', edit_electoral_district_path(electoral_district)
-      %td= link_to 'Удалить', electoral_district, :confirm => 'Вы уверены?', :method => :delete
+  - if @electoral_districts
+    - @electoral_districts.each do |electoral_district|
+      %tr
+        %td= electoral_district.id
+        %td= electoral_district.number
+        %td= electoral_district.name
+        %td= electoral_district.note
+        %td= link_to 'Просмотр', electoral_district_path(electoral_district)
+        %td= link_to 'Изменить', edit_electoral_district_path(electoral_district)
+        %td= link_to 'Удалить', electoral_district, :confirm => 'Вы уверены?', :method => :delete
 
-= will_paginate @electoral_districts
+  - if @electoral_districts
+    = will_paginate @electoral_districts
 
 = link_to 'Добавить', new_electoral_district_path
 
