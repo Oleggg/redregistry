@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140526102902) do
+ActiveRecord::Schema.define(:version => 20140527233603) do
 
   create_table "accommodations", :force => true do |t|
     t.string   "name"
@@ -262,11 +262,12 @@ ActiveRecord::Schema.define(:version => 20140526102902) do
   end
 
   create_table "electoral_districts", :force => true do |t|
-    t.integer  "number",     :null => false
+    t.integer  "number",        :null => false
     t.string   "name"
     t.text     "note"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "shipping_type"
   end
 
   create_table "employment_types", :force => true do |t|
@@ -544,6 +545,17 @@ ActiveRecord::Schema.define(:version => 20140526102902) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "code",        :limit => 8
+  end
+
+  create_table "uics", :force => true do |t|
+    t.integer  "number",          :null => false
+    t.integer  "tic_id",          :null => false
+    t.string   "chairman"
+    t.integer  "electors_number"
+    t.string   "phone"
+    t.text     "note"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "unregistration_causes", :force => true do |t|

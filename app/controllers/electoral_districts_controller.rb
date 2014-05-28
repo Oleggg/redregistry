@@ -5,8 +5,11 @@ class ElectoralDistrictsController < BaseController
 
   def index
     @page = params[:page] || 1
-    #cards = Card.joins(:person)
     electoral_districts = ElectoralDistrict.scoped
+
+    if params[:elections_level] && !params[:elections_level].empty?
+      electoral_districts = electoral_districts.where(:name => "#{params[:elections_level]}")
+    end
 
     @electoral_districts = electoral_districts.scoped.paginate(:page => @page)
 

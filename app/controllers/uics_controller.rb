@@ -21,7 +21,7 @@ class UicsController < BaseController
   def edit
       @UIC = Uic.find(params[:id])
       @UIC.addresses.build if @UIC.addresses.empty?
-      respond_to do |format|..
+      respond_to do |format|
           format.html
           format.js  #{ render :action => "index" }..
       end
@@ -34,6 +34,17 @@ class UicsController < BaseController
       redirect_to(uics_path, :notice => 'УИК успешно создана.')
     else
       render :action => "new"
+    end
+  end
+
+  def update
+    @UIC = Uic.find(params[:id])
+    uic_params = params[:uic]
+
+    if @UIC.update_attributes(uic_params)
+      redirect_to(uics_path, :notice => 'УИК успешно обновлен.')
+    else
+      render :action => "edit"
     end
   end
 

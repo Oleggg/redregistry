@@ -1,4 +1,4 @@
-ru:
+уru:
   activerecord:
     models:
       address: "Адреса"
@@ -90,6 +90,7 @@ ru:
         address: "Адрес"
       electoral_district:
         id: "#"
+        elections_level: "Уровень выборов"
         number: "Номер"
         name: "Название"
         note: "Примечание"
@@ -345,3 +346,9 @@ ru:
     shipping_type:
       by_post: "почта"
       myself: "собственные силы"
+
+  electoral_districts:
+    elections_level:
+      national: "Общероссийские"
+      regional: "Региональные"
+      local: "Местные"

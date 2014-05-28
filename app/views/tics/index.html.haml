@@ -25,12 +25,11 @@
       %td= tic.id
       %td= tic.name
       %td= tic.chief
-      %td= tic.address
-      %td= tic.addresses.first.full_address if member.addresses.first
+      %td= tic.addresses.first.full_address if tic.addresses.first
       %td= tic.note
-      %td= link_to 'Просмотр', member_path(member)
-      %td= link_to 'Изменить', edit_member_path(member)
-      %td= link_to 'Удалить', member, :confirm => 'Вы уверены?', :method => :delete
+      %td= link_to 'Просмотр', tic_path(tic)
+      %td= link_to 'Изменить', edit_tic_path(tic)
+      %td= link_to 'Удалить', tic, :confirm => 'Вы уверены?', :method => :delete
 
 = will_paginate @TICs
 

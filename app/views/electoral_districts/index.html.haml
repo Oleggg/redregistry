@@ -8,6 +8,7 @@
     %h3 Поиск
     = ElectoralDistrict.human_attribute_name(:number)
     = text_field_tag "name", params[:number], :size => 10
+    = select_tag "elections_level",  options_for_select(ElectoralDistrict.elections_level_for_select()) 
     = submit_tag "Найти", :name => :search, :class => "btn btn-default btn-sm"
 
 %table
