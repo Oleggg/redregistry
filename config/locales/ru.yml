@@ -342,13 +342,13 @@
       udo: "УДО"
       end_of_term: "Конец срока"
 
-  subscribers:
-    shipping_type:
-      by_post: "почта"
-      myself: "собственные силы"
-
   electoral_districts:
     elections_level:
       national: "Общероссийские"
       regional: "Региональные"
       local: "Местные"
+
+  subscribers:
+    shipping_type:
+      by_post: "почта"
+      myself: "собственные силы"

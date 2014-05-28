@@ -262,12 +262,12 @@ ActiveRecord::Schema.define(:version => 20140527233603) do
   end
 
   create_table "electoral_districts", :force => true do |t|
-    t.integer  "number",        :null => false
+    t.integer  "number",     :null => false
     t.string   "name"
     t.text     "note"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "shipping_type"
+    t.integer  "level"
   end
 
   create_table "employment_types", :force => true do |t|

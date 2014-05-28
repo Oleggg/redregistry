@@ -2,6 +2,7 @@
 
 = semantic_form_for @electoral_district do |f|
   = f.inputs do
+    = f.input :level, :as => :select, :collection => ElectoralDistrict.elections_level_for_select()
     = f.input :number, :required => true, :input_html => { :class => "form-control" }
     = f.input :name, :input_html => { :class => "form-control" }
     = f.input :note, :as => :text, :input_html => { :class => "form-control" }
