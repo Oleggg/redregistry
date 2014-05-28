@@ -8,6 +8,8 @@
       region_committee: "Райком КПРФ"
       member: "Члены КПРФ"
       electoral_district: "Избирательные округа"
+      tic: "ТИКи"
+      uic: "УИКи"
       eventlog: "Журнал событий"
       friend: "Друзья"
       inspector: "Инспекторы"
@@ -73,7 +75,7 @@
         porch_num: "Число подъездов"
         house_problems: "Проблемы дома"
         address: "Адрес"
-        electoral_district: "Избирательный округ"
+        electoral_district_id: "Избирательный округ"
       subscriber:
         id: "#"
         person_id: "Подписчик"
@@ -95,6 +97,16 @@
         name: "Название"
         note: "Примечание"
         house: "Дома"
+      tic:
+        id: "#"
+        name: "Название"
+        chief: "Руководитель"
+        note: "Примечание"
+      uic:
+        id: "#"
+        number: "Номер"
+        chairman: "Председатель"
+        note: "Примечание"
       member:
         id: "#"
         first_name: "Имя"
