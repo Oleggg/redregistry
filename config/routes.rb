@@ -108,6 +108,7 @@ Bigbrother::Application.routes.draw do |map|
   resource :user_session
 
   #root :to => "cards#index"
-  root :to => "people#index"
+  #root :to => "people#index"
+  root :to => "front#index"
 end
 

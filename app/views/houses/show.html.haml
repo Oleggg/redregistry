@@ -32,13 +32,29 @@
 
 :javascript
   function init_point() {
-    //lat = #{@house_address.lat if @house_address};
-    //lng = #{@house_address.lng if @house_address};
+    lat = #{@house_address.lat if @house_address};
+    lng = #{@house_address.lng if @house_address};
     //var point = new YMaps.GeoPoint(lat, lng);
     //placemark.setOptions({draggable: false});
     //placemark.setGeoPoint(point);
     //placemark.name = "#{@house.description}";
     //placemark.description = "Подписчиков: #{@house.subscribers_count}";
     //map.setCenter(point, 12);
+
+    var placemark = new ymaps.Placemark(
+        [lng, lat], {
+            /* Свойства метки:
+               - контент значка метки */
+            iconContent: "#{@house.subscribers_count}",
+            balloonContent: "#{@house.description} <br /> Подписчиков: #{@house.subscribers_count}"
+        }, {
+            draggable: true,
+            /* - показывать значок метки 
+               при открытии балуна */
+            hideIconOnBalloonOpen: true
+        }
+    );
+    map.geoObjects.add(placemark);
+
   }
 

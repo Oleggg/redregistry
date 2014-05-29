@@ -247,6 +247,7 @@ ul.mainmenu li a:hover {
 }
 
 /* --------------------------- */
+h1 { margin-top: 20px; }
 h1.header {
     border-bottom: 1px solid red;
     margin-bottom: 15px;
@@ -262,3 +263,30 @@ input{
     min-height: 2.2em;
     border: 1px solid #CCCCCC;
 }
+.section{
+    padding: 2em
+    min-height: 200px;
+    background: #fff;
+}
+.gray-block{
+    background: #eee;
+    min-height: 200px;
+}
+.red-block{
+    margin: 1em;
+    padding: 1em;
+    min-height: 100px;
+    color: #fff;
+    background: #D62E2E;
+}
+.red-block #map {
+  width: 500px;
+  height: 250px;
+}
+.red-text-block{
+    padding: 1em;
+    color: #fff;
+    background: #D62E2E;
+}
+
+

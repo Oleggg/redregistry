@@ -5,6 +5,7 @@ class FrontController < BaseController
     #uics = Uic.scoped
     #@UICs = uics.scoped.paginate(:page => @page)
     @total_subscribers = Subscriber.count
+    @electoral_districts = ElectoralDistrict.scoped
     @houses = House.scoped
     @electoral_districts = ElectoralDistrict.scoped
     @region_committees = RegionCommittee.scoped

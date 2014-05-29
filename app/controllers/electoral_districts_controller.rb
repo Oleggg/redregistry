@@ -12,7 +12,7 @@ class ElectoralDistrictsController < BaseController
       @electoral_districts = electoral_districts.scoped.paginate(:page => @page)
     end
 
-    #@electoral_districts = electoral_districts.scoped.paginate(:page => @page)
+    @electoral_districts = electoral_districts.scoped.paginate(:page => @page)
 
   end
 

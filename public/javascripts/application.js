@@ -53,56 +53,57 @@ function initialize_map() { // API v2.0
   var m = document.getElementById("map")
   if(m == null) return;
 
-  //map = new YMaps.Map(m);
-  map = new ymaps.Map(m, {
-        // Центр карты
+  //map = new YMaps.Map(m); // API v1.0
+  map = new ymaps.Map(m, {  // API v2.0
         //center: [45.018662 , 53.195097],
         //center: [ 45.018181, 53.194546 ],
         //center: [55.76, 37.64],
-        center: [45.019, 53.194],
-        // Коэффициент масштабирования
-        zoom: 10,
-        // Тип карты
+        //center: [45.019, 53.194],
+        center: [ 53.194, 45.019 ],
+        zoom: 11,
         type: "yandex#map"
     }
   );
 
+  // API v1.0
   /*var zoom = new YMaps.Zoom();
   var typeControl = new YMaps.TypeControl();
   var scaleLine = new YMaps.ScaleLine();
   map.addControl(zoom);
   map.addControl(typeControl);
   map.addControl(scaleLine);*/
-
+  // API v2.0
   map.controls.add("mapTools")
     .add("zoomControl")
     .add("typeSelector");
 
+  // API v1.0
   /*penza_center = new YMaps.GeoPoint(45.018662, 53.195097);
   map.setCenter(penza_center, 12);*/
   //penza_center = [45.018662, 53.195097];
-  penza_center = [45.019, 53.194];
-
+  penza_center = [45.019529,53.194546];
+  // API v1.0
   //placemark = new YMaps.Placemark(penza_center, {draggable: true});
   //map.addOverlay(placemark);
 
-  var placemark = new ymaps.Placemark(
+  // API v2.0
+  /*var placemark = new ymaps.Placemark(
         penza_center, {
             /* Свойства метки:
-               - контент значка метки */
+               - контент значка метки *
             iconContent: "Пенза",
             // - контент балуна метки
             balloonContent: "Столица П. области"
         }, {
             /* Опции метки:
-               - флаг перетаскивания метки */
+               - флаг перетаскивания метки *
             draggable: true,
             /* - показывать значок метки 
-               при открытии балуна */
+               при открытии балуна *
             hideIconOnBalloonOpen: false
         }
-    );
-  map.geoObjects.add(placemark);
+    );*/
+  //map.geoObjects.add(placemark);
 
   init_point();
 }
@@ -126,7 +127,8 @@ $(document).ready(function() {
     form_name = $(this).attr('data-form-name');
     city = $("#"+form_name+"_addresses_attributes_0_city_id option:selected").text();
     address_line = $("#"+form_name+"_addresses_attributes_0_address_line").val();
-    var geocoder = new YMaps.Geocoder(city + " " + address_line);
+    // API v1.0
+    /*var geocoder = new YMaps.Geocoder(city + " " + address_line);
     YMaps.Events.observe(geocoder, geocoder.Events.Load, function () {
       if (this.length()) {
         var point = this.get(0).getGeoPoint();
@@ -137,7 +139,40 @@ $(document).ready(function() {
       } else {
         alert("Адрес не найден.")
       }
-    });
+    });*/
+
+    // API v2.0
+    var geocoder = ymaps.geocode(
+        (city + " " + address_line) , { }
+    );
+    geocoder.then(
+        function (res) {
+            //map.geoObjects.add(res.geoObjects);
+            if (res.geoObjects.getLength()) {
+                var point = res.geoObjects.get(0);
+                map.geoObjects.add(point);
+                map.panTo(point.geometry.getCoordinates());
+                lng = point.geometry.getCoordinates()[0];
+                lat = point.geometry.getCoordinates()[1];
+                var placemark = new ymaps.Placemark(
+                    [lng, lat], {
+                        //iconContent: "#{house.subscribers_count}",
+                        //balloonContent: "#{house.description} <br /> Подписчиков: #{house.subscribers_count}"
+                    }, {
+                        draggable: false,
+                        hideIconOnBalloonOpen: true
+                    }
+                );
+                map.geoObjects.add(placemark);
+                $("#"+form_name+"_addresses_attributes_0_lat").val(lat);
+                $("#"+form_name+"_addresses_attributes_0_lng").val(lng);
+            }
+        },
+        function (error) {
+            alert("Адрес не найден.");
+        }
+    );
+
   });
 
 /*  $('.select_checkbox').each.change() {
