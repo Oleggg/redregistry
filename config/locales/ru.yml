@@ -104,9 +104,12 @@ ru:
         note: "Примечание"
       uic:
         id: "#"
-        tic_id: "ТИК"
+        tic: "ТИК"
         number: "Номер"
         chairman: "Председатель"
+        electors_number: "Число избирателей"
+        phone: "Телефон"
+        address: "Адрес"
         note: "Примечание"
       member:
         id: "#"
