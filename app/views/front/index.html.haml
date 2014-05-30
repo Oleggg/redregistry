@@ -8,12 +8,18 @@
         -#.red-text-block
         -#  %h1="Всего подписчиков:"
         -#  %h2= @total_subscribers
-        %h1= "Райкомы КПРФ: #{RegionCommittee.count}"
-        %h3= RegionCommittee.count
-        %h1= "Избирательные округа:"
-        %h3= ElectoralDistrict.count
-        %h1= "Избирательные комиссии: "
-        %h3= Uic.count
+        .bordered-text-block
+          -#%h1= "Райкомы КПРФ: #{RegionCommittee.count}"
+          %h1= "Райкомы КПРФ:"
+          - @region_committees.each do |region_committee|
+            %h3= "#{region_committee.note}"
+            -#%h3= "#{region_committee.addresses.first.full_address if region_committee.addresses.first}"
+          %h1= "Избирательные округа:"
+          - @electoral_districts.each do |electoral_district|
+            %h3= "#{electoral_district.name}"
+          %h1= "Избирательные комиссии: "
+          - @uics.each do |uic|
+            %h3= "#{uic.note}"
       .col-sm-6
         .red-block
           -# %h1= "Всего подписчиков:"
@@ -44,11 +50,11 @@
       });
 
 
-.section
-  .container
-    .row
-      .span12
-        %b= " "
+-#.section
+-#  .container
+-#    .row
+-#      .span12
+-#        %b= " "
 
 .section.gray-block
   .container

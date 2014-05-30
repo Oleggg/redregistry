@@ -264,7 +264,9 @@ input{
     border: 1px solid #CCCCCC;
 }
 .section{
-    padding: 2em
+    /*padding: 2em;*/
+    padding-bottom: 3em;
+    padding-top: 3em;
     min-height: 200px;
     background: #fff;
 }
@@ -273,7 +275,7 @@ input{
     min-height: 200px;
 }
 .red-block{
-    margin: 1em;
+    /*margin: 1em;*/
     padding: 1em;
     min-height: 100px;
     color: #fff;
@@ -288,5 +290,9 @@ input{
     color: #fff;
     background: #D62E2E;
 }
-
+.bordered-text-block {
+  border: 1px solid #CCCCCC;
+  color: #777777;
+  padding: 1em 3em;
+}
 

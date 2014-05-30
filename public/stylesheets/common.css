@@ -13,7 +13,7 @@
 /* Common styles end */
 
 /* Common pagination and errors */
-.flash {font-weight: bold; padding: 5px; margin: 10px 10px 0px 0px;}
+.flash {font-weight: bold; padding: 5px; margin: 10px 10px 0px 0px; /* NEW */ margin: 0 auto 5px; max-width: 390px;}
 .error {background-color: #FAA; border: solid 2px red;}
 .warning {background-color: #FFA; border: solid 2px yellow;}
 .notice {background-color: #AFA; border: solid 2px green;}

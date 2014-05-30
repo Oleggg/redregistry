@@ -9,6 +9,7 @@ class FrontController < BaseController
     @houses = House.scoped
     @electoral_districts = ElectoralDistrict.scoped
     @region_committees = RegionCommittee.scoped
+    @uics = Uic.scoped
     #@graph
 
     render :layout => "front"
