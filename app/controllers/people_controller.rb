@@ -125,24 +125,30 @@ class PeopleController < BaseController
     redirect_to(people_path)
   end
 
-  def parse(file)
+  def parse(file, street_name)
     #list = IO.readlines("#{Rails.root}/public/system/data/tenants.txt")
     #list = IO.readlines(file)
     list = IO.readlines("#{Rails.root}/public/uploads/#{file}")
     puts list.inspect
     #list = IO.read file
 
+    puts "# Search street #{street_name}"
+    street = Street.find_or_create_by_name(street_name.to_s)
+    puts "# Street " + street.inspect
+
     #new_house = House.create(:description => "#{file}" )
     puts "HOUSE #{file.to_i}"
     house_name = File.basename("#{Rails.root}/public/uploads/#{file}", ".csv")
     puts "HOUSE #{house_name}"
     new_house = House.find_or_create_by_number(house_name.to_i)
-    new_house.description = "#{house_name}"
+    new_house.street_id = street.id
+    new_house.description = "Дом № #{house_name}"
     new_house.save!
     puts new_house.inspect
     list.each_with_index do |s,i|
       person = s.split(";")
       puts person.inspect
+      if not person[0].to_s.empty?
       #person.each {|a| a.delete("\"") }
       #person.collect{|p| p.delete("\"") }
       #person.each do |p|
@@ -166,7 +172,19 @@ class PeopleController < BaseController
       #puts "----------# New tenant - #{new_tenant.id}"
       new_tenant = Person.create(:apartment_num => "#{person[0]}", :first_name => "#{person[2]}", :last_name => "#{person[1]}", :middle_name => "#{person[3]}", :birthday => "#{person[4]}", :birthyear => "#{person[4]}", :house_id => new_house.id)
       puts "# New tenant - #{new_tenant.inspect}"
+      new_subscriber = Subscriber.new
+      new_subscriber.person_id = new_tenant.id
+      puts "# NOW datetime #{DateTime.now.strftime('%d-%m-%Y')}"
+      new_subscriber.subscription_date = DateTime.now.strftime('%d-%m-%Y')
+      new_subscriber.is_subscribed = 1
+      new_subscriber.total_subscribers = Subscriber.count
+      new_subscriber.shipping_type = 2
+      new_subscriber.save!
+      puts "# New subscriber - #{new_subscriber.inspect}"
+      #puts "# New tenant - #{new_tenant.inspect}"
+
       #Address.create(:address_line => "#{person[4]}", :addressable_type => "Person", :addressable_id => "#{new_tenant.id}" )
+      end
     end
   end
 
@@ -174,12 +192,13 @@ class PeopleController < BaseController
     excel_file = params[:file]
     if params[:file]
       #puts excel_file.inspect
+      street = params[:street]['street']
       uploaded_io = params[:file]['file']
       puts uploaded_io.inspect
       File.open(Rails.root.join('public', 'uploads', uploaded_io.original_filename), 'wb') do |file|
         file.write(uploaded_io.read)
       end
-      parse(uploaded_io.original_filename)
+      parse(uploaded_io.original_filename, street)
       #require 'fastercsv'
       #FasterCSV.foreach(Rails.root.join('public', 'uploads', uploaded_io.original_filename), :headers => true) do |fcsv_obj|
       #FasterCSV.foreach(Rails.root.join('public', 'uploads', uploaded_io.original_filename),  :col_sep => ";" ) do |fcsv_obj|
@@ -220,7 +239,7 @@ class PeopleController < BaseController
        path = params[:file]
        #params['event']['filename']
        #puts "# Uploading #{params['event']['filename']} ..."
-       flash[:notice] = "Импорт жильцов завершен."
+       flash[:notice] = "Импорт подписчиков завершен."
     end
     #puts "# Uploading #{excel_file} ..."
     #if excel_file

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140527233603) do
+ActiveRecord::Schema.define(:version => 20140530161939) do
 
   create_table "accommodations", :force => true do |t|
     t.string   "name"
@@ -343,6 +343,7 @@ ActiveRecord::Schema.define(:version => 20140527233603) do
     t.string  "house_problems"
     t.integer "number"
     t.integer "electoral_district_id"
+    t.integer "street_id"
   end
 
   create_table "inspectors", :force => true do |t|

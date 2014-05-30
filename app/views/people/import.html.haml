@@ -1,10 +1,12 @@
-- title("Импорт #{Person.model_name.human.mb_chars.downcase}")
+- title("Импорт #{Subscriber.model_name.human.mb_chars.downcase}")
 
-%h1= "Импорт #{Person.model_name.human.mb_chars.downcase}"
+%h1= "Импорт #{Subscriber.model_name.human.mb_chars.downcase}"
 
 
 = form_tag(people_import_path, :multipart => true)  do
   %br
+  = label :street, "Улица"
+  = text_field :street, 'street'
   = file_field :file, 'file'
   = submit_tag "Загрузить"
 

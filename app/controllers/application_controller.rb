@@ -149,7 +149,7 @@ class ApplicationController < ActionController::Base
             {:title => "Улицы (#{Street.count})", :url => vocabularies_streets_path},
           ]},
           {:title => 'Импорт', :items => [
-            {:title => "Импорт жителей", :url => people_import_path},
+            {:title => "Импорт подпсичиков", :url => people_import_path},
             {:title => "Импорт округов", :url => electoral_districts_import_path},
           ]},
         ]
