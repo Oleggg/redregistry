@@ -21,18 +21,49 @@
   .buttons
     = link_to 'Вернуться', region_committees_path
 
+- @rcommittee.members.each do |member|
+  - #= member.full_name
+  :javascript
+    $(document).ready(function() {
+      ymaps.ready(function () {
+        var lat = "#{member.addresses.first.lat if member.addresses.first}";
+        var lng = "#{member.addresses.first.lng if member.addresses.first}";
+        var placemark = new ymaps.Placemark(
+          [lng, lat], {
+              //iconContent: "{house.subscribers_count}",
+              balloonContent: "Член КПРФ <br /> #{member.last_name} #{member.first_name} #{member.middle_name}",
+          }, { draggable: true, hideIconOnBalloonOpen: true, preset: 'twirl#redIcon' }
+        );
+        map.geoObjects.add(placemark);
+      });
+    });
+
 - @rcommittee.district.houses.each do |house|
   = house.description
   - house.subscribers.each do |sub|
-    %p= sub.person.full_name
+    - #%p= sub.person.full_name
+    :javascript
+      $(document).ready(function() {
+        ymaps.ready(function () {
+          var lat = "#{sub.person.house.addresses.first.lat if sub.person.house.addresses.first}";
+          var lng = "#{sub.person.house.addresses.first.lng if sub.person.house.addresses.first}";
+          var placemark = new ymaps.Placemark(
+            [lng, lat], {
+                //iconContent: "#{house.subscribers_count}",
+                balloonContent: "Подписчик <br />#{sub.person.full_name} <br /> #{sub.person.house.description}"
+            }, { draggable: true, hideIconOnBalloonOpen: true },{ preset: 'twirl#redIcon' }
+          );
+          map.geoObjects.add(placemark);
+        });
+      });
 
 :javascript
   function init_point() {
-    lat = #{@rcommittee_address.lat if @rcommittee_address};
-    lng = #{@rcommittee_address.lng if @rcommittee_address};
-    var point = new YMaps.GeoPoint(lat, lng);
-    placemark.setOptions({draggable: false});
-    placemark.setGeoPoint(point);
-    map.setCenter(point, 12);
+    //lat = #{@rcommittee_address.lat if @rcommittee_address};
+    //lng = #{@rcommittee_address.lng if @rcommittee_address};
+    //var point = new YMaps.GeoPoint(lat, lng);
+    //placemark.setOptions({draggable: false});
+    //placemark.setGeoPoint(point);
+    //map.setCenter(point, 12);
   }
 

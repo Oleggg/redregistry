@@ -7,6 +7,10 @@ class RegionCommitteesController < BaseController
     @page = params[:page] || 1
     rcommittees = RegionCommittee.scoped
 
+    if params[:district] && !params[:district].empty?
+      rcommittees = rcommittees.where(:district_id => params[:district])
+    end
+
     @rcommittees = rcommittees.scoped.paginate(:page => @page)
 
   end

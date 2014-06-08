@@ -21,7 +21,8 @@ class District < ActiveRecord::Base
   scope :sorted, order("name")
 
   def self.for_select(options = {:include_blank => true})
-    o = sorted.all.collect{|i| [i.name, i.code]}
+    #o = sorted.all.collect{|i| [i.name, i.code]}
+    o = sorted.all.collect{|i| [i.name, i.id]}
     o = [['', nil]] + o if options[:include_blank]
     o
   end

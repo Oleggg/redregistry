@@ -6,11 +6,9 @@
   = form_tag uics_path, :method => :get do
     = hidden_field_tag :page, @page
     %h3 Поиск
-    = Member.human_attribute_name(:name)
-    = text_field_tag "name", params[:name], :size => 10
-    -# = Member.human_attribute_name(:company_type_id)
+    = Tic.model_name.human
     = select_tag "tic", options_for_select(Tic.for_select(:include_blank => true), params[:tic])
-    = submit_tag "Найти", :name => :search
+    = submit_tag "Найти", :name => :search, :class => "btn btn-default btn-sm"
 
 %table
   %tr

@@ -3,13 +3,12 @@
 %h1= RegionCommittee.model_name.human
 
 .filter
-  = form_tag houses_path, :method => :get do
+  = form_tag region_committees_path, :method => :get do
     = hidden_field_tag :page, @page
     %h3 Поиск
-    = RegionCommittee.human_attribute_name(:note)
-    = text_field_tag "name", params[:name], :size => 10
-    -# = RegionCommittee.human_attribute_name(:company_type_id)
-    = submit_tag "Найти", :name => :search
+    = RegionCommittee.human_attribute_name(:district)
+    = select_tag "district", options_for_select(District.for_select(:include_blank => true), params[:district])
+    = submit_tag "Найти", :name => :search, :class => "btn btn-default btn-sm"
 
 %table
   %tr

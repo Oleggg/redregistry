@@ -75,6 +75,7 @@ ru:
         porch_num: "Число подъездов"
         house_problems: "Проблемы дома"
         address: "Адрес"
+        district: "Район"
         electoral_district_id: "Избирательный округ"
       subscriber:
         id: "#"
@@ -87,6 +88,7 @@ ru:
       region_committee:
         id: "#"
         first_secretary: "Первый секретарь"
+        district: "Район"
         city_district: "Район"
         note: "Примечание"
         address: "Адрес"

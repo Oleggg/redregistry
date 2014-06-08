@@ -45,10 +45,15 @@
   function init_point() {
     lat = #{@member_address.lat if @member_address};
     lng = #{@member_address.lng if @member_address};
-    var point = new YMaps.GeoPoint(lat, lng);
-    placemark.setOptions({draggable: false});
-    placemark.setGeoPoint(point);
+    //var point = new YMaps.GeoPoint(lat, lng);
+    //placemark.setOptions({draggable: false});
+    //placemark.setGeoPoint(point);
     //placemark.name = "#{@member}";
-    map.setCenter(point, 12);
+    //map.setCenter(point, 12);
+    var placemark = new ymaps.Placemark(
+        [lng, lat], { draggable: false, hideIconOnBalloonOpen: true },{ preset: 'twirl#redIcon' }
+    );
+    map.geoObjects.add(placemark);
+
   }
 

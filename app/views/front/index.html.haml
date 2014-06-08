@@ -40,10 +40,7 @@
              [lng, lat], {
                iconContent: "#{house.subscribers_count}",
                balloonContent: "#{house.description} <br /> Подписчиков: #{house.subscribers_count}"
-             }, {
-               draggable: true,
-               hideIconOnBalloonOpen: true
-             }
+             }, { draggable: false, hideIconOnBalloonOpen: true }
           );
           map.geoObjects.add(placemark);
         });
@@ -54,39 +51,39 @@
     .row
       .col-sm-4
         .bordered-text-block
-          %h1
+          %h1.clearfix
             = link_to "Подписчики", subscribers_path
             %span.total= "#{@region_committees.count}"
           .img-holder
       .col-sm-4
         .bordered-text-block
-          %h1
+          %h1.clearfix
             = link_to "Дома", houses_path
             %span.total= "#{@houses.count}"
           .img-holder
       .col-sm-4
         .bordered-text-block
-          %h1
+          %h1.clearfix
             = link_to "Жильцы", people_path
             %span.total= "#{@people.count}"
           .img-holder
     .row
       .col-sm-4
         .bordered-text-block
-          %h1
-            = "Райкомы КПРФ:"
+          %h1.clearfix
+            = link_to "Райкомы КПРФ", region_committees_path
             %span.total= "#{@region_committees.count}"
           .img-holder
       .col-sm-4
         .bordered-text-block
-          %h1
-            = "Члены КПРФ:"
-            %span.total= "#{@houses.count}"
+          %h1.clearfix
+            = link_to "Члены КПРФ", members_path
+            %span.total= "#{@members.count}"
           .img-holder
       .col-sm-4
         .bordered-text-block
-          %h1
-            = "Избирательные округа:"
+          %h1.clearfix
+            = link_to "Избирательные округа", electoral_districts_path
             %span.total= "#{@electoral_districts.count}"
           .img-holder
 

@@ -304,15 +304,17 @@ input{
   line-height:1.5em;
 }
 .bordered-text-block h1 a {
-  padding:0.2em 0.5em;
+  display: inline-block;
+  padding: 0.2em 0.5em;
+  border: 1px solid #D62E2E;
+  color: #FFFFFF;
   background: #D62E2E;
-  color:#FFFFFF;
 }
 .bordered-text-block h1 a:hover, .bordered-text-block h1 a:focus {
   text-decoration: none;
 }
 .bordered-text-block .total{
-  padding:0 0.5em;
+  padding: 0.2em 0.5em;
   float: right;
   color: #D62E2E;
   font-weight: bold;
