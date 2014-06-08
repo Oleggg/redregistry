@@ -12,6 +12,8 @@
 
 class District < ActiveRecord::Base
   belongs_to :region, :foreign_key => "region_id", :primary_key => "code"
+
+  has_many :houses
   
   validates_presence_of :name
   validates_uniqueness_of :name

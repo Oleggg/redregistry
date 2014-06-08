@@ -78,6 +78,7 @@ class PeopleController < BaseController
     @person = Person.find(params[:id])
     @person.addresses.build if @person.addresses.empty?
     @person_address = @person.addresses.first
+    #@person_address = @person.house.addresses.first if @person.house and @person.house.addresses.first
   end
 
   def create
@@ -115,8 +116,9 @@ class PeopleController < BaseController
 
   def show
     @person = Person.find(params[:id])
-    @person.addresses.build if @person.addresses.empty?
-    @person_address = @person.addresses.first if @person.addresses.first
+    #@person.addresses.build if @person.addresses.empty?
+    #@person_address = @person.addresses.first if @person.addresses.first
+    @person_address = @person.house.addresses.first if @person.house and @person.house.addresses.first
   end
 
   def destroy

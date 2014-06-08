@@ -7,8 +7,10 @@ class FrontController < BaseController
     @total_subscribers = Subscriber.count
     @electoral_districts = ElectoralDistrict.scoped
     @houses = House.scoped
-    @electoral_districts = ElectoralDistrict.scoped
+    @people = Person.scoped
     @region_committees = RegionCommittee.scoped
+    @members = Member.scoped
+    @electoral_districts = ElectoralDistrict.scoped
     @uics = Uic.scoped
     #@graph
 

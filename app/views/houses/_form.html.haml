@@ -8,6 +8,7 @@
     = f.input :porch_num, :input_html => { :class => "form-control" }
     = f.input :apartments_num, :input_html => { :class => "form-control" }
     = f.input :house_problems, :as => :text, :input_html => { :class => "form-control" }
+    = f.input :district_id, :as => :select, :collection => District.all
     = f.input :street_id, :as => :select, :collection => Street.all
     = f.input :electoral_district_id, :as => :select, :collection => ElectoralDistrict.all
 
@@ -35,7 +36,10 @@
       = link_to 'Вернуться', houses_path
 
 :javascript
-  function init_point() {
-    //init_point_("house");
-  }
+  //ymaps.ready(function () {
+    //initialize_map();
+    function init_point() {
+      init_point_("house");
+    }
+  //});
 

@@ -296,3 +296,34 @@ input{
   padding: 1em 3em;
 }
 
+.section.info-blocks .row {
+  margin-bottom:2em;
+}
+
+.bordered-text-block h1{
+  line-height:1.5em;
+}
+.bordered-text-block h1 a {
+  padding:0.2em 0.5em;
+  background: #D62E2E;
+  color:#FFFFFF;
+}
+.bordered-text-block h1 a:hover, .bordered-text-block h1 a:focus {
+  text-decoration: none;
+}
+.bordered-text-block .total{
+  padding:0 0.5em;
+  float: right;
+  color: #D62E2E;
+  font-weight: bold;
+  border:1px solid;
+}
+
+.img-holder {
+  margin-bottom:2em;
+  /*width: 280px;*/
+  height: 200px;
+  border: 1px solid #CCCCCC;
+  padding: 1em;
+}
+

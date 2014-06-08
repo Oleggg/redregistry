@@ -56,6 +56,7 @@ class SubscribersController < ApplicationController
 
   def show
     @subscriber = Subscriber.find(params[:id])
+    @subscriber_address = @subscriber.person.house.addresses.first if @subscriber.person.house.addresses
   end
 
   def destroy

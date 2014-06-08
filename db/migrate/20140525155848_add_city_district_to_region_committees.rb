@@ -6,7 +6,7 @@ class AddCityDistrictToRegionCommittees < ActiveRecord::Migration
   end
 
   def self.down
-    change_table :egion_committees do |t|
+    change_table :region_committees do |t|
       t.remove :city_district_id
     end
   end

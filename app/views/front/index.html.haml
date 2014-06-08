@@ -49,6 +49,47 @@
         });
       });
 
+.section.info-blocks
+  .container
+    .row
+      .col-sm-4
+        .bordered-text-block
+          %h1
+            = link_to "Подписчики", subscribers_path
+            %span.total= "#{@region_committees.count}"
+          .img-holder
+      .col-sm-4
+        .bordered-text-block
+          %h1
+            = link_to "Дома", houses_path
+            %span.total= "#{@houses.count}"
+          .img-holder
+      .col-sm-4
+        .bordered-text-block
+          %h1
+            = link_to "Жильцы", people_path
+            %span.total= "#{@people.count}"
+          .img-holder
+    .row
+      .col-sm-4
+        .bordered-text-block
+          %h1
+            = "Райкомы КПРФ:"
+            %span.total= "#{@region_committees.count}"
+          .img-holder
+      .col-sm-4
+        .bordered-text-block
+          %h1
+            = "Члены КПРФ:"
+            %span.total= "#{@houses.count}"
+          .img-holder
+      .col-sm-4
+        .bordered-text-block
+          %h1
+            = "Избирательные округа:"
+            %span.total= "#{@electoral_districts.count}"
+          .img-holder
+
 
 -#.section
 -#  .container

@@ -12,7 +12,7 @@ function add_fields(link, association, content) {
   $(link).parent().before(content.replace(regexp, new_id));
 }
 
-function init_point_(form_name) {
+function init_point_APIv1(form_name) { // API v1.0
   lat = $("#" + form_name + "_addresses_attributes_0_lat");
   lng = $("#" + form_name + "_addresses_attributes_0_lng");
 
@@ -25,6 +25,34 @@ function init_point_(form_name) {
     lat.val(current.getX());
     lng.val(current.getY());
   });
+}
+
+function init_point_(form_name) { // API v2.0
+  lat = $("#" + form_name + "_addresses_attributes_0_lat");
+  lng = $("#" + form_name + "_addresses_attributes_0_lng");
+
+  /*var point = new YMaps.GeoPoint(lat.val(), lng.val());
+  placemark.setGeoPoint(point);
+  placemark.setOptions({draggable: true});
+  map.setCenter(point, 12);
+  YMaps.Events.observe(placemark, placemark.Events.DragEnd, function (obj) {
+    var current = obj.getGeoPoint().copy();
+    lat.val(current.getX());
+    lng.val(current.getY());
+  });*/
+
+  var placemark = new ymaps.Placemark(
+        [ lng.val(), lat.val() ], {
+            //iconContent: "Москва",
+            //balloonContent: "Столица России"
+        }, {
+            draggable: true,
+            hideIconOnBalloonOpen: true
+        }
+  );
+  map.geoObjects.add(placemark);
+  //map.panTo([ lng.val(), lat.val() ], { flying: true });
+  //map.panTo([ 53.1943, 45.0023 ], { flying: true });
 }
 
 function initialize_map_v1() {
@@ -46,7 +74,7 @@ function initialize_map_v1() {
   placemark = new YMaps.Placemark(penza_center, {draggable: true});
   map.addOverlay(placemark);
 
-  init_point();
+  //init_point();
 }
 
 function initialize_map() { // API v2.0
@@ -60,7 +88,7 @@ function initialize_map() { // API v2.0
         //center: [55.76, 37.64],
         //center: [45.019, 53.194],
         center: [ 53.194, 45.019 ],
-        zoom: 11,
+        zoom: 12,
         type: "yandex#map"
     }
   );
@@ -72,6 +100,7 @@ function initialize_map() { // API v2.0
   map.addControl(zoom);
   map.addControl(typeControl);
   map.addControl(scaleLine);*/
+
   // API v2.0
   map.controls.add("mapTools")
     .add("zoomControl")
@@ -82,6 +111,7 @@ function initialize_map() { // API v2.0
   map.setCenter(penza_center, 12);*/
   //penza_center = [45.018662, 53.195097];
   penza_center = [45.019529,53.194546];
+
   // API v1.0
   //placemark = new YMaps.Placemark(penza_center, {draggable: true});
   //map.addOverlay(placemark);
@@ -95,11 +125,7 @@ function initialize_map() { // API v2.0
             // - контент балуна метки
             balloonContent: "Столица П. области"
         }, {
-            /* Опции метки:
-               - флаг перетаскивания метки *
             draggable: true,
-            /* - показывать значок метки 
-               при открытии балуна *
             hideIconOnBalloonOpen: false
         }
     );*/

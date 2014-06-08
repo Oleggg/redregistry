@@ -16,7 +16,7 @@
       = @subscriber.subscription_reason
     %li
       .label= Subscriber.human_attribute_name(:shipping_type)
-      = @subscriber.shipping_type
+      = @subscriber.shipping_type_for_display
     %li
       -# .label= Company.human_attribute_name(:address)
       -# = @company_address.full_address if @company_address
@@ -29,11 +29,16 @@
 
 :javascript
   function init_point() {
-    //lat = {@company_address.lat};
-    //lng = {@company_address.lng};
+    lat = #{@subscriber_address.lat};
+    lng = #{@subscriber_address.lng};
     //var point = new YMaps.GeoPoint(lat, lng);
-    placemark.setOptions({draggable: false});
-    placemark.setGeoPoint(point);
-    map.setCenter(point, 12);
+    //placemark.setOptions({draggable: false});
+    //placemark.setGeoPoint(point);
+    //map.setCenter(point, 12);
+    var placemark = new ymaps.Placemark(
+        [lng, lat], { draggable: true, hideIconOnBalloonOpen: true }
+    );
+    map.geoObjects.add(placemark);
+
   }
 

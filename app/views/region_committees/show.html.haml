@@ -21,6 +21,11 @@
   .buttons
     = link_to 'Вернуться', region_committees_path
 
+- @rcommittee.district.houses.each do |house|
+  = house.description
+  - house.subscribers.each do |sub|
+    %p= sub.person.full_name
+
 :javascript
   function init_point() {
     lat = #{@rcommittee_address.lat if @rcommittee_address};

@@ -47,11 +47,21 @@
 
 :javascript
   function init_point() {
-    lat = #{@person_address.lat};
-    lng = #{@person_address.lng};
-    var point = new YMaps.GeoPoint(lat, lng);
-    placemark.setOptions({draggable: false});
-    placemark.setGeoPoint(point);
-    map.setCenter(point, 12);
+    lat = "#{@person_address.lat if @person_address}";
+    lng = "#{@person_address.lng if @person_address}";
+    //var point = new YMaps.GeoPoint(lat, lng);
+    //placemark.setOptions({draggable: false});
+    //placemark.setGeoPoint(point);
+    //map.setCenter(point, 12);
+
+    var placemark = new ymaps.Placemark(
+        [lng, lat],
+        {
+            draggable: true,
+            hideIconOnBalloonOpen: true
+        }
+    );
+    map.geoObjects.add(placemark);
+
   }
 

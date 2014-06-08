@@ -1,6 +1,6 @@
 class MembersController < BaseController
   set_main_menu(:cards)
-  set_sub_menu(:houses)
+  set_sub_menu(:members)
   respond_to :html, :xml, :json
 
   def index

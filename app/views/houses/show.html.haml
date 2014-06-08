@@ -34,12 +34,12 @@
   function init_point() {
     lat = #{@house_address.lat if @house_address};
     lng = #{@house_address.lng if @house_address};
-    //var point = new YMaps.GeoPoint(lat, lng);
-    //placemark.setOptions({draggable: false});
-    //placemark.setGeoPoint(point);
-    //placemark.name = "#{@house.description}";
-    //placemark.description = "Подписчиков: #{@house.subscribers_count}";
-    //map.setCenter(point, 12);
+    //#var point = new YMaps.GeoPoint(lat, lng);
+    //#placemark.setOptions({draggable: false});
+    //#placemark.setGeoPoint(point);
+    //#placemark.name = "#{@house.description}";
+    //#placemark.description = "Подписчиков: #{@house.subscribers_count}";
+    //#map.setCenter(point, 12);
 
     var placemark = new ymaps.Placemark(
         [lng, lat], {
