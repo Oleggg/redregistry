@@ -1,10 +1,13 @@
 - title("Главная")
 - javascript_include_yandex_map_api
 
+.hidden-map
+
 .section.gray-block
+  #map
   .container
     .row
-      .col-sm-6
+      .col-sm-5
         -#.red-text-block
         -#  %h1="Всего подписчиков:"
         -#  %h2= @total_subscribers
@@ -21,10 +24,12 @@
           - @uics.each do |uic|
             %h3= "#{uic.note}"
       .col-sm-6
-        .red-block
+        -#.red-block
           -# %h1= "Всего подписчиков:"
           -# %h2= @total_subscribers
-          #map
+          -#<a href="#" class="expand-map">развернуть</a>
+          -#.hidden-map
+          -# #map
 
 - @electoral_districts.each do |electoral_district|
   - electoral_district.houses.each do |house|
@@ -53,7 +58,7 @@
         .bordered-text-block
           %h1.clearfix
             = link_to "Подписчики", subscribers_path
-            %span.total= "#{@region_committees.count}"
+            %span.total= "#{@total_subscribers}"
           .img-holder
       .col-sm-4
         .bordered-text-block
@@ -104,3 +109,14 @@
         -#%h1= "Избирательные округа:"
         -#%h2= @total_subscribers
 
+:javascript
+  //$(document).ready(function() {
+  //ymaps.ready(function(){    
+  function init_point() {
+    $(".expand-map").click(function(e){
+      console.log("click");
+      $("#map").width(1000).height(500)
+      $(".hidden-map").show();
+      map.container.fitToViewport();
+    });
+  }

@@ -7,8 +7,8 @@
     = hidden_field_tag :page, @page
     %h3 Поиск
     = RegionCommittee.human_attribute_name(:district)
-    = select_tag "district", options_for_select(District.for_select(:include_blank => true), params[:district])
-    = submit_tag "Найти", :name => :search, :class => "btn btn-default btn-sm"
+    = select_tag "district", options_for_select(District.for_select(:include_blank => true), params[:district]),:onchange => ("$(this).parent('form').submit();")
+    - #= submit_tag "Найти", :name => :search, :class => "btn btn-default btn-sm"
 
 %table
   %tr
@@ -23,7 +23,7 @@
     %tr
       %td= rcommittee.id
       %td= rcommittee.first_secretary
-      %td= rcommittee.city_district.name if rcommittee.city_district
+      %td= rcommittee.district.name if rcommittee.district
       %td= rcommittee.addresses.first.full_address if rcommittee.addresses.first
       %td= rcommittee.note
       %td= link_to 'Просмотр', region_committee_path(rcommittee)

@@ -18,7 +18,7 @@ class District < ActiveRecord::Base
   validates_presence_of :name
   validates_uniqueness_of :name
   
-  scope :sorted, order("name")
+  scope :sorted, order("code")
 
   def self.for_select(options = {:include_blank => true})
     #o = sorted.all.collect{|i| [i.name, i.code]}

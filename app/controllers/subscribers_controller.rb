@@ -4,7 +4,11 @@ class SubscribersController < ApplicationController
 
   def index
     @page = params[:page] || 1
-    subscribers = Subscriber.scoped
+    #subscribers = Subscriber.scoped
+    subscribers = Subscriber.joins(:person)
+    if params[:name] && !params[:name].empty?
+    	subscribers = subscribers.where("people.first_name LIKE :name OR people.last_name LIKE :name OR people.middle_name LIKE :name",:name => "%#{params[:name]}%")
+    end
 
     @subscribers = subscribers.scoped.paginate(:page => @page)
 

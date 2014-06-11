@@ -269,10 +269,26 @@ input{
     padding-top: 3em;
     min-height: 200px;
     background: #fff;
+    position: relative;
+}
+.hidden-map{
+    display: none;
+    height: 500px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 1000px;
 }
 .gray-block{
     background: #eee;
     min-height: 200px;
+}
+.gray-block #map{
+    height: 400px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
 }
 .red-block{
     /*margin: 1em;*/
@@ -294,6 +310,7 @@ input{
   border: 1px solid #CCCCCC;
   color: #777777;
   padding: 1em 3em;
+  background: none repeat scroll 0 0 rgba(255, 255, 255, 0.6);
 }
 
 .section.info-blocks .row {
@@ -305,7 +322,7 @@ input{
 }
 .bordered-text-block h1 a {
   display: inline-block;
-  padding: 0.2em 0.5em;
+  padding: 0.2em 0.3em;
   border: 1px solid #D62E2E;
   color: #FFFFFF;
   background: #D62E2E;

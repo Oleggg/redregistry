@@ -7,30 +7,30 @@
     = hidden_field_tag :page, @page
     %h3 Поиск
     = Tic.model_name.human
-    = select_tag "tic", options_for_select(Tic.for_select(:include_blank => true), params[:tic])
-    = submit_tag "Найти", :name => :search, :class => "btn btn-default btn-sm"
+    = select_tag "tic", options_for_select(Tic.for_select(:include_blank => true), params[:tic]), :onchange => "$(this).parent('form').submit();"
+    -# = submit_tag "Найти", :name => :search, :class => "btn btn-default btn-sm"
 
 %table
   %tr
     %th= Uic.human_attribute_name(:id)
-    %th= Uic.human_attribute_name(:tic)
     %th= Uic.human_attribute_name(:number)
     %th= Uic.human_attribute_name(:chairman)
     %th= Uic.human_attribute_name(:address)
     %th= Uic.human_attribute_name(:phone)
     %th= Uic.human_attribute_name(:note)
+    %th= Uic.human_attribute_name(:tic)
     %th{:colspan=>"3"}
 
   - if @UICs
     - @UICs.each do |uic|
       %tr
         %td= uic.id
-        %td= uic.tic.name
         %td= uic.number
         %td= uic.chairman
         %td= uic.addresses.first.full_address if uic.addresses.first
         %td= uic.phone
         %td= uic.note
+        %td= uic.tic.name
         %td= link_to 'Просмотр', uic_path(uic)
         %td= link_to 'Изменить', edit_uic_path(uic)
         %td= link_to 'Удалить', uic, :confirm => 'Вы уверены?', :method => :delete
